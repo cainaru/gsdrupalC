@@ -1,0 +1,35 @@
+uuid: b2f276c9-6f4c-43ec-827a-66dd51904de5
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.double.field_double_content_primary
+    - field.field.paragraph.double.field_double_content_secondary
+    - paragraphs.paragraphs_type.double
+  module:
+    - entity_reference_revisions
+id: paragraph.double.preview
+targetEntityType: paragraph
+bundle: double
+mode: preview
+content:
+  field_double_content_primary:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: above
+    settings:
+      view_mode: preview
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_double_content_secondary:
+    type: entity_reference_revisions_entity_view
+    weight: 1
+    label: above
+    settings:
+      view_mode: preview
+      link: ''
+    third_party_settings: {  }
+    region: content
+hidden: {  }

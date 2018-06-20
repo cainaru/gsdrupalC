@@ -1,0 +1,43 @@
+fluid_container: 1
+navbar_position: fixed-top
+_core:
+  default_config_hash: 6VoOIV9FryjKLk7527PpbPusvEFaIe44OW2glPLR6sk
+favicon:
+  mimetype: image/vnd.microsoft.icon
+  path: ''
+  url: 'http://digital-narratives-d8-theme-revamp:8888/themes/university_bootstrap/favicon.ico'
+  use_default: true
+schemas:
+  bootstrap: 8000
+  university_bootstrap: 8000
+navbar_inverse: 1
+table_responsive: '-1'
+table: ''
+cdn_provider: ''
+region_wells:
+  navigation: ''
+  navigation_collapsible: ''
+  navigation_utility: ''
+  header: ''
+  highlighted: ''
+  help: ''
+  before_content: ''
+  content: ''
+  after_content: ''
+  sidebar_first: ''
+  sidebar_second: ''
+  footer_first: ''
+  footer_second: ''
+  footer_third: ''
+  footer_bottom_left: ''
+  footer_bottom_right: ''
+features:
+  comment_user_picture: true
+  comment_user_verification: true
+  favicon: true
+  node_user_picture: true
+logo:
+  path: ''
+  url: ''
+  use_default: true
+university_bootstrap_brand_bar: 0

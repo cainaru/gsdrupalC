@@ -1,0 +1,37 @@
+.paragraph--type--content-reference .referenced > .university-content-container,
+.referenced > .university-content-container {
+    background: $color-gray-light;
+    margin: 0;
+    padding-bottom: .5em;
+    padding-top: .5em;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.paragraph--type--content-reference .referenced > .university-content-container h2,
+.referenced > .university-content-container h2 {
+    margin: 0;
+    margin-bottom: .675rem;
+}
+
+.paragraph--type--content-reference .referenced > .university-content-container .moderation-state-label,
+.referenced > .university-content-container .moderation-state-label {
+    margin-top: 0;
+    margin-bottom: .675rem;
+}
+
+.paragraph--type--content-reference .referenced > .university-content-container h2 a,
+.referenced > .university-content-container h2 a {
+	color: $text-color;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+    	text-decoration: underline;
+    }
+}
+
+.paragraph--type--content-reference .referenced > .university-content-container .byline,
+.referenced > .university-content-container .byline {
+    color: $text-color;
+}

@@ -1,0 +1,23 @@
+uuid: 2ffa28ee-8c74-4557-8bfc-4cc38d396ffb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_text_color
+    - paragraphs.paragraphs_type.breakout
+  module:
+    - options
+id: paragraph.breakout.field_text_color
+field_name: field_text_color
+entity_type: paragraph
+bundle: breakout
+label: 'Text color'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: '1'
+default_value_callback: ''
+settings: {  }
+field_type: list_string

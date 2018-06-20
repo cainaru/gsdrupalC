@@ -1,0 +1,24 @@
+uuid: c5703c3e-87ba-475b-ad74-7d4936ff0302
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.content_reference.field_content_reference
+    - paragraphs.paragraphs_type.content_reference
+id: paragraph.content_reference.preview
+targetEntityType: paragraph
+bundle: content_reference
+mode: preview
+content:
+  field_content_reference:
+    weight: 0
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+hidden:
+  created: true
+  uid: true

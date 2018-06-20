@@ -1,0 +1,37 @@
+uuid: c0ee6f45-fdf4-405d-a14f-0b652e6206c6
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.location_reference.body
+    - field.field.node.location_reference.field_geolocation
+    - field.field.node.location_reference.field_location_type
+    - node.type.location_reference
+  module:
+    - text
+    - user
+_core:
+  default_config_hash: joQ_QZGZEr0qUdoAmYj-7ZsiwQlHi3C7ovZ0YPuIt_Q
+id: node.location_reference.teaser
+targetEntityType: node
+bundle: location_reference
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 0
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  content_moderation_control: true
+  field_geolocation: true
+  field_location_type: true

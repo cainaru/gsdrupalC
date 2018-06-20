@@ -1,0 +1,22 @@
+uuid: b8dd236f-3dee-4565-ba94-4c4ed50d475c
+langcode: en
+status: true
+dependencies:
+  module:
+    - color_field
+    - node
+_core:
+  default_config_hash: h6dhn9ioUBZJA-RTPmWHUd4UmURHw-HthqnA7hycydk
+id: node.field_timeline_item_bg_color
+field_name: field_timeline_item_bg_color
+entity_type: node
+type: color_field_type
+settings:
+  format: '#HEXHEX'
+module: color_field
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,30 @@
+uuid: 2b80f421-4141-43da-aa8e-8315aeb3257c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.breakout.field_background_color
+    - field.field.paragraph.breakout.field_background_image
+    - field.field.paragraph.breakout.field_breakout_content
+    - paragraphs.paragraphs_type.breakout
+  module:
+    - entity_reference_revisions
+id: paragraph.breakout.default
+targetEntityType: paragraph
+bundle: breakout
+mode: default
+content:
+  field_breakout_content:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  field_background_color: true
+  field_background_image: true
+  uid: true

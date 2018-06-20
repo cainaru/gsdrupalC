@@ -1,0 +1,23 @@
+uuid: c538fc39-6430-4704-9d27-041b78d7d7c6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_display_options
+    - paragraphs.paragraphs_type.banner_media
+  module:
+    - options
+id: paragraph.banner_media.field_display_options
+field_name: field_display_options
+entity_type: paragraph
+bundle: banner_media
+label: 'Display Options'
+description: "<em><strong>Display options</strong></em> provide the ability to display the featured media in the narrative as a full-width cover image behind the title and subtitle or as smaller partial-width image below the title and subtitle.<br>\r\n<strong>Note:</strong> For low resolution images, or images that appear pixelated, select Partial width."
+required: true
+translatable: false
+default_value:
+  -
+    value: '1'
+default_value_callback: ''
+settings: {  }
+field_type: list_string

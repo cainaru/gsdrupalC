@@ -1,0 +1,30 @@
+uuid: 2a9440d1-2743-4f52-9057-efa7a06cdcc9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_category
+    - node.type.timeline_slide
+    - taxonomy.vocabulary.category
+_core:
+  default_config_hash: _BbaTe14zcbnbTIEqqa34LQ5Gj_4I6lOBk-XMDbG5V8
+id: node.timeline_slide.field_category
+field_name: field_category
+entity_type: node
+bundle: timeline_slide
+label: Category
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      category: category
+    sort:
+      field: _none
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

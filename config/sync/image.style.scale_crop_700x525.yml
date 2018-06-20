@@ -1,0 +1,17 @@
+uuid: add88294-649e-4cbb-8378-6e7319be1e27
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: scale_crop_700x525
+label: 'Scale Crop 700x525'
+effects:
+  5173e7bd-66b6-4753-9c54-d3436dffea25:
+    uuid: 5173e7bd-66b6-4753-9c54-d3436dffea25
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 700
+      height: 525
+      crop_type: focal_point

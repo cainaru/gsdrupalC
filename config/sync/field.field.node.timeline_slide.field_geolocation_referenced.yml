@@ -1,0 +1,31 @@
+uuid: 59a79c66-98ee-4536-a099-4109411fe917
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_geolocation_referenced
+    - node.type.location_reference
+    - node.type.timeline_slide
+_core:
+  default_config_hash: a0dr_hEShWWd0aIjqcotzreQnkAAxULvJ_4c_I9E0uA
+id: node.timeline_slide.field_geolocation_referenced
+field_name: field_geolocation_referenced
+entity_type: node
+bundle: timeline_slide
+label: GeoLocation
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: unpublished
+  handler_settings:
+    target_bundles:
+      location_reference: location_reference
+    sort:
+      field: title
+      direction: ASC
+    auto_create: 1
+    auto_create_bundle: ''
+field_type: entity_reference

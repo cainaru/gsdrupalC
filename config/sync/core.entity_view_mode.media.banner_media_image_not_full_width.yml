@@ -1,0 +1,10 @@
+uuid: a49d9df8-5f5b-49e2-aa0c-d68b088c4c8c
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+id: media.banner_media_image_not_full_width
+label: 'Banner Media Image Not Full-width'
+targetEntityType: media
+cache: true

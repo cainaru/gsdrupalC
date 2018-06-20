@@ -1,0 +1,49 @@
+uuid: b66b9a58-675c-4e09-b3ac-ba65a57806f2
+langcode: en
+status: true
+dependencies: {  }
+id: editor
+label: Editor
+weight: 4
+is_admin: null
+permissions:
+  - 'access content overview'
+  - 'access general_content_entity_browser entity browser pages'
+  - 'access location_browser entity browser pages'
+  - 'access media overview'
+  - 'access media_entity_browser entity browser pages'
+  - 'access modal_media_entity_browser entity browser pages'
+  - 'access timeline_slide_connector entity browser pages'
+  - 'access toolbar'
+  - 'create location_reference content'
+  - 'create media'
+  - 'create narrative content'
+  - 'create timeline content'
+  - 'create timeline_slide content'
+  - 'edit any location_reference content'
+  - 'edit any narrative content'
+  - 'edit any timeline content'
+  - 'edit any timeline_slide content'
+  - 'edit own location_reference content'
+  - 'edit own narrative content'
+  - 'edit own timeline content'
+  - 'edit own timeline_slide content'
+  - 'update media'
+  - 'use editorial transition archive'
+  - 'use editorial transition archived_draft'
+  - 'use editorial transition archived_published'
+  - 'use editorial transition create_new_draft'
+  - 'use editorial transition internal'
+  - 'use editorial transition needs_review'
+  - 'use editorial transition publish'
+  - 'use text format basic_html'
+  - 'use text format iframe'
+  - 'use text format simple'
+  - 'view any unpublished content'
+  - 'view latest version'
+  - 'view location_reference revisions'
+  - 'view narrative revisions'
+  - 'view own unpublished content'
+  - 'view the administration theme'
+  - 'view timeline revisions'
+  - 'view timeline_slide revisions'

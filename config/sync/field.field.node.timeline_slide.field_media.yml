@@ -1,0 +1,33 @@
+uuid: 89595f1e-a22b-46a6-8993-859eb225c00f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_media
+    - media_entity.bundle.image
+    - media_entity.bundle.video_external
+    - node.type.timeline_slide
+_core:
+  default_config_hash: 8x-WOfklWHnKtO6w7ecT56HHpwzqzM-BKpb8QJ0euP8
+id: node.timeline_slide.field_media
+field_name: field_media
+entity_type: node
+bundle: timeline_slide
+label: Media
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+      video_external: video_external
+    sort:
+      field: name
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: image
+field_type: entity_reference

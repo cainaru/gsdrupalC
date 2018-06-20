@@ -1,0 +1,29 @@
+uuid: b6e9b529-ba4f-4cb8-a269-aab82301f2d3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_authorship
+    - node.type.timeline_slide
+    - taxonomy.vocabulary.authorship
+id: node.timeline_slide.field_authorship
+field_name: field_authorship
+entity_type: node
+bundle: timeline_slide
+label: 'Authored by'
+description: "<strong>Example:</strong> Jane Doe<br>\r\n<strong>Note:</strong> Separate multiple authors with a comma. <strong>Example:</strong> Jane Doe, John Smith"
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      authorship: authorship
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

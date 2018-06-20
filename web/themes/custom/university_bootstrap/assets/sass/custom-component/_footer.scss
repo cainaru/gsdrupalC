@@ -1,0 +1,66 @@
+footer.footer {
+  border-top: 3px solid $color-primary;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: $line-height-computed;
+  background-color: #090909;
+  color: #ffffff;
+
+  & a {
+  	color: #ffffff;
+
+  	&:hover,
+    &:focus {
+      color: $color-gold;
+    }
+  }
+
+  & .nav {
+  	> li > a {
+  	  font-weight: 500;
+  	  padding: 0;
+  	  background-color: transparent;
+
+  	  &:hover,
+      &:focus {
+        color: $color-gold;
+        text-decoration: underline;
+      }
+  	}
+  }
+}
+
+.footer-top {
+  padding-top: ($line-height-computed * 2);
+  padding-bottom: ($line-height-computed * 2);
+}
+
+.footer-bottom {
+  border-top: 1px solid #323232;
+  padding-top: $line-height-computed;
+  padding-bottom: $line-height-computed;
+}
+
+.university-info h3 {
+  font-family: $font-family-sans-serif;
+  margin: 0;
+
+  span {
+  	font-weight: 400;
+  }
+}
+
+.university-info address {
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+  margin-bottom: 0;
+}
+
+#subfooter-navigation .nav li {
+  display: inline-block;
+}
+
+.copyright {
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+}

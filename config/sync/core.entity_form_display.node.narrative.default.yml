@@ -1,0 +1,213 @@
+uuid: 27f97a1b-7a0a-4eb1-af6c-b1e678eea710
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.narrative.field_authorship
+    - field.field.node.narrative.field_banner_color
+    - field.field.node.narrative.field_banner_media_element
+    - field.field.node.narrative.field_paragraph_elements
+    - field.field.node.narrative.field_subtitle
+    - node.type.narrative
+  module:
+    - color_field
+    - content_moderation
+    - field_group
+    - paragraphs
+    - path
+    - text
+third_party_settings:
+  field_group:
+    group_banner:
+      children:
+        - title
+        - field_subtitle
+        - field_authorship
+        - group_hr_1
+      parent_name: ''
+      weight: 0
+      format_type: fieldset
+      format_settings:
+        label: 'Page Header'
+        description: ''
+        id: ''
+        classes: ''
+        required_fields: false
+      label: 'Page Header'
+      region: content
+    group_background_:
+      children:
+        - field_banner_color
+      parent_name: group_hr_1
+      weight: 5
+      format_type: html_element
+      format_settings:
+        label: 'Background color:'
+        element: div
+        show_label: true
+        label_element: label
+        attributes: 'for="etc"'
+        effect: none
+        speed: fast
+        id: ''
+        classes: ''
+        required_fields: false
+      label: 'Background color:'
+      region: content
+    group_hr_1:
+      children:
+        - group_featured_media_desc
+        - group_background_
+      parent_name: group_banner
+      weight: 3
+      format_type: html_element
+      format_settings:
+        label: hr-1
+        element: hr
+        show_label: false
+        label_element: h3
+        attributes: 'style="margin-top: 1.5em; margin-bottom: 1.5em;"'
+        effect: none
+        speed: fast
+        id: ''
+        classes: hr
+        required_fields: false
+      label: hr-1
+      region: content
+    group_featured_media_desc:
+      children:
+        - field_banner_media_element
+      parent_name: group_hr_1
+      weight: 3
+      format_type: fieldset
+      format_settings:
+        label: ''
+        description: '<em><strong>Featured media</strong></em> is an image that represents the narrative. This image is used as the narrative''s thumbnail in content teasers. In the narrative itself, featured media can be displayed as a full-width cover image behind the title and subtitle or as smaller partial-width image below the title and subtitle.'
+        id: ''
+        classes: description
+        required_fields: false
+      label: ''
+      region: content
+    group_paragraph_elements:
+      children:
+        - field_paragraph_elements
+      parent_name: ''
+      weight: 1
+      format_type: fieldset
+      format_settings:
+        label: 'Main Content'
+        description: ''
+        id: ''
+        classes: description
+        required_fields: false
+      label: 'Main Content'
+      region: content
+id: node.narrative.default
+targetEntityType: node
+bundle: narrative
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_authorship:
+    weight: 2
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete_tags
+    region: content
+  field_banner_color:
+    type: color_field_widget_html5
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_banner_media_element:
+    type: entity_reference_paragraphs
+    weight: 4
+    region: content
+    settings:
+      title: 'Featured Media'
+      title_plural: 'Featured Media'
+      edit_mode: preview
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+  field_paragraph_elements:
+    type: entity_reference_paragraphs
+    weight: 7
+    settings:
+      title: Element
+      title_plural: Elements
+      edit_mode: preview
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
+    region: content
+  field_subtitle:
+    weight: 1
+    settings:
+      rows: 1
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 6
+    third_party_settings: {  }
+    region: content
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 2
+    region: content
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 7
+    third_party_settings: {  }
+    region: content
+  title:
+    type: string_textfield
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  uid:
+    type: entity_reference_autocomplete
+    weight: 4
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+hidden: {  }

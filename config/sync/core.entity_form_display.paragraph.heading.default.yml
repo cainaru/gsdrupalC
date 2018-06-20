@@ -1,0 +1,24 @@
+uuid: e8070a07-10b9-487e-aa59-1c5f68024b6a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.heading.field_heading
+    - paragraphs.paragraphs_type.heading
+id: paragraph.heading.default
+targetEntityType: paragraph
+bundle: heading
+mode: default
+content:
+  field_heading:
+    weight: 6
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

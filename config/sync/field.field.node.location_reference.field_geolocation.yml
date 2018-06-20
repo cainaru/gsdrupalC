@@ -1,0 +1,23 @@
+uuid: 25e1e7ce-bb9b-428b-bfd9-a11519652ed2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_geolocation
+    - node.type.location_reference
+  module:
+    - geolocation
+_core:
+  default_config_hash: SC_1w46_MmkMhHMSGnQPhs4KeGAKTUVSZBZ_5uz7qpw
+id: node.location_reference.field_geolocation
+field_name: field_geolocation
+entity_type: node
+bundle: location_reference
+label: GeoLocation
+description: 'Set the location by entering a location in the search above or clicking on the map.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: geolocation

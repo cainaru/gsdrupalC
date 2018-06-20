@@ -1,0 +1,10 @@
+uuid: c22ffa8e-f7bc-4b17-98bc-2f0362a150b7
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.banner_featured
+label: 'Banner Featured'
+targetEntityType: node
+cache: true

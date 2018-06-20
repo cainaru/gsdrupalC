@@ -1,0 +1,25 @@
+uuid: de90b6ac-4ab9-40a5-b440-a834482f8483
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_video_embed
+    - media_entity.bundle.video_external
+  module:
+    - video_embed_field
+id: media.video_external.field_video_embed
+field_name: field_video_embed
+entity_type: media
+bundle: video_external
+label: 'Video URL'
+description: 'The URL of the video from Vimeo or Youtube.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_providers:
+    youtube_playlist: youtube_playlist
+    youtube: youtube
+    vimeo: vimeo
+field_type: video_embed_field

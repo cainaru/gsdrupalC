@@ -1,0 +1,104 @@
+uuid: 57359dd7-1a3c-4bc5-9f4f-29807baf958c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.breakout.field_background_color
+    - field.field.paragraph.breakout.field_background_image
+    - field.field.paragraph.breakout.field_breakout_content
+    - field.field.paragraph.breakout.field_text_color
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.breakout
+  module:
+    - color_field
+    - field_group
+    - image
+    - paragraphs
+third_party_settings:
+  field_group:
+    group_background_color_label:
+      children:
+        - field_background_color
+      parent_name: group_hr_1
+      weight: 1
+      format_type: html_element
+      format_settings:
+        label: 'Background color:'
+        element: div
+        show_label: true
+        label_element: label
+        attributes: 'for="etc"'
+        effect: none
+        speed: fast
+        id: ''
+        classes: ''
+        required_fields: false
+      label: 'Background color:'
+      region: content
+    group_hr_1:
+      children:
+        - group_background_color_label
+        - field_text_color
+        - field_background_image
+      parent_name: ''
+      weight: 4
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: hr
+        element: hr
+        show_label: false
+        label_element: h3
+        required_fields: false
+        attributes: 'style="margin-top: 1.5em; margin-bottom: 1.5em;"'
+        effect: none
+        speed: fast
+      label: hr-1
+      region: content
+id: paragraph.breakout.default
+targetEntityType: paragraph
+bundle: breakout
+mode: default
+content:
+  field_background_color:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: color_field_widget_html5
+    region: content
+  field_background_image:
+    weight: 3
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_breakout_content:
+    type: entity_reference_paragraphs
+    weight: 0
+    settings:
+      title: 'Breakout content'
+      title_plural: 'Breakout content'
+      edit_mode: preview
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    region: content
+  field_text_color:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  uid: true

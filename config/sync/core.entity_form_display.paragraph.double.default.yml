@@ -1,0 +1,49 @@
+uuid: 43ca138d-664e-4961-93c9-bf488e10cef4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.double.field_double_content_primary
+    - field.field.paragraph.double.field_double_content_secondary
+    - paragraphs.paragraphs_type.double
+  module:
+    - paragraphs
+id: paragraph.double.default
+targetEntityType: paragraph
+bundle: double
+mode: default
+content:
+  field_double_content_primary:
+    type: entity_reference_paragraphs
+    weight: 6
+    settings:
+      title: 'Primary content'
+      title_plural: 'Primary content'
+      edit_mode: open
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    region: content
+  field_double_content_secondary:
+    type: entity_reference_paragraphs
+    weight: 7
+    settings:
+      title: 'Secondary content'
+      title_plural: 'Secondary content'
+      edit_mode: open
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  uid: true

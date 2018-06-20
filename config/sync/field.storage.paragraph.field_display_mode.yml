@@ -1,0 +1,35 @@
+uuid: 16fd811d-2bf2-4216-8a58-52fe68420e7a
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+_core:
+  default_config_hash: mHCQbYHreX2CyF0BR7S8Wr3fyywde-PQMUIRhIf-OZ8
+id: paragraph.field_display_mode
+field_name: field_display_mode
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: left
+      label: 'Align to the left'
+    -
+      value: right
+      label: 'Align to the right'
+    -
+      value: full
+      label: 'Display full width'
+    -
+      value: center
+      label: 'Display centered'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

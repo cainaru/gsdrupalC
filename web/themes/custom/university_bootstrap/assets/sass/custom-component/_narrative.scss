@@ -1,0 +1,235 @@
+// ========================================
+// Narrative specific styling
+// ========================================
+
+.narrative.full {
+
+  $narrative-font-size: 2.0rem;
+  $narrative-line-height-computed: ($narrative-font-size * $line-height-base);
+
+  font-size: $narrative-font-size;
+
+  & p {
+    margin-top: 1em;
+    margin-bottom: 1em;
+  }
+
+  & p:last-child,
+  & .form-group:last-child,
+  & .panel:last-child {
+    margin-bottom: 0;
+  }
+
+  & ul {
+    line-height: $narrative-line-height-computed;
+  }
+
+  & ul,
+  & ol {
+    margin-bottom: ($narrative-line-height-computed / 2);
+  }
+
+  & h2 {
+    font-size: 3.3rem;
+  }
+
+  & h3 {
+    font-size: 2.3rem;
+  }
+
+  & h4 {
+    font-size: 2rem;
+  }
+
+  & h5 {
+    font-size: 1.8rem;
+  }
+
+  & h6 {
+    font-size: 1.6rem;
+  }
+
+  & .paragraph--type--text, 
+  & .paragraph--type--double, 
+  & .paragraph--type--content-reference .referenced, 
+  & .paragraph--type--breakout iframe{
+    @include content-max-width($screen-sm-min, 58.5em);
+    @include center-block();
+  }
+  
+  & .page-header-content-container {
+    @extend %text-content-width;
+    @include center-block();
+  }
+
+  & .has-featured-media {
+
+    &.full-width {
+      & .page-header-content-container {
+        @media (min-width: $screen-sm-min) {
+          position: absolute;
+          top: 10%;
+          left: 0;
+          right: 0;
+          color: #ffffff;
+          text-shadow: 0px 0px 10px #231f20, 0px 0px 5px #000000;
+        }
+      }
+    }
+
+    &.not-full-width {
+      & .page-header-content-container {
+        margin-bottom: $narrative-line-height-computed;
+      }
+
+      & .featured-media {
+        @extend %text-content-width;
+        @include center-block();
+      }
+    }
+  }
+
+  & .no-featured-media {
+    @include clearfix();
+    margin-left: -15px;
+    margin-right: -15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: $narrative-line-height-computed;
+    padding-bottom: $narrative-line-height-computed;
+    color: #ffffff;
+    text-shadow: 0px 0px 10px #231f20, 0px 0px 5px #000000;
+  }
+
+  & figcaption.banner-media-caption {
+    text-align: right;
+  }
+
+  & figcaption.banner-media-caption .caption-text, 
+  & figcaption.banner-media-caption .citation {
+    display: block;
+  }
+
+  & figcaption.banner-media-caption .caption-text {
+    margin-left: auto;
+    max-width: 100%;
+  }
+
+  & figcaption.banner-media-caption .caption-text > * {
+    margin-left: inherit;
+    max-width: inherit;
+  }
+
+  & figcaption.banner-media-caption .citation {
+    margin-left: auto;
+  }
+
+  & figcaption.banner-media-caption .citation > * {
+    margin-left: inherit;
+  }
+
+
+  & figure figcaption {
+    font-size: $caption-font-size;
+    line-height: inherit;
+    margin-top: .675rem;
+  }
+
+  & figure figcaption .caption-text {
+    margin-top: .675rem;
+  }
+
+  & figure figcaption .caption-text > * {
+    margin-top: .675rem;
+  }
+
+  & figure figcaption .citation {
+    margin-top: 0;
+    font-size: $citation-font-size;
+  }
+
+  & figure figcaption .citation > * {
+    margin-top: 0;
+  }
+
+  & .paragraph--type--breakout iframe,
+  & .paragraph--type--double,
+  & .paragraph--type--text {
+    @extend %max-content-width;
+    @include center-block();
+  }
+
+  & .paragraph--type--heading h2 {
+    @extend %text-content-width;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  & .paragraph--type--text .field--name-field-text > *:not(iframe) {
+    @extend %text-content-width;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  & .paragraph--type--breakout {
+  padding: $narrative-line-height-computed 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  color: #ffffff;
+
+    & .container-fluid {
+      margin-top: $narrative-line-height-computed;
+      margin-bottom: $narrative-line-height-computed;
+    }
+
+    & .paragraph--type--text .field--name-field-text a {
+      color: #ffffff;
+    }
+
+    &.text-black {
+      color: #000000;
+      & .paragraph--type--text .field--name-field-text a {
+        color: #000000;
+
+        &:hover,
+        &:focus {
+          color: $link-hover-color;
+          text-decoration: $link-hover-decoration;
+        }
+
+        &:focus {
+          @include tab-focus;
+        }
+      }
+    }
+
+    &.text-white {
+      color: #ffffff;
+      & .paragraph--type--text .field--name-field-text a {
+        color: #ffffff;
+
+        &:hover,
+        &:focus {
+          color: #d6d7d9;
+          text-decoration: $link-hover-decoration;
+        }
+
+        &:focus {
+          @include tab-focus;
+        }
+      }
+    }
+  }
+
+  & .paragraph--type--text + .paragraph--type--breakout,
+  & .paragraph--type--double +  .paragraph--type--breakout {
+    margin-top: $narrative-line-height-computed;
+  }
+
+  & .paragraph--type--breakout + .paragraph--type--text,
+  & .paragraph--type--breakout + .paragraph--type--double {
+    margin-top: $narrative-line-height-computed;
+  }
+
+}

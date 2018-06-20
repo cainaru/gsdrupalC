@@ -1,0 +1,9 @@
+uuid: 905129f5-371e-4957-9aea-22e55413d290
+langcode: en
+status: true
+dependencies: {  }
+name: 'Location Type'
+vid: location_type
+description: 'Use to classify the type of location'
+hierarchy: 0
+weight: 0

@@ -1,0 +1,14 @@
+uuid: 18b418f3-5213-4927-bcfd-9c3594a6006f
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.p
+  module:
+    - user
+id: user_remove_role_action.p
+label: 'Remove the Publish Own role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: p

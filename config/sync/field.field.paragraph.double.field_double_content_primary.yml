@@ -1,0 +1,68 @@
+uuid: 72c40016-b4ad-4684-9e28-9ec3fff9cb5b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_double_content_primary
+    - paragraphs.paragraphs_type.aside
+    - paragraphs.paragraphs_type.breakout
+    - paragraphs.paragraphs_type.content_reference
+    - paragraphs.paragraphs_type.double
+    - paragraphs.paragraphs_type.heading
+    - paragraphs.paragraphs_type.media
+    - paragraphs.paragraphs_type.media_carousel
+    - paragraphs.paragraphs_type.text
+  module:
+    - entity_reference_revisions
+id: paragraph.double.field_double_content_primary
+field_name: field_double_content_primary
+entity_type: paragraph
+bundle: double
+label: Primary
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      heading: heading
+      text: text
+      media: media
+      media_carousel: media_carousel
+      content_reference: content_reference
+      aside: aside
+      breakout: breakout
+      double: double
+    target_bundles_drag_drop:
+      heading:
+        enabled: true
+        weight: -19
+      text:
+        enabled: true
+        weight: -18
+      media:
+        enabled: true
+        weight: -17
+      media_carousel:
+        enabled: true
+        weight: -16
+      content_reference:
+        enabled: true
+        weight: -15
+      aside:
+        enabled: true
+        weight: -14
+      breakout:
+        enabled: true
+        weight: -13
+      double:
+        enabled: true
+        weight: -12
+      banner_media:
+        weight: -11
+        enabled: false
+field_type: entity_reference_revisions

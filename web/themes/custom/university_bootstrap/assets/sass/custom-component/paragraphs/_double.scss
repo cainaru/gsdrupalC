@@ -1,0 +1,18 @@
+// ========================================
+// Styling for Double Paragraph type
+// ========================================
+@media (min-width: 992px){
+  // .paragraph--type--double {
+  //   padding: .5em;
+  // }
+  .field--name-field-double-content-primary {
+    max-width: 30em;
+    margin-right: 0;
+    margin-left: auto;
+  }
+  .field--name-field-double-content-secondary {
+    max-width: 30em;
+    margin-left: 0;
+    margin-right: auto;
+  }
+}

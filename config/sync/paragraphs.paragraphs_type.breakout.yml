@@ -1,0 +1,9 @@
+uuid: 5bde8fc4-54db-4195-a5f6-e2eb7c0c294c
+langcode: en
+status: true
+dependencies: {  }
+id: breakout
+label: Breakout
+icon_uuid: null
+description: null
+behavior_plugins: {  }

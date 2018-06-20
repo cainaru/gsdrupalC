@@ -1,0 +1,60 @@
+uuid: 9b3befb2-a3fa-4a73-b7d5-4f4103b3617f
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.modal_media_entity_browser
+    - field.field.paragraph.banner_media.field_banner_media
+    - field.field.paragraph.banner_media.field_banner_media_caption
+    - field.field.paragraph.banner_media.field_banner_media_credit
+    - field.field.paragraph.banner_media.field_display_options
+    - paragraphs.paragraphs_type.banner_media
+  module:
+    - entity_browser
+    - text
+id: paragraph.banner_media.default
+targetEntityType: paragraph
+bundle: banner_media
+mode: default
+content:
+  field_banner_media:
+    weight: 0
+    settings:
+      entity_browser: modal_media_entity_browser
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_prepend
+      field_widget_display_settings:
+        view_mode: preview
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_banner_media_caption:
+    weight: 2
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_banner_media_credit:
+    weight: 3
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_display_options:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+hidden:
+  created: true
+  moderation_state: true
+  status: true
+  uid: true

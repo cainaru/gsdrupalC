@@ -1,0 +1,205 @@
+{#
+/**
+ * @file
+ * Theme override to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+     Only "getter" methods (method names starting with "get", "has", or "is")
+     and a few common methods such as "id" and "label" are available. Calling
+     other methods (such as node.delete) will result in an exception.
+ * - label: The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: Themed creation date field.
+ * - author_name: Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @ingroup templates
+ *
+ * @see template_preprocess_node()
+ *
+ * @todo Remove the id attribute (or make it a class), because if that gets
+ *   rendered twice on a page this is invalid CSS for example: two lists
+ *   in different view modes.
+ */
+#}
+{%
+  set classes = [
+    node.bundle|clean_class,
+    node.isPromoted() ? 'is-promoted',
+    node.isSticky() ? 'is-sticky',
+    not node.isPublished() ? 'is-unpublished',
+    view_mode ? view_mode|clean_class,
+    'clearfix',
+  ]
+%}
+<article{{ attributes.addClass(classes) }}>
+
+  {{ title_prefix }}
+  {% if label %}
+
+    {# Checks if page in order to display custom page header stuff on nodes #}
+    {% if page %}
+      
+      {# Create block to render again later #}
+      {% block header %}
+
+        {# 
+          Modifies classes in page-header-wrapper div depending on if there is featured media or not
+          Disclaimer: this is super messy.. there's gotta be a better way but I couldn't figure it out 
+        #}
+
+        {# Checks if full-width featured media/banner media/hero media paragraph #}
+        {% if node.field_banner_media_element is not empty %}
+
+          {# Checks which display option is selected #}
+          {% if content.field_banner_media_element.0['#paragraph'].field_display_options.value == '1' %}
+
+            {# 
+              if full-width then page title overlayed on featured media/banner media/hero media when screen
+              larger than 768px 
+            #}
+            <div class="page-header-wrapper has-featured-media full-width">
+          {% elseif content.field_banner_media_element.0['#paragraph'].field_display_options.value == '2' %}
+            
+            {# if not full-width then featured media/banner media/hero media rendered below page title #}
+            <div class="page-header-wrapper has-featured-media not-full-width">
+          {% endif %}
+
+        {# 
+          Checks if narrative content type and if featured media/banner media/hero media paragraph is empty, 
+          renders background color if it is empty 
+        #}
+
+        {% elseif node.getType == 'narrative' and node.field_banner_media_element is empty %}
+          <div class="page-header-wrapper no-featured-media" style="background-color:{{ node.field_banner_color.color }};">
+        {% else %}
+          <div class="page-header-wrapper">
+        {% endif %}
+
+        {# Renders full-width featured media/banner media/hero media paragraph #}
+        {% if node.field_banner_media_element and content.field_banner_media_element.0['#paragraph'].field_display_options.value == '1' %}
+          <div class="featured-media row clearfix">
+            {{ content.field_banner_media_element }}
+          </div>
+        {% endif %}
+
+          <div class="page-header-content-container">
+          {% block moderation_stat %}
+            {% if node.moderation_state and node.moderation_state.value != 'published' %}
+              <div class="moderation-state-label">
+                {% if node.moderation_state.value == 'draft' %}
+                  <span class="label label-info">{% trans %}Draft{% endtrans %}</span>
+                {% elseif node.moderation_state.value == 'needs_review' %}
+                  <span class="label label-warning">{% trans %}Needs Review{% endtrans %}</span>
+                {% elseif node.moderation_state.value == 'internal' %}
+                  <span class="label label-success">{% trans %}Published (Local Only){% endtrans %}</span>
+                {% elseif node.moderation_state.value == 'archived' %}
+                  <span class="label label-default">{% trans %}Archived{% endtrans %}</span>
+                {% endif %}
+              </div>
+            {% elseif node.moderation_state and node.moderation_state.value == 'published' and logged_in %}
+              <div class="moderation-state-label">
+                <span class="label label-danger">{% trans %}Published{% endtrans %}</span>
+              </div>
+            {% endif %}
+          {% endblock %}
+
+            <h1 class="page-header">{{ label }}</h1>
+            {% if node.field_subtitle.value %}
+              <div class="subtitle">
+                {{ content.field_subtitle.0 }}
+              </div>
+            {% endif %}
+            {% if content.field_authorship %}
+              {{ content.field_authorship }}
+            {% endif %}
+          </div>
+
+          {# Renders not full-width featured media/banner media/hero media paragraph #}
+          {% if node.field_banner_media_element and content.field_banner_media_element.0['#paragraph'].field_display_options.value == '2' %}
+            <div class="featured-media clearfix">
+              {{ content.field_banner_media_element }}
+            </div>
+          {% endif %}
+
+        </div>
+      {% endblock %}
+    {% elseif not page and view_mode == 'referenced' %}
+      <div class="university-content-container">
+        {{ block('moderation_stat') }}
+        <h2{{ title_attributes }}>
+          <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+        </h2>
+        {% if content.field_authorship %}
+          {{ content.field_authorship }}
+        {% endif %}
+      </div>
+    {% elseif not page and view_mode == 'teaser' %}
+      {{ block('moderation_stat') }}
+      <h2{{ title_attributes }}>
+        <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+      </h2>
+    {% else %}
+      {{ block('header') }}
+    {% endif %}
+  {% endif %}
+  {{ title_suffix }}
+
+  {% if display_submitted %}
+    <footer>
+      {{ author_picture }}
+      <div{{ author_attributes.addClass('author') }}>
+        {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+        {{ metadata }}
+      </div>
+    </footer>
+  {% endif %}
+
+  <div{{ content_attributes.addClass('content') }}>
+    {{ content|without('field_banner_media_element', 'field_banner_color', 'field_subtitle', 'field_authorship') }}
+  </div>
+
+</article>

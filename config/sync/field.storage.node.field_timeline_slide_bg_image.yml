@@ -1,0 +1,22 @@
+uuid: e8aaf5c7-0366-4817-a1b1-645bbf2901a1
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+    - node
+_core:
+  default_config_hash: 96ZiReU8URQoCfYnKVeMv4pR7ZTd58PnU5JFs5vGFvY
+id: node.field_timeline_slide_bg_image
+field_name: field_timeline_slide_bg_image
+entity_type: node
+type: entity_reference
+settings:
+  target_type: media
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,34 @@
+uuid: e7da01d9-5dc2-4bd1-8adf-0d0c0c79f2aa
+langcode: en
+status: false
+dependencies:
+  config:
+    - views.view.narrative_listing
+  module:
+    - block_class
+    - system
+    - views
+  theme:
+    - university_bootstrap
+third_party_settings:
+  block_class:
+    classes: 'university-section-block university-grid color-gray-light row clearfix'
+id: views_block__narrative_listing_block_1
+theme: university_bootstrap
+region: content
+weight: -5
+provider: null
+plugin: 'views_block:narrative_listing-block_1'
+settings:
+  id: 'views_block:narrative_listing-block_1'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }

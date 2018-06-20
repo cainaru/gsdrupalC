@@ -1,0 +1,30 @@
+uuid: 5a300648-40f8-447f-8c87-73065a4713f4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.media_carousel.field_media_carousel_items
+    - paragraphs.paragraphs_type.media_carousel
+  module:
+    - paragraphs
+id: paragraph.media_carousel.default
+targetEntityType: paragraph
+bundle: media_carousel
+mode: default
+content:
+  field_media_carousel_items:
+    type: entity_reference_paragraphs
+    weight: 0
+    settings:
+      title: Media
+      title_plural: Media
+      edit_mode: open
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

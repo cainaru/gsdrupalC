@@ -1,0 +1,5 @@
+.paragraph--type--text .field--name-field-text > *:not(iframe) {
+  @extend %text-content-width;
+  margin-left: auto;
+  margin-right: auto;
+}

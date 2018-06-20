@@ -1,0 +1,115 @@
+uuid: 4c022da7-94f2-4dd3-a0e9-9cbf19f065ba
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.media.field_caption
+    - field.field.paragraph.media.field_citation
+    - field.field.paragraph.media.field_media
+    - paragraphs.paragraphs_type.media
+  module:
+    - field_group
+    - text
+third_party_settings:
+  field_group:
+    group_figcaption:
+      children:
+        - group_caption_text
+        - group_citation
+      parent_name: group_figure
+      weight: 2
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: ''
+        element: figcaption
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+      label: figcaption
+      region: content
+    group_figure:
+      children:
+        - field_media
+        - group_figcaption
+      parent_name: ''
+      weight: 0
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: ''
+        element: figure
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+      label: figure
+      region: content
+    group_caption_text:
+      children:
+        - field_caption
+      parent_name: group_figcaption
+      weight: 20
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: caption-text
+        element: span
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+      label: caption-text
+      region: content
+    group_citation:
+      children:
+        - field_citation
+      parent_name: group_figcaption
+      weight: 21
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: citation
+        element: span
+        show_label: false
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+      label: citation
+      region: content
+id: paragraph.media.default
+targetEntityType: paragraph
+bundle: media
+mode: default
+content:
+  field_caption:
+    weight: 21
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_citation:
+    weight: 22
+    label: visually_hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_media:
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+hidden:
+  created: true
+  uid: true

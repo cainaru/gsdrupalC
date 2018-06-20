@@ -1,0 +1,35 @@
+uuid: 1e7733d7-24fc-4bd0-b508-59d5e555a7a5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.content_reference.field_content_reference
+    - paragraphs.paragraphs_type.content_reference
+  module:
+    - entity_browser_entity_form
+    - inline_entity_form
+id: paragraph.content_reference.default
+targetEntityType: paragraph
+bundle: content_reference
+mode: default
+content:
+  field_content_reference:
+    weight: 0
+    settings:
+      form_mode: default
+      override_labels: true
+      label_singular: Content
+      label_plural: Content
+      allow_existing: true
+      match_operator: CONTAINS
+      allow_new: false
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: general_content_entity_browser
+    type: inline_entity_form_complex
+    region: content
+hidden:
+  created: true
+  moderation_state: true
+  status: true
+  uid: true

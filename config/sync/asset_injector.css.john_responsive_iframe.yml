@@ -1,0 +1,11 @@
+uuid: 383ec701-4fd0-484d-8302-83309cc7c652
+langcode: en
+status: true
+dependencies: {  }
+id: john_responsive_iframe
+label: 'John - Responsive iframe'
+code: ".responsive-iframe {\r\n  position: relative;\r\n  height: 0;\r\n  overflow: hidden;\r\n  padding-bottom: 56.25%;\r\n  max-width: 100%;\r\n}\r\n.responsive-iframe.ratio-4x3 {\r\n  padding-bottom: 75%;\r\n}\r\n.responsive-iframe.ratio-golden {\r\n  padding-bottom: 61.8%;\r\n}\r\n.responsive-iframe.ratio-16x9 {\r\n  padding-bottom: 56.25%;\r\n}\r\n.responsive-iframe iframe {\r\n  width: 100%;\r\n  height: 100%;\r\n  position:absolute;\r\n  top:0;\r\n  left:0;\r\n}"
+media: all
+preprocess: true
+conditions: {  }
+conditions_require_all: true

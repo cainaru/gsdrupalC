@@ -1,0 +1,17 @@
+uuid: d400bcfb-78d1-4f44-9233-e95a852d28f5
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: large_scale_crop_700x400_
+label: 'Large Scale Crop (700x400)'
+effects:
+  76122c39-5b8f-408c-9d8e-9b633a1d5b05:
+    uuid: 76122c39-5b8f-408c-9d8e-9b633a1d5b05
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 700
+      height: 400
+      crop_type: focal_point

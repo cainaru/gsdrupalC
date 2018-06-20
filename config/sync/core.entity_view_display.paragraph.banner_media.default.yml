@@ -1,0 +1,49 @@
+uuid: bd20d5f6-6b67-49b0-8c82-77d95b9ccc7e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.banner_media.field_banner_media
+    - field.field.paragraph.banner_media.field_banner_media_caption
+    - field.field.paragraph.banner_media.field_banner_media_credit
+    - field.field.paragraph.banner_media.field_display_options
+    - paragraphs.paragraphs_type.banner_media
+  module:
+    - options
+    - text
+id: paragraph.banner_media.default
+targetEntityType: paragraph
+bundle: banner_media
+mode: default
+content:
+  field_banner_media:
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: banner_media_image
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+  field_banner_media_caption:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_banner_media_credit:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+  field_display_options:
+    weight: 3
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+hidden: {  }

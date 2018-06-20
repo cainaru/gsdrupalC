@@ -1,0 +1,57 @@
+uuid: aa2bb73f-490e-4b56-abae-66193d412bcd
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.timeline_slide.body
+    - field.field.node.timeline_slide.field_authorship
+    - field.field.node.timeline_slide.field_category
+    - field.field.node.timeline_slide.field_display_date
+    - field.field.node.timeline_slide.field_end_date
+    - field.field.node.timeline_slide.field_geolocation_referenced
+    - field.field.node.timeline_slide.field_media
+    - field.field.node.timeline_slide.field_media_caption_formatted
+    - field.field.node.timeline_slide.field_media_citation_formatted
+    - field.field.node.timeline_slide.field_start_date
+    - field.field.node.timeline_slide.field_timeline_item_bg_color
+    - field.field.node.timeline_slide.field_timeline_slide_bg_image
+    - field.field.node.timeline_slide.field_type_of_slide
+    - node.type.timeline_slide
+  module:
+    - text
+    - user
+_core:
+  default_config_hash: 8wZQXfhmdbE6FXEKe2FfVj7PVrJ1DSWMOYorRIrFL4U
+id: node.timeline_slide.teaser
+targetEntityType: node
+bundle: timeline_slide
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 0
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  content_moderation_control: true
+  field_authorship: true
+  field_category: true
+  field_display_date: true
+  field_end_date: true
+  field_geolocation_referenced: true
+  field_media: true
+  field_media_caption_formatted: true
+  field_media_citation_formatted: true
+  field_start_date: true
+  field_timeline_item_bg_color: true
+  field_timeline_slide_bg_image: true
+  field_type_of_slide: true

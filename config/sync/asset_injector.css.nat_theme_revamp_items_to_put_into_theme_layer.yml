@@ -1,0 +1,18 @@
+uuid: 5cba1e99-31a0-458d-b8fe-e93ca17083c3
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+id: nat_theme_revamp_items_to_put_into_theme_layer
+label: 'Nat - Theme revamp items to put into theme layer'
+code: ".university-promoted-single-with-attachment > .view-content:before,\r\n.university-promoted-single-with-attachment > .view-content:after {\r\n  display: block;\r\n  clear: none;\r\n}\r\n\r\n.banner-featured {\r\n  position: relative;\r\n}\r\n\r\n.university-banner-featured {\r\n  background: #333;\r\n  padding-top: 2.7rem;\r\n  padding-bottom: 2.7rem;\r\n}\r\n\r\n.university-banner-featured .university-banner-featured-content  {\r\n  color: #ffffff;\r\n}\r\n\r\n.university-banner-featured .university-banner-featured-content h2 {\r\n    font-size: 40px;\r\n}\r\n\r\n.university-banner-featured .university-banner-featured-content h2 a {\r\n  color: #ffffff;\r\n}\r\n\r\n.university-banner-featured .university-banner-featured-content .subtitle {\r\n  font-size: 2rem;\r\n  margin-top: 0px;\r\n}\r\n\r\n.university-banner-featured .university-banner-featured-content .byline {\r\n  margin-bottom: 2.7rem;\r\n}\r\n\r\n@media (min-width: 768px) {\r\n  .university-banner-featured {\r\n    padding-top: 0;\r\n    padding-bottom: 0;\r\n    background: none;\r\n    position: absolute;\r\n    bottom: 10%;\r\n    left: 0;\r\n    right: 0;\r\n    padding-left: 15px;\r\n    padding-right: 15px;\r\n    text-shadow: 0px 0px 10px #231f20, 0px 0px 5px #000000;\r\n    display: block;\r\n    margin-left: auto;\r\n    margin-right: auto;\r\n    max-width: 65em;\r\n  }\r\n}\r\n\r\n@media (min-width: 992px) {\r\n  .banner-featured .featured-image {\r\n    min-height: 42vw;\r\n  }\r\n  \r\n  .banner-featured .featured-image .paragraph--type--banner-media {\r\n    position: absolute !important;\r\n    clip: rect(1px,1px,1px,1px);\r\n    overflow: hidden;\r\n    height: 1px;\r\n    width: 1px;\r\n    word-wrap: normal;\r\n  }\r\n  \r\n  .banner-featured {\r\n    background-color: #333;\r\n    background-size: cover;\r\n    background-position: left center;\r\n    background-repeat: no-repeat;\r\n  }\r\n}\r\n\r\n.teaser-listing .col-xs-4.col-sm-3 {\r\n  padding-right: 0px;\r\n}"
+media: all
+preprocess: true
+conditions:
+  current_theme:
+    id: current_theme
+    theme:
+      university_bootstrap: university_bootstrap
+    negate: false
+conditions_require_all: true

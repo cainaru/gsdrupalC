@@ -1,0 +1,47 @@
+uuid: 95e36fdf-ac0f-4195-9d48-dcc5296fa227
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.media.field_caption
+    - field.field.paragraph.media.field_citation
+    - field.field.paragraph.media.field_media
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.media
+  module:
+    - media_entity
+    - text
+id: paragraph.media.preview
+targetEntityType: paragraph
+bundle: media
+mode: preview
+content:
+  field_caption:
+    type: text_trimmed
+    weight: 2
+    label: inline
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  field_citation:
+    type: text_trimmed
+    weight: 1
+    label: inline
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  field_media:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: thumbnail
+      image_link: ''
+    third_party_settings: {  }
+    type: media_thumbnail
+    region: content
+hidden:
+  created: true
+  uid: true

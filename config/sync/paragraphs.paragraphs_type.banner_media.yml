@@ -1,0 +1,9 @@
+uuid: 8be44d3e-b006-463a-aa54-d8fba81950f1
+langcode: en
+status: true
+dependencies: {  }
+id: banner_media
+label: 'Featured Media'
+icon_uuid: null
+description: null
+behavior_plugins: {  }

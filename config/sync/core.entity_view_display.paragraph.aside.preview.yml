@@ -1,0 +1,36 @@
+uuid: 1499eff7-6b83-4b6a-8e63-b5901f05dd4d
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.aside.field_aside_content
+    - field.field.paragraph.aside.field_display_mode
+    - paragraphs.paragraphs_type.aside
+  module:
+    - entity_reference_revisions
+    - options
+_core:
+  default_config_hash: _MQryh2BLz7aCf7pFN4LRthopDIIAj401g1pDduMVlg
+id: paragraph.aside.preview
+targetEntityType: paragraph
+bundle: aside
+mode: preview
+content:
+  field_aside_content:
+    type: entity_reference_revisions_entity_view
+    weight: 1
+    label: hidden
+    settings:
+      view_mode: preview
+      link: ''
+    third_party_settings: {  }
+    region: content
+  field_display_mode:
+    type: list_default
+    weight: 0
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+hidden: {  }

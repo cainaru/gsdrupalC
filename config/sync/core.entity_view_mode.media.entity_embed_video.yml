@@ -1,0 +1,10 @@
+uuid: cc8df632-0580-4b40-b47d-3fa9f897b102
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+id: media.entity_embed_video
+label: 'Entity Embed Video'
+targetEntityType: media
+cache: true

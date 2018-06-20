@@ -1,0 +1,42 @@
+uuid: 9d6d6156-8345-49a7-82f3-eb23d4115a54
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.account
+  module:
+    - block_class
+    - system
+    - user
+  theme:
+    - university_bootstrap
+third_party_settings:
+  block_class:
+    classes: ''
+_core:
+  default_config_hash: R2K_qX0ZUMbUL6ie_-S9tZVjvqmlWKlscikgeRv9vhw
+id: university_bootstrap_account_menu
+theme: university_bootstrap
+region: navigation_collapsible
+weight: -5
+provider: null
+plugin: 'system_menu_block:account'
+settings:
+  id: 'system_menu_block:account'
+  label: 'User account menu'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 2
+visibility:
+  user_role:
+    id: user_role
+    roles:
+      authenticated: authenticated
+      administrator: administrator
+      contributor: contributor
+      editor: editor
+      p: p
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'

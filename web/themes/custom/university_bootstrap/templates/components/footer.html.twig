@@ -1,0 +1,85 @@
+{# {% block footer %}
+<footer class="university-footer footer {{ container }}" role="contentinfo">
+  <div class="footer-top row">
+  	<section class="col-sm-12">
+  	  {{ page.footer }}
+  	</section>
+  </div>
+  <div class="footer-bottom row">
+  	<section class="col-sm-12">
+	  	<div class="row">
+	  	  <div class="col-sm-12">
+          <div class="row">
+            <div class="col-sm-6 col-md-6">
+              <div class="university-info">
+                <h3>St. Lawrence University <span>Digital Initiatives</span></h3>
+                <address>Canton, NY 13617</address>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-6 text-right">
+              <div class="additional-links">
+                <nav role="navigation" id="subfooter-navigation">
+                  <h2 class="visually-hidden">Subfooter navigation</h2>
+                  <ul class="menu nav">
+                    <li><a href="http://digital.stlawu.edu/">Digital Initiatives<span><i class="fa fa-external-link" aria-hidden="true"></i></span></a></li>
+                  </ul>
+                </nav>
+              </div>
+	  	  	    <div class="copyright">
+	  	  	      <span>&copy; {{ now|date('Y') }} St. Lawrence University.</span>
+	  	  	    </div>
+            </div>
+          </div>
+	  	  </div>
+	  	</div>
+  	</section>
+  </div>
+</footer>
+{% endblock %} #}
+
+{% block footer %}
+<footer class="footer {{ container }}" role="contentinfo">
+  <div class="main-footer footer-top row">
+    <div class="university-content-container container-fluid">
+      <div class="row">
+        <div class="col-md-4">
+          {{ page.footer_first }}
+        </div>
+        <div class="col-md-4">
+          {{ page.footer_second }}
+        </div>
+        <div class="col-md-4">
+          {{ page.footer_third }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom row">
+    <div class="university-content-container container-fluid">
+      <div class="row">
+        <div class="col-md-6">
+          {{ page.footer_bottom_left }}
+          <div class="university-info">
+            <h3>St. Lawrence University <span>Digital Initiatives</span></h3>
+            <address>Canton, NY 13617</address>
+          </div>
+        </div>
+        <div class="col-md-6 text-right">
+          {{ page.footer_bottom_right }}
+          <div class="additional-links">
+            <nav role="navigation" id="subfooter-navigation">
+              <h2 class="visually-hidden">Subfooter navigation</h2>
+              <ul class="menu nav">
+                <li><a href="http://digital.stlawu.edu/">Digital Initiatives<span><i class="fa fa-external-link" aria-hidden="true"></i></span></a></li>
+              </ul>
+            </nav>
+          </div>
+          <div class="copyright">
+            <span>&copy; {{ now|date('Y') }} St. Lawrence University.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+{% endblock %}

@@ -1,0 +1,44 @@
+uuid: d72981cf-5e95-4262-89bb-a57acd280a2b
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.content_moderation_dashboard
+  module:
+    - block_class
+    - system
+    - user
+    - views
+  theme:
+    - seven
+third_party_settings:
+  block_class:
+    classes: ''
+id: views_block__content_moderation_dashboard_block_1
+theme: seven
+region: content
+weight: 0
+provider: null
+plugin: 'views_block:content_moderation_dashboard-block_1'
+settings:
+  id: 'views_block:content_moderation_dashboard-block_1'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+visibility:
+  user_role:
+    id: user_role
+    roles:
+      administrator: administrator
+      contributor: contributor
+      editor: editor
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+  request_path:
+    id: request_path
+    pages: /admin/content
+    negate: false
+    context_mapping: {  }

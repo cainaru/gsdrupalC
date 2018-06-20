@@ -1,0 +1,21 @@
+uuid: 126831d6-3bc1-4a32-9a1b-4386e343148a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_display_date
+    - node.type.timeline_slide
+_core:
+  default_config_hash: nSeZgqD4O0vprPB9kikSoGJSqkACDet9_-aRJP2LkE8
+id: node.timeline_slide.field_display_date
+field_name: field_display_date
+entity_type: node
+bundle: timeline_slide
+label: 'Display Date'
+description: "<em><strong>Display date</strong></em> overrides how the date is displayed on the slide. If you need more flexibility about how dates are shown on the slide or if a date is not known, you can specify a \"display date\" in this field.<br>\r\n<strong>Example:</strong> July 1943 — 1946"
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

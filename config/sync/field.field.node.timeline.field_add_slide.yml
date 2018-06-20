@@ -1,0 +1,31 @@
+uuid: 1856575b-e661-4c34-8cfc-3aec730befe5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_add_slide
+    - node.type.timeline
+    - node.type.timeline_slide
+_core:
+  default_config_hash: O4CnfPnkoce8oUa2Mbs29XCcWxBZVHzZpfSH4eNKLf0
+id: node.timeline.field_add_slide
+field_name: field_add_slide
+entity_type: node
+bundle: timeline
+label: 'Add Slide'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: unpublished
+  handler_settings:
+    target_bundles:
+      timeline_slide: timeline_slide
+    sort:
+      field: title
+      direction: ASC
+    auto_create: 1
+    auto_create_bundle: ''
+field_type: entity_reference

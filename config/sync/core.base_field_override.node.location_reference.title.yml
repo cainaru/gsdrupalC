@@ -1,0 +1,18 @@
+uuid: 14783be3-cf13-4b26-8c46-ab037c3e9bdd
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.location_reference
+id: node.location_reference.title
+field_name: title
+entity_type: node
+bundle: location_reference
+label: 'Location Title'
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

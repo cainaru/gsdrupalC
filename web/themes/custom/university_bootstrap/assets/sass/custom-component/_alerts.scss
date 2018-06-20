@@ -1,0 +1,9 @@
+// Base styles
+// -------------------------
+
+.alert {
+  margin-bottom: ($line-height-computed / 2);
+  & :first-child {
+    margin-top: 0;
+  }
+}

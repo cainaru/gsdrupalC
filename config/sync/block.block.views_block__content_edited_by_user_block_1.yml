@@ -1,0 +1,34 @@
+uuid: 1bf14d71-cd91-4ca3-99cf-8ee6f72b2048
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.content_edited_by_user
+  module:
+    - block_class
+    - system
+    - views
+  theme:
+    - seven
+third_party_settings:
+  block_class:
+    classes: ''
+id: views_block__content_edited_by_user_block_1
+theme: seven
+region: content
+weight: -2
+provider: null
+plugin: 'views_block:content_edited_by_user-block_1'
+settings:
+  id: 'views_block:content_edited_by_user-block_1'
+  label: ''
+  provider: views
+  label_display: '0'
+  views_label: ''
+  items_per_page: none
+visibility:
+  request_path:
+    id: request_path
+    pages: /admin/content
+    negate: false
+    context_mapping: {  }

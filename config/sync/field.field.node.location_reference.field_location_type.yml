@@ -1,0 +1,32 @@
+uuid: 732ae9b7-5075-4c93-b2b9-70a5566c13c4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_location_type
+    - node.type.location_reference
+    - taxonomy.vocabulary.location_type
+  content:
+    - 'taxonomy_term:location_type:2b8dca35-642d-44f7-bcbe-ed9d7900cb05'
+id: node.location_reference.field_location_type
+field_name: field_location_type
+entity_type: node
+bundle: location_reference
+label: 'Location Type'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    target_uuid: 2b8dca35-642d-44f7-bcbe-ed9d7900cb05
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      location_type: location_type
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

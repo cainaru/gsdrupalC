@@ -1,0 +1,25 @@
+uuid: b48c13e7-d2ba-4fe9-8e5d-0d837e2ec2f7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_width
+    - media_entity.bundle.image
+_core:
+  default_config_hash: 1v4b9hRmGKhFHTkjyZNVKFv_n-zMphsHDJ8nieiGBpE
+id: media.image.field_width
+field_name: field_width
+entity_type: media
+bundle: image
+label: Width
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

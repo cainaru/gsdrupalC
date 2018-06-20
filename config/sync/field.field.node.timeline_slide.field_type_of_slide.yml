@@ -1,0 +1,25 @@
+uuid: d85d4bca-d4e8-492b-a536-316eaef09550
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_type_of_slide
+    - node.type.timeline_slide
+  module:
+    - options
+_core:
+  default_config_hash: XiBoKO_6LpWBEz1Xc2auXbWSO0SJbu3ufz_SAqcLw-c
+id: node.timeline_slide.field_type_of_slide
+field_name: field_type_of_slide
+entity_type: node
+bundle: timeline_slide
+label: 'Type of Slide'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: default
+default_value_callback: ''
+settings: {  }
+field_type: list_string

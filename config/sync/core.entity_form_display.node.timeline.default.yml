@@ -1,0 +1,162 @@
+uuid: 7dd818f7-8c4f-402c-a552-ce002bb0977d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.timeline.body
+    - field.field.node.timeline.field_add_slide
+    - field.field.node.timeline.field_authorship
+    - node.type.timeline
+  module:
+    - content_moderation
+    - entity_browser_entity_form
+    - field_group
+    - inline_entity_form
+    - path
+    - text
+third_party_settings:
+  field_group:
+    group_page_header:
+      children:
+        - title
+        - field_authorship
+      parent_name: ''
+      weight: 0
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: false
+      label: 'Page Header'
+      region: content
+    group_main_co:
+      children:
+        - body
+        - group_timeline_slides
+      parent_name: ''
+      weight: 1
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: false
+      label: 'Main Content'
+      region: content
+    group_timeline_slides:
+      children:
+        - field_add_slide
+      parent_name: group_main_co
+      weight: 3
+      format_type: html_element
+      format_settings:
+        label: 'Timeline Slides'
+        element: div
+        show_label: true
+        label_element: h3
+        attributes: ''
+        effect: none
+        speed: fast
+        id: timeline-slides-field-group
+        classes: ''
+        required_fields: false
+      label: 'Timeline Slides'
+      region: content
+_core:
+  default_config_hash: W_m0QU7mNyjhvywBmsyRi1HUB2C9pxuZKO542rVX4m4
+id: node.timeline.default
+targetEntityType: node
+bundle: timeline
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 2
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  created:
+    type: datetime_timestamp
+    weight: 5
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_add_slide:
+    weight: 4
+    settings:
+      form_mode: default
+      override_labels: true
+      label_singular: Slide
+      label_plural: Slides
+      allow_new: true
+      allow_existing: true
+      match_operator: CONTAINS
+    third_party_settings:
+      entity_browser_entity_form:
+        entity_browser_id: timeline_slide_connector
+    type: inline_entity_form_complex
+    region: content
+  field_authorship:
+    weight: 2
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete_tags
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 9
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 8
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  promote:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 6
+    third_party_settings: {  }
+    region: content
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 10
+    region: content
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 7
+    third_party_settings: {  }
+    region: content
+  title:
+    type: string_textfield
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  uid:
+    type: entity_reference_autocomplete
+    weight: 4
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+hidden: {  }

@@ -1,0 +1,14 @@
+uuid: 8c6e9da0-b572-4186-9f09-a5140cc62419
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: taxonomy_term_paht
+label: 'Taxonomy Term Pathauto Pattern'
+type: 'canonical_entities:taxonomy_term'
+pattern: '[term:vocabulary]/[term:name]'
+selection_criteria: {  }
+selection_logic: and
+weight: 0
+relationships: {  }

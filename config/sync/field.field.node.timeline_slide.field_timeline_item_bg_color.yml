@@ -1,0 +1,24 @@
+uuid: 7b98568b-c6b6-4feb-bf76-e98967a11319
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_timeline_item_bg_color
+    - node.type.timeline_slide
+  module:
+    - color_field
+_core:
+  default_config_hash: 7PunXZJx5-hndk-PGgbjzMMRKsfaMzrh5Im3PLV-NX0
+id: node.timeline_slide.field_timeline_item_bg_color
+field_name: field_timeline_item_bg_color
+entity_type: node
+bundle: timeline_slide
+label: 'Slide Background Color'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  opacity: 0
+field_type: color_field_type

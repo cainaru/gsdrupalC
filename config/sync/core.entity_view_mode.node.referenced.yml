@@ -1,0 +1,10 @@
+uuid: fff63aec-d0e9-4782-b347-e10db6ae836c
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.referenced
+label: Referenced
+targetEntityType: node
+cache: true

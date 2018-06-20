@@ -1,0 +1,17 @@
+uuid: 5835236d-7430-4991-8c28-8e6958670f5e
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: extra_small_screen_480x270_
+label: 'Extra Small Screen (480x270)'
+effects:
+  4ffd6b99-0a31-4d1a-a53f-d5d473d916c4:
+    uuid: 4ffd6b99-0a31-4d1a-a53f-d5d473d916c4
+    id: focal_point_scale_and_crop
+    weight: 2
+    data:
+      width: 480
+      height: 270
+      crop_type: focal_point

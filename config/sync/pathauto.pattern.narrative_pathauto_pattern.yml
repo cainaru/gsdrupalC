@@ -1,0 +1,22 @@
+uuid: 81877a5b-4a55-43b4-ad63-c652e64e8779
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: narrative_pathauto_pattern
+label: 'Narrative Pathauto Pattern'
+type: 'canonical_entities:node'
+pattern: 'narrative/[node:title]'
+selection_criteria:
+  a65535c0-8bf6-431f-90b0-2f212d298846:
+    id: node_type
+    bundles:
+      narrative: narrative
+    negate: false
+    context_mapping:
+      node: node
+    uuid: a65535c0-8bf6-431f-90b0-2f212d298846
+selection_logic: and
+weight: -5
+relationships: {  }

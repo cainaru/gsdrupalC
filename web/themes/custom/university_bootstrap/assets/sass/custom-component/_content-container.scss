@@ -1,0 +1,43 @@
+// Content max-width for various screens
+//
+// Max-width for content when viewed on a designated screen.
+
+// ========================================
+// Max content width without margin-auto (placeholder class?)
+// ========================================
+// This is set to a max-width of 65em based on 
+// the $content-container-max-width variable in variables/_university-bootstrap-variables.scss
+%max-content-width {
+  @include content-max-width($screen-sm-min, $content-container-max-width);
+}
+
+// ========================================
+// Text content width without margin-auto (placeholder class?)
+// ========================================
+// This is set to a max-width of 70rem based on 
+// the $text-max-width variable in variables/_university-bootstrap-variables.scss
+%text-content-width {
+  @include content-max-width($screen-sm-min, $text-max-width);
+}
+
+// ========================================
+// Layout content container for content on not full-width pages
+// ========================================
+.university-layout-content-container {
+  @extend %max-content-width;
+}
+
+// ========================================
+// General content container (helper class?)
+// ========================================
+.university-content-container {
+  @extend %max-content-width;
+  @include center-block();
+}
+
+// ========================================
+// General content container (helper class?)
+// ========================================
+.paragraph--type--text, .paragraph--type--double, .paragraph--type--content-reference .referenced, .paragraph--type--breakout iframe{
+  @extend .university-content-container;
+}

@@ -1,0 +1,25 @@
+uuid: f573f63c-15ca-47d0-b62b-80fc58fc2f59
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_video_image
+    - media_entity.bundle.video_external
+id: media.video_external.field_video_image
+field_name: field_video_image
+entity_type: media
+bundle: video_external
+label: 'Video image'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings:
+    target_bundles: null
+    sort:
+      field: _none
+    auto_create: false
+field_type: entity_reference

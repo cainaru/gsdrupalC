@@ -1,0 +1,10 @@
+uuid: 409852c6-7a42-4146-b462-e1febcab6dd9
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+id: media.banner_media_image
+label: 'Banner Media Image Full-width'
+targetEntityType: media
+cache: true

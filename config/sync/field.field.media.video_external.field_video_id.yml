@@ -1,0 +1,19 @@
+uuid: ebb8ea5a-fc6e-4bc6-9c49-1b290fcb3651
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_video_id
+    - media_entity.bundle.video_external
+id: media.video_external.field_video_id
+field_name: field_video_id
+entity_type: media
+bundle: video_external
+label: 'Video ID'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

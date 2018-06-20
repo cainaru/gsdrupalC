@@ -1,0 +1,107 @@
+uuid: 5d50a983-a902-4daf-a861-c657fb842be6
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.article
+    - node.type.location_reference
+    - node.type.narrative
+    - node.type.page
+    - node.type.timeline
+    - node.type.timeline_slide
+  module:
+    - content_moderation
+_core:
+  default_config_hash: T_JxNjYlfoRBi7Bj1zs5Xv9xv1btuBkKp5C1tNrjMhI
+id: editorial
+label: Editorial
+type: content_moderation
+type_settings:
+  states:
+    archived:
+      label: Archived
+      weight: -6
+      published: false
+      default_revision: true
+    draft:
+      label: Draft
+      published: false
+      default_revision: false
+      weight: -10
+    internal:
+      published: false
+      default_revision: true
+      label: 'Published (Local Only)'
+      weight: -8
+    needs_review:
+      published: false
+      default_revision: false
+      label: 'Needs Review'
+      weight: -9
+    published:
+      label: Published
+      published: true
+      default_revision: true
+      weight: -7
+  transitions:
+    archive:
+      label: Archive
+      from:
+        - internal
+        - published
+      to: archived
+      weight: -5
+    archived_draft:
+      label: 'Restore to Draft'
+      from:
+        - archived
+      to: draft
+      weight: -4
+    archived_published:
+      label: Restore
+      from:
+        - archived
+      to: published
+      weight: -3
+    create_new_draft:
+      label: 'Create New Draft'
+      to: draft
+      weight: -10
+      from:
+        - draft
+        - published
+    internal:
+      label: 'Publish (Local Only)'
+      from:
+        - draft
+        - internal
+        - needs_review
+        - published
+      to: internal
+      weight: -8
+    needs_review:
+      label: 'Needs Review'
+      from:
+        - draft
+        - internal
+        - needs_review
+        - published
+      to: needs_review
+      weight: -9
+    publish:
+      label: Publish
+      to: published
+      weight: -6
+      from:
+        - draft
+        - internal
+        - needs_review
+        - published
+  entity_types:
+    node:
+      - article
+      - location_reference
+      - narrative
+      - page
+      - timeline
+      - timeline_slide

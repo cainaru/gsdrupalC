@@ -1,0 +1,22 @@
+uuid: 353efa08-43c4-45c2-8f6c-3eeac01f2e41
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+id: nat_admin_content_tweaks
+label: 'Nat - admin/content tweaks'
+code: ".header-inline-block,\r\n.view-all-inline-block {\r\n  display: inline-block;\r\n}\r\n\r\n.block-views-blockcontent-edited-by-user-block-1,\r\n.block-views-blockcontent-moderation-dashboard-block-1 {\r\n  margin-bottom: 2em;\r\n}"
+media: all
+preprocess: true
+conditions:
+  current_theme:
+    id: current_theme
+    theme:
+      seven: seven
+    negate: false
+  request_path:
+    id: request_path
+    pages: /admin/content
+    negate: false
+conditions_require_all: true

@@ -1,0 +1,30 @@
+uuid: b2298fa0-8360-40f5-a9fe-a6111c0a4a78
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_timeline_slide_bg_image
+    - media_entity.bundle.image
+    - node.type.timeline_slide
+_core:
+  default_config_hash: TuDuGP8xs0ot4PV_eOmSgrNrD_hwd9S09z8YREkIZZo
+id: node.timeline_slide.field_timeline_slide_bg_image
+field_name: field_timeline_slide_bg_image
+entity_type: node
+bundle: timeline_slide
+label: 'Slide Background Image'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+    sort:
+      field: _none
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

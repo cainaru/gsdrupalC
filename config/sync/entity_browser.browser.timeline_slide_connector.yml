@@ -1,0 +1,44 @@
+uuid: 18d40b11-018f-40aa-92b5-db6939114b13
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.existing_timeline_slide_selector
+  module:
+    - entity_browser_entity_form
+    - views
+_core:
+  default_config_hash: Kg15RrxXbd8y4g3wgBkci0Rczrhypxuin0NeiRwBJ1Y
+name: timeline_slide_connector
+label: 'Timeline Slide Connector'
+display: modal
+display_configuration:
+  width: ''
+  height: '500'
+  link_text: 'Connect Slide(s)'
+  auto_open: false
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  7317cec6-0349-46f6-b622-d288e51d37c1:
+    settings:
+      view: existing_timeline_slide_selector
+      view_display: entity_browser_1
+      submit_text: 'Select entities'
+      auto_select: false
+    uuid: 7317cec6-0349-46f6-b622-d288e51d37c1
+    weight: 1
+    label: 'Add Existing Slide'
+    id: view
+  de1ee497-53b0-4581-9690-074813a3497f:
+    settings:
+      entity_type: node
+      bundle: timeline_slide
+      form_mode: default
+      submit_text: 'Save slide'
+    uuid: de1ee497-53b0-4581-9690-074813a3497f
+    weight: 2
+    label: 'Add a New Slide'
+    id: entity_form

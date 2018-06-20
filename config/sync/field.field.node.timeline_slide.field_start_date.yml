@@ -1,0 +1,23 @@
+uuid: 0ec2d5bb-c7fe-434a-b79a-32e1981b894d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_start_date
+    - node.type.timeline_slide
+  module:
+    - datetime
+_core:
+  default_config_hash: THSi3QM2Z2M3CuE8ztcGPAzxIgO7eZXinX8-QyKMqI4
+id: node.timeline_slide.field_start_date
+field_name: field_start_date
+entity_type: node
+bundle: timeline_slide
+label: 'Start Date'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

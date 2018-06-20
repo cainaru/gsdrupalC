@@ -1,0 +1,36 @@
+core: 8.x
+type: theme
+base theme: bootstrap
+
+name: 'University Bootstrap'
+description: 'Uses the Bootstrap framework Sass source files and must be compiled (not for beginners).'
+package: 'Bootstrap'
+
+regions:
+  navigation: 'Navigation'
+  navigation_collapsible: 'Navigation (Collapsible)'
+  navigation_utility: 'Navigation (Utility)'
+  header: 'Top Bar'
+  highlighted: 'Highlighted'
+  help: 'Help'
+  breadcrumbs: Breadcrumbs
+  page_title: 'Page Title'
+  before_content: 'Before Content'
+  content: 'Content'
+  after_content: 'After Content'
+  sidebar_first: 'Primary'
+  sidebar_second: 'Secondary'
+  footer_first: 'Footer first'
+  footer_second: 'Footer second'
+  footer_third: 'Footer third'
+  footer_bottom_left: 'Footer bottom left'
+  footer_bottom_right: 'Footer bottom right'
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'
+
+libraries:
+  - 'university_bootstrap/global-styling'
+  - 'university_bootstrap/bootstrap-scripts'
+
+ckeditor_stylesheets:
+  - css/style.css

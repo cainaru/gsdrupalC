@@ -1,0 +1,59 @@
+// Styling for Breakout Paragraph type
+
+.paragraph--type--breakout {
+  // margin-top: 3rem;
+  // margin-bottom: 3rem;
+  padding: $line-height-computed 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  color: white;
+
+  & .container-fluid {
+  	margin-top: $line-height-computed;
+  	margin-bottom: $line-height-computed;
+  }
+
+  & .paragraph--type--text .field--name-field-text a {
+    color: white;
+  }
+}
+
+.paragraph--type--text + .paragraph--type--breakout,
+.paragraph--type--double +  .paragraph--type--breakout {
+    margin-top: $line-height-computed;
+}
+
+.paragraph--type--breakout + .paragraph--type--text,
+.paragraph--type--breakout + .paragraph--type--double {
+    margin-top: $line-height-computed;
+}
+
+.text-black {
+  color: #000000;
+  & .paragraph--type--text .field--name-field-text a {
+    color: #000000;
+  }
+}
+
+.text-white {
+  color: #ffffff;
+  & .paragraph--type--text .field--name-field-text a {
+    color: #ffffff;
+  }
+}
+
+// Legacy Breakout Paragraph type
+
+// .paragraph--type--breakout {
+//   padding: 3rem 0;
+//   background-size: cover;
+//   background-repeat: no-repeat;
+//   background-position: center center;
+//   color: white;
+//   &:after {
+//     content: "";
+//     clear: both;
+//     display: table;
+//   }
+// }

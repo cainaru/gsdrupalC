@@ -1,0 +1,9 @@
+uuid: 8745d59f-bc9b-4504-a3a4-c5e594ea8d06
+langcode: en
+status: true
+dependencies: {  }
+id: content_reference
+label: 'Content Reference'
+icon_uuid: null
+description: null
+behavior_plugins: {  }

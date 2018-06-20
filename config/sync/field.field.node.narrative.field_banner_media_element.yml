@@ -1,0 +1,43 @@
+uuid: 1dfa8836-f214-4ade-82e2-4461f8c5087a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_banner_media_element
+    - node.type.narrative
+    - paragraphs.paragraphs_type.banner_media
+  module:
+    - entity_reference_revisions
+id: node.narrative.field_banner_media_element
+field_name: field_banner_media_element
+entity_type: node
+bundle: narrative
+label: 'Featured Media'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      banner_media: banner_media
+    target_bundles_drag_drop:
+      banner_media:
+        enabled: true
+        weight: 6
+      breakout:
+        weight: 7
+        enabled: false
+      column:
+        weight: 8
+        enabled: false
+      row:
+        weight: 9
+        enabled: false
+      text:
+        weight: 10
+        enabled: false
+field_type: entity_reference_revisions

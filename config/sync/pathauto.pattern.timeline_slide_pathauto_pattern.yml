@@ -1,0 +1,22 @@
+uuid: 75944704-4d48-457c-bfcf-1fdf08e8fb6c
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: timeline_slide_pathauto_pattern
+label: 'Timeline Slide Pathauto Pattern'
+type: 'canonical_entities:node'
+pattern: 'timeline-slide/[node:title]'
+selection_criteria:
+  41fa92cb-48ba-45a3-a51c-c5b70060b462:
+    id: node_type
+    bundles:
+      timeline_slide: timeline_slide
+    negate: false
+    context_mapping:
+      node: node
+    uuid: 41fa92cb-48ba-45a3-a51c-c5b70060b462
+selection_logic: and
+weight: -5
+relationships: {  }

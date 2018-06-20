@@ -1,0 +1,34 @@
+uuid: 8011f3f6-9019-45d9-a555-c003fb9fb185
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.image.field_height
+    - field.field.media.image.field_image
+    - field.field.media.image.field_width
+    - image.style.large
+    - media_entity.bundle.image
+  module:
+    - focal_point
+id: media.image.default
+targetEntityType: media
+bundle: image
+mode: default
+content:
+  field_image:
+    type: image_focal_point
+    weight: 0
+    region: content
+    settings:
+      preview_image_style: large
+      preview_link: true
+      offsets: '50,50'
+      progress_indicator: throbber
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_height: true
+  field_width: true
+  name: true
+  path: true
+  uid: true

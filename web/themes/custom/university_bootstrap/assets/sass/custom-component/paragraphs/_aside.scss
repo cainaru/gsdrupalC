@@ -1,0 +1,77 @@
+// ========================================
+// Styles for Aside Paragraph type (previously called Card)
+// ========================================
+.paragraph--type--aside {
+  max-width: 45em;
+  margin: auto;
+}
+
+.display-mode-right {
+  float: right;
+  width: 45%;
+
+  .field--name-field-aside-content {
+    float: left;
+    width: 100%;
+    max-width: 20em;
+  }
+}
+
+.display-mode-left {
+  float: left;
+  width: 45%;
+
+  .field--name-field-aside-content {
+    float: right;
+    width: 100%;
+    max-width: 20em;
+  }
+}
+
+.paragraph--type--aside .field--name-field-aside-content {
+  background: rgba(255,255,255,.9);
+  margin: .5em;
+  padding: .5em;
+  border-radius: 5px;
+  color: #333;
+}
+.display-mode-center .field--name-field-aside-content {
+  max-width: 25em;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Stuff below is legacy sass
+
+/* .field--name-field-paragraph-elements {
+  .field--item {
+    .paragraph--type--aside {
+      max-width: 45em;
+      margin: auto;
+    }
+    .display-mode-center {
+      .field--name-field-aside-content {
+        max-width: 20em;
+        margin: auto;
+      }
+    }
+    .display-mode-right {
+      float: right;
+      width: 45%;
+      .field--name-field-aside-content {
+        width: 100%;
+        max-width: 20em;
+        float: left;
+      }
+    }
+    .display-mode-left {
+      float: left;
+      width: 45%;
+      .field--name-field-aside-content {
+        width: 100%;
+        max-width: 20em;
+        float: right;
+      }
+    }
+  }
+} */

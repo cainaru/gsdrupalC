@@ -1,0 +1,46 @@
+uuid: af1827a6-91e6-4a83-a0d9-15bc2e20b06c
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.simple
+  module:
+    - ckeditor
+format: simple
+editor: ckeditor
+settings:
+  toolbar:
+    rows:
+      -
+        -
+          name: Formatting
+          items:
+            - Bold
+            - Italic
+            - Superscript
+            - Subscript
+            - '-'
+            - RemoveFormat
+        -
+          name: Links
+          items:
+            - DrupalLink
+            - DrupalUnlink
+            - Anchor
+        -
+          name: Tools
+          items:
+            - Source
+  plugins:
+    language:
+      language_list: un
+    stylescombo:
+      styles: ''
+image_upload:
+  status: false
+  scheme: public
+  directory: inline-images
+  max_size: ''
+  max_dimensions:
+    width: null
+    height: null

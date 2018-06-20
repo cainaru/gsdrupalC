@@ -1,0 +1,22 @@
+uuid: 5d52113e-b283-47ca-b9a2-52277a368c7d
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: timeline_pathauto_pattern
+label: 'Timeline Pathauto Pattern'
+type: 'canonical_entities:node'
+pattern: 'timeline/[node:title]'
+selection_criteria:
+  efca2b02-bb32-4c78-84ba-6de15a469fd1:
+    id: node_type
+    bundles:
+      timeline: timeline
+    negate: false
+    context_mapping:
+      node: node
+    uuid: efca2b02-bb32-4c78-84ba-6de15a469fd1
+selection_logic: and
+weight: -5
+relationships: {  }

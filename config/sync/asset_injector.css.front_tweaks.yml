@@ -1,0 +1,22 @@
+uuid: b70ab835-0a07-424d-ad08-c49a3f7f1491
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+id: front_tweaks
+label: 'Front Tweaks'
+code: ".page-header-wrapper {\r\n  display: none;\r\n}"
+media: all
+preprocess: true
+conditions:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+  current_theme:
+    id: current_theme
+    theme:
+      university_bootstrap: university_bootstrap
+    negate: false
+conditions_require_all: true

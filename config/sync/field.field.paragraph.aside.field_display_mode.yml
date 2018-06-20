@@ -1,0 +1,25 @@
+uuid: 7f1f0187-f160-428a-9f8f-fc33be203f69
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_display_mode
+    - paragraphs.paragraphs_type.aside
+  module:
+    - options
+_core:
+  default_config_hash: Mn9CIT-yHmfNIyOMmLlsAJzcx2QTp-vFV5N8pJIdVXA
+id: paragraph.aside.field_display_mode
+field_name: field_display_mode
+entity_type: paragraph
+bundle: aside
+label: 'Display Mode'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: right
+default_value_callback: ''
+settings: {  }
+field_type: list_string

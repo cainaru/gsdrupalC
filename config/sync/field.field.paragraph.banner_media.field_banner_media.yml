@@ -1,0 +1,30 @@
+uuid: ce65e052-081f-44da-896c-b71d8f350cfe
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_banner_media
+    - media_entity.bundle.image
+    - media_entity.bundle.video_external
+    - paragraphs.paragraphs_type.banner_media
+id: paragraph.banner_media.field_banner_media
+field_name: field_banner_media
+entity_type: paragraph
+bundle: banner_media
+label: Media
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      image: image
+      video_external: video_external
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: image
+field_type: entity_reference

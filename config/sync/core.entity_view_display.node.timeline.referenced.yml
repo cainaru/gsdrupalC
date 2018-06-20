@@ -1,0 +1,41 @@
+uuid: debd8a20-6c4c-441d-822a-89668066f9b4
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.referenced
+    - field.field.node.timeline.body
+    - field.field.node.timeline.field_add_slide
+    - field.field.node.timeline.field_authorship
+    - node.type.timeline
+  module:
+    - user
+_core:
+  default_config_hash: Oo7qNShGbVCHlWqRnLY4EC_MgdXuWeNxzAQXJOmYNxs
+id: node.timeline.referenced
+targetEntityType: node
+bundle: timeline
+mode: referenced
+content:
+  field_authorship:
+    type: entity_reference_label
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      link: false
+    third_party_settings: {  }
+  links:
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  timeline_maker_entity_view_1:
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  body: true
+  content_moderation_control: true
+  field_add_slide: true

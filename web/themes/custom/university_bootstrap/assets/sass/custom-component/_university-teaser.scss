@@ -1,0 +1,49 @@
+.university-teaser {
+  display: block;
+
+  & h2,
+  & h3 {
+    color: #333;
+    text-decoration: none;
+
+    & a {
+      color: #333;
+      text-decoration: none;
+
+      &:hover,
+      &:focus {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  & > a {
+    color: #333;
+    text-decoration: none;
+
+    &:hover h2,
+    &:hover h3,
+    &:focus h2,
+    &:focus h3 {
+      text-decoration: underline;
+    }
+  }
+
+  & h2 {
+  	font-size: $h3-font-size;
+  	margin-top: ($line-height-computed / 2);
+  }
+
+  & h3 {
+    margin-top: ($line-height-computed / 2);
+  }
+
+  & .moderation-state-label {
+    margin-top: ($line-height-computed / 2);
+  }
+
+  & .category {
+    font-size: $h6-font-size;
+    margin-top: ($line-height-computed / 2);
+  }
+}

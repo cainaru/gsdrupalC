@@ -1,0 +1,10 @@
+uuid: b7e62f7b-7e09-4c45-96d9-dd3c3f5e6c1d
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity
+id: media.scale_crop_700x525
+label: 'Scale Crop 700x525'
+targetEntityType: media
+cache: true

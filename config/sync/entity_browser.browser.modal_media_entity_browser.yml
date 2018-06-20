@@ -1,0 +1,68 @@
+uuid: cd5dc186-8b91-4638-af78-d399e2e464a5
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.media_entity_browser
+  module:
+    - entity_browser_entity_form
+    - views
+name: modal_media_entity_browser
+label: 'Modal Media Entity Browser'
+display: modal
+display_configuration:
+  width: '1070'
+  height: '840'
+  link_text: 'Select media'
+  auto_open: false
+selection_display: no_display
+selection_display_configuration:
+  entity_type: media
+  display: rendered_entity
+  display_settings:
+    view_mode: default
+  select_text: 'Use selected'
+  selection_hidden: false
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  60cb6b9d-f4fe-4cb5-a2ec-28d6bd337f0f:
+    settings:
+      view: media_entity_browser
+      view_display: entity_browser_1
+      submit_text: 'Select Media'
+      auto_select: false
+    uuid: 60cb6b9d-f4fe-4cb5-a2ec-28d6bd337f0f
+    weight: -9
+    label: 'All Media'
+    id: view
+  cb60af76-6aa5-40e9-b0eb-de911facf486:
+    settings:
+      entity_type: media
+      bundle: image
+      form_mode: default
+      submit_text: 'Save Image'
+    uuid: cb60af76-6aa5-40e9-b0eb-de911facf486
+    weight: -8
+    label: 'Add Image'
+    id: entity_form
+  3fe656e7-0edf-465f-9d3f-9ad8e7a22b0a:
+    settings:
+      entity_type: media
+      bundle: video_external
+      form_mode: default
+      submit_text: 'Save Video'
+    uuid: 3fe656e7-0edf-465f-9d3f-9ad8e7a22b0a
+    weight: -7
+    label: 'Add Video'
+    id: entity_form
+  4b9fd686-0f14-45cf-b4f4-2a89be9fc3e7:
+    settings:
+      view: media_entity_browser
+      view_display: entity_browser_2
+      submit_text: 'Select Media'
+      auto_select: false
+    uuid: 4b9fd686-0f14-45cf-b4f4-2a89be9fc3e7
+    weight: -10
+    label: 'My Media'
+    id: view

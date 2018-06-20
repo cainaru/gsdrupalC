@@ -1,0 +1,66 @@
+uuid: 5994885c-e418-4a31-bab0-8b2d7340e8e3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.aside.field_aside_content
+    - field.field.paragraph.aside.field_display_mode
+    - paragraphs.paragraphs_type.aside
+  module:
+    - field_group
+    - paragraphs
+third_party_settings:
+  field_group:
+    group_hr_1:
+      children:
+        - field_display_mode
+      parent_name: ''
+      weight: 1
+      format_type: html_element
+      format_settings:
+        id: ''
+        classes: hr
+        element: hr
+        show_label: false
+        label_element: h3
+        required_fields: false
+        attributes: 'style="margin-top: 1.5em; margin-bottom: 1.5em;"'
+        effect: none
+        speed: fast
+      label: hr-1
+      region: content
+_core:
+  default_config_hash: F2zegZS5qMxPSa12U5pIjYzZsgOrH4Tq9gBeEF9trBM
+id: paragraph.aside.default
+targetEntityType: paragraph
+bundle: aside
+mode: default
+content:
+  field_aside_content:
+    type: entity_reference_paragraphs
+    weight: 0
+    settings:
+      title: 'Aside content'
+      title_plural: 'Aside content'
+      edit_mode: open
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: _none
+    third_party_settings: {  }
+    region: content
+  field_display_mode:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+    region: content
+  moderation_state:
+    type: moderation_state_default
+    weight: 100
+    settings: {  }
+    region: content
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  uid: true

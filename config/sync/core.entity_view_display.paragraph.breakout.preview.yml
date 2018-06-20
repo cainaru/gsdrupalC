@@ -1,0 +1,50 @@
+uuid: 20104724-e26e-4441-9e4c-c564cf3ca39e
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.breakout.field_background_color
+    - field.field.paragraph.breakout.field_background_image
+    - field.field.paragraph.breakout.field_breakout_content
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.breakout
+  module:
+    - color_field
+    - entity_reference_revisions
+    - image
+id: paragraph.breakout.preview
+targetEntityType: paragraph
+bundle: breakout
+mode: preview
+content:
+  field_background_color:
+    weight: 0
+    label: inline
+    settings:
+      opacity: '1'
+      format: hex
+    third_party_settings: {  }
+    type: color_field_formatter_text
+    region: content
+  field_background_image:
+    type: image
+    weight: 1
+    label: above
+    settings:
+      image_style: thumbnail
+      image_link: ''
+    third_party_settings: {  }
+    region: content
+  field_breakout_content:
+    type: entity_reference_revisions_entity_view
+    weight: 2
+    label: above
+    settings:
+      view_mode: preview
+      link: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  uid: true

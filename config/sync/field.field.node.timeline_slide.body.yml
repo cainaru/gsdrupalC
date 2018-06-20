@@ -1,0 +1,47 @@
+uuid: ad13df26-5e14-42d3-8421-b122e5f1aae3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.timeline_slide
+  module:
+    - better_formats
+    - text
+third_party_settings:
+  better_formats:
+    allowed_formats_toggle: 0
+    allowed_formats:
+      basic_html: basic_html
+      iframe: iframe
+      restricted_html: restricted_html
+      simple: simple
+      full_html: full_html
+    default_order_toggle: 0
+    default_order_wrapper:
+      formats:
+        basic_html:
+          weight: '0'
+        iframe:
+          weight: '0'
+        restricted_html:
+          weight: '0'
+        simple:
+          weight: '0'
+        full_html:
+          weight: '1'
+_core:
+  default_config_hash: 26Cf_tEJSG4Y8lQC83ZMfQTp2fv0c_xbov5diS5waI0
+id: node.timeline_slide.body
+field_name: body
+entity_type: node
+bundle: timeline_slide
+label: 'Slide Text'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

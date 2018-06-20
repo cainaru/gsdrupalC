@@ -1,0 +1,34 @@
+uuid: 764f6c63-7882-410c-9bef-6dd7980a806a
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.scale_crop_700x525
+    - field.field.media.image.field_height
+    - field.field.media.image.field_image
+    - field.field.media.image.field_width
+    - image.style.scale_crop_700x525
+    - media_entity.bundle.image
+  module:
+    - image
+id: media.image.scale_crop_700x525
+targetEntityType: media
+bundle: image
+mode: scale_crop_700x525
+content:
+  field_image:
+    type: image
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      image_style: scale_crop_700x525
+      image_link: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_height: true
+  field_width: true
+  name: true
+  thumbnail: true
+  uid: true

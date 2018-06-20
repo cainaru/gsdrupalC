@@ -1,0 +1,388 @@
+/**
+ * Typography styling.
+ */
+
+body {
+  font-weight: $font-weight-normal;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  text-decoration: underline;
+  -webkit-transition: .25s;
+  transition: .25s;
+
+  .list-group &,
+  .nav-pills &,
+  .nav-tabs &,
+  &.btn {
+    text-decoration: none;
+  }
+}
+
+nav a, .navbar a, a[role='button'] {
+  text-decoration: none;
+}
+
+nav[role=navigation] .tabs--primary a[data-drupal-link-system-path^="node/"][data-drupal-link-system-path$="/edit"]:before {
+  font-family: 'FontAwesome';
+  content: "\f040";
+  color: inherit;
+  font-size: inherit;
+  margin-right: .2em;
+}
+
+nav[role=navigation] .tabs--primary a[data-drupal-link-system-path^="node/"][data-drupal-link-system-path$="/revisions"]:before {
+  font-family: 'FontAwesome';
+  content: "\f1da";
+  color: inherit;
+  font-size: inherit;
+  margin-right: .2em;
+}
+
+nav[role=navigation] .tabs--primary a[data-drupal-link-system-path^="node/"][data-drupal-link-system-path$="/latest"]:before {
+  font-family: 'FontAwesome';
+  content: "\f058";
+  color: inherit;
+  font-size: inherit;
+  margin-right: .2em;
+}
+
+nav[role=navigation] .tabs--primary a[data-drupal-link-system-path^="node/"][data-drupal-link-system-path$="/delete"]:before {
+  font-family: 'FontAwesome';
+  content: "\f071";
+  color: inherit;
+  font-size: inherit;
+  margin-right: .2em;
+}
+
+.menu > .active > a,
+.navbar-nav > .active > a,
+.university-sidenav > .active > a {
+  font-weight: $font-weight-extra-bold;
+}
+
+.nav-pills > .active > a,
+.nav-tabs > .active > a {
+  font-weight: $font-weight-bold;
+}
+
+p {
+  line-height: $base-line-height;
+  margin-top: ($line-height-computed / 2);
+  margin-bottom: ($line-height-computed / 2);
+}
+
+ul {
+  line-height: $line-height-computed;
+}
+
+// li {
+//   margin-bottom: 0.5em;
+// }
+
+// ul ul, ul ol, ol ul, ol ol {
+//   margin-top: 0.5em;
+// }
+
+.menu li, .navbar-nav li, .toolbar-menu li {
+  margin-bottom: 0;
+}
+
+.university-main-content p,
+.university-main-content dt,
+.university-main-content dd,  
+.university-main-content ol, 
+.university-main-content ul:not(.tabs--primary), 
+.university-main-content blockquote {
+  @extend %text-content-width;
+}
+
+// ========================================
+// Heading mixins
+// ========================================
+@mixin title {
+  font-size: $title-font-size;
+  font-weight: $font-weight-bold;
+}
+
+@mixin h1 {
+  font-size: $h1-font-size;
+  font-weight: $font-weight-bold;
+}
+
+@mixin h2 {
+  font-size: $h2-font-size;
+  font-weight: $font-weight-bold;
+}
+
+@mixin h3 {
+  font-size: $h3-font-size;
+  font-weight: $font-weight-bold;
+}
+
+@mixin h4 {
+  font-size: $h4-font-size;
+  font-weight: $font-weight-bold;
+}
+
+@mixin h5 {
+  font-size: $h5-font-size;
+  font-weight: $font-weight-bold;
+}
+
+@mixin h6 {
+  font-size: $h6-font-size;
+  font-weight: $font-weight-normal;
+  line-height: $base-line-height;
+  text-transform: uppercase;
+}
+
+// ========================================
+// Headings
+// ========================================
+h1 {
+  @include h1();
+}
+
+h2 {
+  @include h2();
+}
+
+h3 {
+  @include h3();
+}
+
+h4 {
+  @include h4();
+}
+
+h5 {
+  @include h5();
+}
+
+h6 {
+  @include h6();
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: $font-family-serif;
+  line-height: $heading-line-height;
+  margin-top: 1.5em;
+  margin-bottom: .5em;
+}
+
+.moderation-state-label {
+  font-size: $h3-font-size;
+  margin-top: $line-height-computed;
+}
+
+mark,
+.mark {
+  background-color: lighten($state-warning-bg, 10%);
+}
+
+pre, code, samp, kbd {
+  font-size: 77.778%;
+}
+
+pre {
+  // If we have a 1px border, we need to offset by 1px.
+  padding: calc(#{$line-height-computed / 2} - 1px) 15px;
+}
+
+code {
+  padding: 0 4px;
+}
+
+samp {
+  vertical-align: top;
+}
+
+// Blockquotes
+blockquote {
+  padding: ($line-height-computed / 2) $line-height-computed;
+  margin: $line-height-computed 0 $line-height-computed;
+  border-left: 10px solid $blockquote-border-color;
+  background-color: $blockquote-bg;
+  color: $gray-darker;
+
+  &:before {
+    font-family: 'FontAwesome';
+    content: "\f10d";
+    color: $blockquote-border-color;
+    font-size: $h2-font-size;
+    margin-right: .2em;
+  }
+
+  p,
+  ul,
+  ol {
+    display: inline;
+    margin-bottom: 0.5em;
+
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // Note: Deprecated small and .small as of v3.1.0
+  // Context: https://github.com/twbs/bootstrap/issues/11660
+  footer,
+  small,
+  .small {
+    margin-top: 1em;
+    display: block;
+    font-size: 80%; // back to default font-size
+    line-height: $line-height-base;
+    color: $blockquote-small-color;
+
+    &:before {
+      content: '\2014 \00A0'; // em dash, nbsp
+    }
+  }
+}
+
+// ========================================
+// Page Title/Page Header
+// ========================================
+.page-header {
+  margin-top: $line-height-computed;
+}
+
+// ========================================
+// Block Title
+// ========================================
+.block-title {
+  margin-top: 0;
+}
+
+.panel-title {
+  font-family: $font-family-sans-serif;
+  font-size: $base-font-size;
+  font-weight: $font-weight-extra-bold;
+}
+
+// ========================================
+// Byline
+// ========================================
+.byline {
+  font-weight: 500;
+  font-style: italic;
+}
+
+// ========================================
+// Lead/Subtitle
+// ========================================
+.lead, .subtitle {
+  font-size: $lead-font-size;
+  font-family: $font-family-serif;
+  font-weight: 400;
+  line-height: $lead-line-height;
+  margin-bottom: 1em;
+}
+
+// ========================================
+// Captions/Citations
+// ========================================
+
+figcaption.banner-media-caption {
+    text-align: right;
+}
+
+figcaption.banner-media-caption .caption-text, figcaption.banner-media-caption .citation {
+    display: block;
+}
+
+figcaption.banner-media-caption .caption-text {
+    margin-left: auto;
+    max-width: 100%;
+}
+
+figcaption.banner-media-caption .caption-text > * {
+    margin-left: inherit;
+    max-width: inherit;
+}
+
+figcaption.banner-media-caption .citation {
+    margin-left: auto;
+}
+
+figcaption.banner-media-caption .citation > * {
+    margin-left: inherit;
+}
+
+
+figure figcaption {
+  font-size: $caption-font-size;
+  line-height: inherit;
+  margin-top: .675rem;
+}
+
+figure figcaption .caption-text {
+  margin-top: inherit;
+}
+
+figure figcaption .caption-text > * {
+  margin-top: inherit;
+}
+
+figure figcaption .citation {
+  margin-top: 0;
+  font-size: $citation-font-size;
+}
+
+figure figcaption .citation > * {
+  margin-top: inherit;
+}
+
+// figcaption.banner-media-caption.caption {
+//   // TODO: Need to wrap featured media in figure tag
+//   display: block;
+//   text-align: right;
+
+//   & span {
+//     display: block;
+//   }
+
+//   & .caption-text,
+//   & .caption-text > * {
+//     font-size: $caption-font-size;
+//     max-width: 100%;
+//     margin-top: 0;
+//   }
+
+//   & .citation,
+//   & .citation > * {
+//     font-size: $citation-font-size;
+//     max-width: $text-max-width;
+//     margin-top: 0;
+//     margin-left: auto;
+//   }
+
+//   & .caption-text > *,
+//   & .citation > * {
+//     display: inline-block;
+//   }
+
+// }
+
+// .field--name-field-caption > * > *,
+// .field--name-field-caption-rich-text > * > * {
+//   // TODO: Need to wrap media in figure tag
+//   // (isn't there a better way to do this?)
+//   font-size: $caption-font-size;
+//   line-height: 2rem;
+//   margin-top: .5rem;
+// }
+
+// .field--name-field-citation > * > * {
+//   // TODO: Need to wrap media in figure tag
+//   // (isn't there a better way to do this?)
+//   font-size: $citation-font-size;
+//   margin-top: .5rem;
+// }

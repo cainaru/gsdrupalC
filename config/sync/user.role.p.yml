@@ -1,0 +1,10 @@
+uuid: 4ba337a4-dabc-49f2-be1a-6c15d67a854f
+langcode: en
+status: true
+dependencies: {  }
+id: p
+label: 'Publish Own'
+weight: 5
+is_admin: null
+permissions:
+  - 'use editorial transition publish'

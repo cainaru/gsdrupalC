@@ -1,0 +1,9 @@
+uuid: a47e5190-ca5f-49fc-8f69-07df2c6f5d2e
+langcode: en
+status: true
+dependencies: {  }
+name: Authorship
+vid: authorship
+description: 'Use authorship to list authors of content.'
+hierarchy: 0
+weight: 0

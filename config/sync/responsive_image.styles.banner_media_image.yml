@@ -1,0 +1,26 @@
+uuid: d2829e8c-abc5-4e1b-99fe-649af73b36fe
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.extra_small_screen_480x270_
+    - image.style.large_screen_1200x675_
+    - image.style.medium_screen_992x558_
+    - image.style.small_screen_768x432_
+    - image.style.thumbnail
+id: banner_media_image
+label: 'Banner Media Image Full-width'
+image_style_mappings:
+  -
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
+    image_mapping_type: sizes
+    image_mapping:
+      sizes: 100vw
+      sizes_image_styles:
+        - extra_small_screen_480x270_
+        - large_screen_1200x675_
+        - medium_screen_992x558_
+        - small_screen_768x432_
+breakpoint_group: responsive_image
+fallback_image_style: thumbnail

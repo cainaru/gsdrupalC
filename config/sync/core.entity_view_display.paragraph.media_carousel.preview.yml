@@ -1,0 +1,25 @@
+uuid: 15d2bddc-3b35-438e-b114-0c1e5653b2d2
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.media_carousel.field_media_carousel_items
+    - paragraphs.paragraphs_type.media_carousel
+  module:
+    - entity_reference_revisions
+id: paragraph.media_carousel.preview
+targetEntityType: paragraph
+bundle: media_carousel
+mode: preview
+content:
+  field_media_carousel_items:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: preview
+      link: ''
+    third_party_settings: {  }
+    region: content
+hidden: {  }

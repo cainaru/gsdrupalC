@@ -1,0 +1,9 @@
+uuid: b56b37ce-d5dc-4bba-b8fd-101a75efa9aa
+langcode: en
+status: true
+dependencies: {  }
+id: media_carousel
+label: 'Media Carousel'
+icon_uuid: null
+description: null
+behavior_plugins: {  }

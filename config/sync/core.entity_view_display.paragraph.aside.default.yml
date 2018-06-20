@@ -1,0 +1,28 @@
+uuid: efad32b4-6a55-476e-bf9b-79e01a80e02b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.aside.field_aside_content
+    - field.field.paragraph.aside.field_display_mode
+    - paragraphs.paragraphs_type.aside
+  module:
+    - entity_reference_revisions
+_core:
+  default_config_hash: J2ICDHx0KSBRZpfPAPanGdhRIqTL5GCZKUOVuO6_QAs
+id: paragraph.aside.default
+targetEntityType: paragraph
+bundle: aside
+mode: default
+content:
+  field_aside_content:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  field_display_mode: true

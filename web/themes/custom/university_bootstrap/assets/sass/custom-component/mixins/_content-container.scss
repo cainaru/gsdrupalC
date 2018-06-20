@@ -1,0 +1,17 @@
+// Content max-width for various screens mixin
+//
+// Easily pump out max-width for content when viewed on a designated screen.
+
+@mixin content-max-width($screen-breakpoint, $content-max-width) {
+  @media (min-width: $screen-breakpoint) {
+  	max-width: $content-max-width;
+  }
+}
+
+// Content margins mixin
+//
+// Easily pump out margins for content.
+
+@mixin content-margins($content-top-bottom-margins, $content-left-right-margins) {
+  margin: $content-top-bottom-margins $content-left-right-margins;
+}

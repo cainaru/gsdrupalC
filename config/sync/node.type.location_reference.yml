@@ -1,0 +1,20 @@
+uuid: a67a7823-468d-44b0-9300-4df44d115039
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus:
+      - main
+    parent: 'main:'
+_core:
+  default_config_hash: '-dBWvtQxfaDYJiGFWG-jC-g8zgPGmGYmx3j8MhETg6g'
+name: Location
+type: location_reference
+description: 'Use <em>location</em> to identify geographic locations.'
+help: ''
+new_revision: false
+preview_mode: 0
+display_submitted: false

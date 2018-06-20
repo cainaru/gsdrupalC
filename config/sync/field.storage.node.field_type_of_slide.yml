@@ -1,0 +1,32 @@
+uuid: 312b3982-c5c5-494c-bbd7-0d3b8802ce1e
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - options
+_core:
+  default_config_hash: kQRO8oO2g2P1xEaz3xYh_s1Inb6LHcXocOImqibcW7M
+id: node.field_type_of_slide
+field_name: field_type_of_slide
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: default
+      label: default
+    -
+      value: title
+      label: title
+    -
+      value: era
+      label: era
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

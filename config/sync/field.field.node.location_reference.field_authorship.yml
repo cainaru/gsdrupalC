@@ -1,0 +1,29 @@
+uuid: 2181f45a-eb2e-4834-b5af-0dc3dc14c420
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_authorship
+    - node.type.location_reference
+    - taxonomy.vocabulary.authorship
+id: node.location_reference.field_authorship
+field_name: field_authorship
+entity_type: node
+bundle: location_reference
+label: 'Authored by'
+description: "<strong>Example:</strong> Jane Doe<br>\r\n<strong>Note:</strong> Separate multiple authors with a comma. <strong>Example:</strong> Jane Doe, John Smith"
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      authorship: authorship
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference
