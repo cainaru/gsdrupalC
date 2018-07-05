@@ -1,0 +1,38 @@
+{
+  "name": "drupal/color_field",
+  "source": {
+    "type": "git",
+    "url": "https://git.drupal.org/project/color_field",
+    "reference": "b9ffa9032f997fd982d0c7692746e15da947c703"
+  },
+  "require": {
+    "drupal/core": "*"
+  },
+  "suggest": {
+    "bower-asset/jquery-simple-color": "^v1.2.2: Provides JavaScript library necessary for the Color Grid widget",
+    "bower-asset/spectrum": "^1.8: Provides JavaScript library necessary for Spectrum widget."
+  },
+  "type": "drupal-module",
+  "notification-url": "https://packages.drupal.org/8/downloads",
+  "license": [
+    "GPL-2.0-or-later"
+  ],
+  "authors": [
+    {
+      "name": "targoo",
+      "homepage": "https://www.drupal.org/user/431910",
+      "role": "Maintainer"
+    },
+    {
+      "name": "Nick Wilde",
+      "homepage": "https://www.drupal.org/user/nickwilde",
+      "role": "Maintainer"
+    }
+  ],
+  "description": "Provides a color field type to store the color value and opacity",
+  "homepage": "https://www.drupal.org/project/color_field",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/color_field?version=8.x",
+    "source": "http://cgit.drupalcode.org/color_field"
+  }
+}

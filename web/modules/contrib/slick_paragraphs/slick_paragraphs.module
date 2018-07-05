@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @file
+ * Provides Slick integration with Paragraphs.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_field_formatter_info_alter().
+ */
+function slick_paragraphs_field_formatter_info_alter(array &$info) {
+  // Supports Media Entity via VEM within VEF if available.
+  if (function_exists('slick_media_help')) {
+    $info['slick_paragraphs'] = [
+      'id'          => 'slick_paragraphs',
+      'label'       => t('Slick Paragraphs Media'),
+      'description' => t('Display the referenced paragraph with ME as a Slick carousel'),
+      'class'       => 'Drupal\slick_paragraphs\Plugin\Field\FieldFormatter\SlickParagraphsFormatter',
+      'field_types' => ['entity_reference_revisions'],
+      'quickedit'   => ['editor' => 'disabled'],
+      'provider'    => 'slick_paragraphs',
+    ];
+  }
+}
+
+/**
+ * Implements hook_help().
+ */
+function slick_paragraphs_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.slick_paragraphs':
+      return check_markup(file_get_contents(dirname(__FILE__) . '/README.html'), 'restricted_html');
+  }
+}

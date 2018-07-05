@@ -1,0 +1,15 @@
+name: Slick Paragraphs
+type: module
+description: 'Provides Slick integration with Paragraphs.'
+# version: VERSION
+# core: 8.x
+package: Slick
+dependencies:
+  - paragraphs:paragraphs
+  - slick:slick
+
+# Information added by Drupal.org packaging script on 2017-01-23
+version: '8.x-1.0-rc1'
+core: '8.x'
+project: 'slick_paragraphs'
+datestamp: 1485195188

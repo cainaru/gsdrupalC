@@ -1,0 +1,35 @@
+
+Slick Paragraphs 8.x-1.0-dev, 2016-12-27
+----------------------------------------
+- Marked it Beta6.
+
+Slick Paragraphs 8.x-1.0-dev, 2016-12-13
+----------------------------------------
+- Added Slick Paragraphs Basic formatter, to render each slide (paragraph
+  bundle) as is, to have different composition of fields per slide. Use Field
+  Group, Display Suite, Bootstrap Layouts, etc. to get different layouts at
+  ease. This formatter is available at both top-level and child paragraphs
+  types. Requires Blazy Beta6+. Clearing cache suffices
+- Decoupled Slick Media from hard dependency into optional integration.
+  Clearing cache suffices
+
+Slick Paragraphs 8.x-1.0-dev, 2016-11-29
+----------------------------------------
+- Updated to latest Blazy Beta5 and Slick Beta5.
+- Fixed for descriptions.
+- Updated .info file.
+
+Slick Paragraphs 8.x-1.0-dev, 2016-09-07
+----------------------------------------
+- Fixed for the missing paragraphs dependency.
+- Fixed for descriptions.
+- Added known issues.
+
+Slick Paragraphs 8.x-1.0-dev, 2016-08-29
+----------------------------------------
+- Added module files.
+- Initial commit.
+
+Slick Paragraphs 8.x-1.0-dev, 2016-08-28
+----------------------------------------
+- Initial WIP.

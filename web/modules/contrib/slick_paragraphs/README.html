@@ -1,0 +1,204 @@
+<h2>ABOUT</h2>
+
+Provides integration between Slick [1] and Paragraphs [2].
+Slick Paragraphs allows richer slideshow/carousel contents with a mix of text,
+image and video, and more complex slide components like nested sliders, or any
+relevant field type as slide components and probably with a few extra fields
+before and or after the slideshow with the goodness of Paragraphs.
+It is also possible to make individual bundle as a slide.
+
+This provides a Slick Paragraphs formatter for the Paragraphs type.
+
+
+<h2>REQUIREMENTS</h2>
+<ul>
+  <li>[1] http://dgo.to/slick</li>
+  <li>[2] http://dgo.to/paragraphs</li>
+</ul>
+
+<h2>RECOMMENDED/ OPTIONAL INTEGRATION</h2>
+<ol>
+  <li>http://dgo.to/slick_media, to have the richer slide components</li>
+  <li>http://dgo.to/media_entity</li>
+  <li>http://dgo.to/video_embed_field with Video Embed Media</li>
+</ol>
+
+<h2>INSTALLATION</h2>
+Install the module as usual, more info can be found on:
+http://drupal.org/documentation/install/modules-themes/modules-7
+
+Enable Slick Paragraphs module under "Slick" package:
+<strong>/admin/modules#edit-modules-slick</strong>
+
+
+<h2>USAGE / CONFIGURATION</h2>
+There are two formatters:
+[1] <strong>Slick Paragraphs Basic</strong>, to render each slide (paragraph bundle) as is, to
+    have different composition of fields per slide. Use Field Group, Display
+    Suite, Bootstrap Layouts, etc. to get different layouts at ease.
+    This formatter is available at both top-level and child paragraphs types.
+    Requires Blazy Beta6+.
+
+[2] <strong>Slick Paragraphs Media</strong>, to have customized slide with advanced features.
+    This formatter is only available at second level paragraphs type.
+    Formerly just named "Slick Paragraphs", and now only available if Slick 
+    Media is installed.
+
+The following instruction applies to [2], while [1] acts like any regular
+formatter.
+
+The final sample structure will be like:
+  <strong>Node > Paragraphs > Slideshow > Slide</strong>
+
+  Where "Node" can be any public facing entity like User, ECK, etc.
+  "Paragraphs" is a field type paragraphs inside Node.
+  "Slideshow", along with other paragraphs, containing a field type paragraph
+  "Slides" is the host paragraph bundle for child paragraph bundle "Slide"
+  which contains non-paragraph fields.
+
+  Unless you need more themeing control, "Default" view mode suffices for all.
+  All the steps here can be reversed when you get the big picture.
+
+  This should help clarify any step below:
+  Adding a paragraphs type/bundle is like adding a content type.
+  Adding a field type paragraph is like adding any other field.
+
+<h3>Visit any of the given URLs, and or adjust accordingly.</h3>
+
+<ol>
+<li><strong>/admin/structure/paragraphs_type/add</strong>
+  <ul>
+    <li>Add a new Paragraphs bundle to hold slide components, e.g.: Slide</li>
+    <li>Alternatively skip and re-use existing paragraph bundles, and make note
+    of the paragraph machine name to replace "slide" for the following steps.</li>
+  </ul>
+</li>
+<li><strong>/admin/structure/paragraphs_type/slide/fields</strong>
+  <ul>
+    <li>Add or re-use fields for the "Slide" components, e.g.:
+    Image/Video/Media entity, Title, Caption, Link, Color, Layout list, etc.</li>
+    <li>You are going to have a multi-value field "Slides", so it is reasonable
+    to have single-value fields for any of the non-paragraph fields here,
+    except probably field links.</li>
+    <li>Alternatively, just render a multi-value text, image or media entity here
+    as a Slick carousel to make them as nested or independent slicks later.</li>
+    <li>Manage individual field display later when done:
+      <ul>
+        <li><strong>/admin/structure/paragraphs_type/slide/display</strong></li>
+        <li>Be sure to make expected fields visible here.</li>
+      </ul>
+  </ul>
+</li>
+<li><strong>/admin/structure/paragraphs_type/add</strong>
+  <ul>
+    <li>Add a new Paragraphs bundle to host the created "Slide", e.g.: Slideshow</li>
+  </ul>
+</li>
+<li><strong>/admin/structure/paragraphs_type/slideshow/fields/add-field</strong>
+  <ul>
+    <li>Add a new field Paragraph type named "Slides" (Entity reference revisions),
+    and select the previously created "Slide", excluding other paragraph types
+    to avoid complication.</li>
+  </ul>
+</li>
+<li><strong>/admin/structure/paragraphs_type/slideshow/display</strong>
+  <ul>
+    <li>Select "Slick Paragraphs" for the "Slides" field under "Format",
+    and click the "Configure" icon.</li>
+    <li>Adjust Slick formatter options accordingly, including your optionset.</li>
+  </ul>
+</li>
+<li><strong>/admin/structure/types</strong>, or
+  <strong>/admin/config/people/accounts/fields</strong>, or
+  any fieldable entity.
+  <ul>
+    <li>Select "Manage fields" for the target bundle.</li>
+    <li>If you already have Paragraphs, simply edit and select "Slideshow" to
+    include it along with other Paragraphs bundles.</li>
+    <li>If none, add or re-use "Paragraph" field under "Reference revisions".</li>
+    <li>Be sure to at least choose "Slideshow" under "Paragraph types",
+    excluding "Slide" bundle which is already embedded inside "Slideshow" bundle.</li>
+  </ul>
+</li>
+<li>Add a content with a Slideshow paragraph, and see Slick Carousel there.</li>
+</ol>
+
+The more complex is your slide, the more options are available.
+
+
+<h2>OPTIONSET</h2>
+To create your optionsets, go to:
+
+<strong>/admin/config/media/slick</strong>
+
+
+<h2 id="slick-layout">SLIDE LAYOUT</h2>
+The slide layout option depends on at least a skin selected. No skin, just DIY.
+A Paragraphs is fieldable entity so you can add custom field to hold layout
+options. While core image field supports several caption placements/ layout that
+affect the entire slides, the fieldable entity may have unique layout per slide
+using a dedicated "List (text)" type with the following supported/pre-defined
+keys:
+<code>top, right, bottom, left, center, below</code>, e.g:
+
+<h3>Option #1</h3>
+<code>bottom|Caption bottom
+top|Caption top
+right|Caption right
+left|Caption left
+center|Caption center
+center-top|Caption center top
+below|Caption below the slide</code>
+
+
+<h3>Option #2</h3>
+
+If you have complex slide layout via Paragraphs with overlay video or images
+within slide captions, also supported:
+
+<code>stage-right|Caption left, stage right
+stage-left|Caption right, stage left</code>
+
+
+<h3>Option #3</h3>
+
+If you choose skin Split, additional layout options supported:
+
+<code>split-right|Caption left, stage right, split half
+split-left|Caption right, stage left, split half</code>
+
+
+Split means image and caption are displayed side by side.
+
+Specific to split layout, be sure to get consistent options (left and right)
+per slide, and also choose optionset with skin Split to have a context per
+slideshow. Otherwise layout per slideshow will be screwed up.
+
+Except the "Caption below the slide" option, all is absolutely positioned aka
+overlayed on top of the main slide image/ background for larger monitor.
+Those layouts are ideally applied to large displays, not multiple small slides,
+nor small carousels, except "Caption below the slide" which is reasonable with
+small slides.
+
+
+<h3>Option #4</h3>
+
+Merge all options as needed.
+
+
+<h2>TROUBLESHOOTING</h2>
+Be sure to first update Blazy and Slick Media prior to this module update.
+
+<h2>KNOWN ISSUES</h2>
+o The module only works from within Field UI Manage display under Formatter, not
+  Views UI. The issue is Views UI doesn't seem to respect
+  SlickParagraphsFormatter::isApplicable(), or there may need additional method.
+  Till proper fix, please ignore "Slick Paragraphs" formatter within Views UI.
+
+<h2>AUTHOR/MAINTAINER/CREDITS</h2>
+gausarts
+
+
+<h2>READ MORE</h2>
+See the project page on drupal.org: http://drupal.org/project/slick_paragraphs.
+
