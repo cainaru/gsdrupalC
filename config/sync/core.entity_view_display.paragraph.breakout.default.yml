@@ -27,4 +27,5 @@ hidden:
   created: true
   field_background_color: true
   field_background_image: true
+  field_text_color: true
   uid: true

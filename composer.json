@@ -92,6 +92,7 @@
         "drupal/exif_orientation": "^1.0",
         "drupal/externalauth": "^1.0",
         "drupal/extlink": "^1.1",
+        "drupal/facets": "^1.0",
         "drupal/field_group": "^3.0",
         "drupal/focal_point": "^1.0",
         "drupal/geolocation": "^1.11",

@@ -33,5 +33,6 @@ content:
     third_party_settings: {  }
 hidden:
   content_moderation_control: true
+  field_authorship: true
   field_geolocation: true
   field_location_type: true
