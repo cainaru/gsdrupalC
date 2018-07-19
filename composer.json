@@ -68,6 +68,7 @@
         "desandro/masonry": "^4.2",
         "dinbror/blazy": "^1.8",
         "drupal-composer/drupal-scaffold": "^2.5",
+        "drupal/address": "^1.4",
         "drupal/anchor_link": "^1.6",
         "drupal/animate_any": "^1.1",
         "drupal/asset_injector": "^2.2",

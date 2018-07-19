@@ -154,6 +154,7 @@ class ComposerStaticInit8a24c64bf1e563a9b883bf82ad6650f8
             'Consolidation\\AnnotatedCommand\\' => 31,
             'Composer\\Semver\\' => 16,
             'Composer\\Installers\\' => 20,
+            'CommerceGuys\\Addressing\\' => 24,
         ),
         'B' => 
         array (
@@ -473,6 +474,10 @@ class ComposerStaticInit8a24c64bf1e563a9b883bf82ad6650f8
         'Composer\\Installers\\' => 
         array (
             0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
+        ),
+        'CommerceGuys\\Addressing\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/commerceguys/addressing/src',
         ),
         'Behat\\Mink\\Driver\\' => 
         array (
