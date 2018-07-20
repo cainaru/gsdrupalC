@@ -76,6 +76,7 @@
         "drupal/blazy": "^1.0",
         "drupal/block_class": "^1.0",
         "drupal/bootstrap": "^3.11",
+        "drupal/chosen": "^2.6",
         "drupal/color_field": "^2.0",
         "drupal/colorbox": "^1.4",
         "drupal/config_installer": "^1.8",
