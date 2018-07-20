@@ -6269,6 +6269,22 @@
         ]
     },
     {
+        "name": "harvesthq/chosen",
+        "version": "1.8.2",
+        "version_normalized": "1.8.2.0",
+        "dist": {
+            "type": "zip",
+            "url": "https://github.com/harvesthq/chosen/releases/download/v1.8.2/chosen_v1.8.2.zip",
+            "reference": null,
+            "shasum": null
+        },
+        "require": {
+            "composer/installers": "^1.2.0"
+        },
+        "type": "drupal-library",
+        "installation-source": "dist"
+    },
+    {
         "name": "igorw/get-in",
         "version": "v1.0.3",
         "version_normalized": "1.0.3.0",

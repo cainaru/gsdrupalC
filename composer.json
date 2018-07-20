@@ -32,6 +32,21 @@
         {
             "type": "package",
             "package": {
+                 "name": "harvesthq/chosen",
+                 "version": "1.8.2",
+                 "type": "drupal-library",
+                 "dist": {
+                   "url": "https://github.com/harvesthq/chosen/releases/download/v1.8.2/chosen_v1.8.2.zip",
+                    "type": "zip"
+        },
+                "require": {
+                    "composer/installers": "^1.2.0"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
                 "name": "gdsmith/easing",
                 "version": "1.4.1",
                 "type": "drupal-library",
@@ -122,6 +137,7 @@
         "drush/drush": "~8",
         "enyo/dropzone": "^4.0",
         "gdsmith/easing": "^1.4",
+        "harvesthq/chosen": "^1.8",
         "jackmoore/colorbox": "^1.0",
         "kenwheeler/slick": "^1.6",
         "oomphinc/composer-installers-extender": "^1.0",
