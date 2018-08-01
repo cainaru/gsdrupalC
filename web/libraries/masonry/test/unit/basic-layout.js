@@ -1,9 +1,14 @@
-QUnit.test( 'basic layout top left', function( assert ) {
-  var msnry = new Masonry( '#basic-layout-top-left', {
+( function() {
+
+'use strict';
+
+test( 'basic layout top left', function() {
+  var container = document.querySelector('#basic-layout-top-left');
+  var msnry = new Masonry( container, {
     columnWidth: 60
   });
 
-  checkItemPositions( msnry, assert, {
+  checkItemPositions( msnry, {
     0: {
       left: 0,
       top: 0
@@ -28,13 +33,14 @@ QUnit.test( 'basic layout top left', function( assert ) {
 
 });
 
-QUnit.test( 'basic layout top right', function( assert ) {
-  var msnry = new Masonry( '#basic-layout-top-right', {
+test( 'basic layout top right', function() {
+  var container = document.querySelector('#basic-layout-top-right');
+  var msnry = new Masonry( container, {
     isOriginLeft: false,
     columnWidth: 60
   });
 
-  checkItemPositions( msnry, assert, {
+  checkItemPositions( msnry, {
     0: {
       right: 0,
       top: 0
@@ -59,13 +65,14 @@ QUnit.test( 'basic layout top right', function( assert ) {
 
 });
 
-QUnit.test( 'basic layout bottom left', function( assert ) {
-  var msnry = new Masonry( '#basic-layout-bottom-left', {
+test( 'basic layout bottom left', function() {
+  var container = document.querySelector('#basic-layout-bottom-left');
+  var msnry = new Masonry( container, {
     isOriginTop: false,
     columnWidth: 60
   });
 
-  checkItemPositions( msnry, assert, {
+  checkItemPositions( msnry, {
     0: {
       left: 0,
       bottom: 0
@@ -90,14 +97,15 @@ QUnit.test( 'basic layout bottom left', function( assert ) {
 
 });
 
-QUnit.test( 'basic layout bottom right', function( assert ) {
-  var msnry = new Masonry( '#basic-layout-bottom-right', {
+test( 'basic layout bottom right', function() {
+  var container = document.querySelector('#basic-layout-bottom-right');
+  var msnry = new Masonry( container, {
     isOriginLeft: false,
     isOriginTop: false,
     columnWidth: 60
   });
 
-  checkItemPositions( msnry, assert, {
+  checkItemPositions( msnry, {
     0: {
       right: 0,
       bottom: 0
@@ -121,3 +129,5 @@ QUnit.test( 'basic layout bottom right', function( assert ) {
   });
 
 });
+
+})();
