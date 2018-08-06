@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\facets_summary\Functional\Rest;
 
-use Drupal\facets\Entity\FacetSource;
 use Drupal\facets_summary\Entity\FacetsSummary;
 use Drupal\Tests\rest\Functional\EntityResource\EntityResourceTestBase;
 

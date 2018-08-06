@@ -12,18 +12,25 @@ use Drupal\views\Entity\View;
 class AjaxBehaviorTest extends JsBase {
 
   /**
-   * Tests ajax links.
+   * {@inheritdoc}
    */
-  public function testAjaxLinks() {
-    // Create facets.
-    $this->createFacet('owl');
-    $this->createFacet('duck', 'keywords');
+  public function setUp() {
+    parent::setUp();
 
     // Force ajax.
     $view = View::load('search_api_test_view');
     $display = $view->getDisplay('page_1');
     $display['display_options']['use_ajax'] = TRUE;
     $view->save();
+  }
+
+  /**
+   * Tests ajax links.
+   */
+  public function testAjaxLinks() {
+    // Create facets.
+    $this->createFacet('owl');
+    $this->createFacet('duck', 'keywords');
 
     // Go to the views page.
     $this->drupalGet('search-api-test-fulltext');
@@ -55,7 +62,7 @@ class AjaxBehaviorTest extends JsBase {
     $this->assertSession()->assertWaitOnAjaxRequest();
     $this->assertSession()->pageTextContains('Displaying 5 search results');
     $links = $this->xpath('//a//span[normalize-space(text())=:label]', [':label' => 'article']);
-    // $this->assertNotEmpty($links);
+    $this->assertNotEmpty($links);
 
     // Check that the strawberry link disappears when filtering on items.
     $links = $this->xpath('//a//span[normalize-space(text())=:label]', [':label' => 'strawberry']);
@@ -64,6 +71,32 @@ class AjaxBehaviorTest extends JsBase {
     $this->assertSession()->assertWaitOnAjaxRequest();
     $links = $this->xpath('//a//span[normalize-space(text())=:label]', [':label' => 'strawberry']);
     $this->assertEmpty($links);
+  }
+
+  /**
+   * Tests links with exposed filters.
+   */
+  public function testLinksWithExposedFilter() {
+    $view = View::load('search_api_test_view');
+    $display = $view->getDisplay('page_1');
+    $display['display_options']['filters']['search_api_fulltext']['expose']['required'] = TRUE;
+    $view->save();
+
+    $this->createFacet('owl');
+    $this->drupalGet('search-api-test-fulltext');
+
+    $page = $this->getSession()->getPage();
+    $block_owl = $page->findById('block-owl-block');
+    $block_owl->isVisible();
+
+    $this->assertSession()->fieldExists('edit-search-api-fulltext')->setValue('baz');
+    $this->click('.form-submit');
+    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertSession()->pageTextContains('Displaying 3 search results');
+
+    $this->clickLink('item');
+    $this->assertSession()->assertWaitOnAjaxRequest();
+    $this->assertSession()->pageTextContains('Displaying 1 search results');
   }
 
 }

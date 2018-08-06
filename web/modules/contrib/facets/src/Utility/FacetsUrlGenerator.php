@@ -30,6 +30,8 @@ class FacetsUrlGenerator {
    *
    * @param \Drupal\facets\UrlProcessor\UrlProcessorPluginManager $urlProcessorPluginManager
    *   The url processor plugin manager.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   *   The entity type manager.
    */
   public function __construct(UrlProcessorPluginManager $urlProcessorPluginManager, EntityTypeManagerInterface $entityTypeManager) {
     $this->urlProcessorPluginManager = $urlProcessorPluginManager;

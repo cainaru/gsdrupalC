@@ -14,7 +14,7 @@ use Drupal\facets_summary\Processor\ProcessorPluginBase;
  *   label = @Translation("Show a summary of all selected facets"),
  *   description = @Translation("When checked, this facet will show an imploded list of all selected facets."),
  *   stages = {
- *     "build" = 50
+ *     "build" = 20
  *   }
  * )
  */

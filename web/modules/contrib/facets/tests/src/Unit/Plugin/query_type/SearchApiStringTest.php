@@ -171,7 +171,7 @@ class SearchApiStringTest extends UnitTestCase {
   }
 
   /**
-   * Data provider for ::provideTrimValues
+   * Data provider for ::provideTrimValues.
    *
    * @return array
    *   An array of expected and input values.

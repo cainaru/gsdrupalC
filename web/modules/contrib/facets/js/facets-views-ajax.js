@@ -192,6 +192,7 @@
       });
 
       if (reload) {
+        href = addExposedFiltersToFacetsUrl(href, options.extraData.view_name, options.extraData.view_display_id);
         updateFacetsBlocks(href);
       }
     }
@@ -199,5 +200,18 @@
     // Call the original Drupal method with the right context.
     beforeSend.apply(this, arguments);
   }
+
+  // Helper function to add exposed form data to facets url
+  var addExposedFiltersToFacetsUrl = function(href, view_name, view_display_id) {
+    var $exposed_form = $('form#views-exposed-form-' + view_name.replace(/_/g, '-') + '-' + view_display_id.replace(/_/g, '-'));
+
+    var params = Drupal.Views.parseQueryString(href);
+
+    $.each($exposed_form.serializeArray(), function() {
+      params[this.name] = this.value;
+    });
+
+    return href.split('?')[0] + '?' + $.param(params);
+  };
 
 })(jQuery, Drupal);

@@ -48,6 +48,8 @@
         .text(default_option_label);
       $dropdown.append($default_option);
 
+      $ul.prepend('<li class="default-option"><a href=".">' + default_option_label + '</a></li>');
+
       var has_active = false;
       $links.each(function () {
         var $link = $(this);
@@ -59,7 +61,7 @@
           has_active = true;
           // Set empty text value to this link to unselect facet.
           $default_option.attr('value', $link.attr('href'));
-
+          $ul.find('.default-option a').attr("href", $link.attr('href'));
           $option.attr('selected', 'selected');
           $link.find('.js-facet-deactivate').remove();
         }
@@ -69,8 +71,13 @@
 
       // Go to the selected option when it's clicked.
       $dropdown.on('change.facets', function () {
-        var a = $($ul).find("[data-drupal-facet-item-id='" + $(this).find(':selected').data('drupalFacetItemId') + "']");
-        $(a)[0].click();
+        var anchor = $($ul).find("[data-drupal-facet-item-id='" + $(this).find(':selected').data('drupalFacetItemId') + "']");
+        if ( anchor.length  > 0) {
+          $(anchor)[0].click();
+        }
+        else {
+          $ul.find('.default-option a')[0].click();
+        }
       });
 
       // Append empty text option.

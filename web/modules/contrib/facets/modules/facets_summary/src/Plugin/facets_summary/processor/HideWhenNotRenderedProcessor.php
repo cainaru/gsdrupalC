@@ -15,7 +15,7 @@ use Drupal\facets_summary\Processor\ProcessorPluginBase;
  *   description = @Translation("When checked, this facet will only be rendered when the facet source is rendered. If you want to show facets on other pages too, you need to uncheck this setting."),
  *   default_enabled = TRUE,
  *   stages = {
- *     "build" = 10
+ *     "build" = 45
  *   }
  * )
  */

@@ -14,7 +14,7 @@ use Drupal\facets_summary\Processor\ProcessorPluginBase;
  *   label = @Translation("Show a summary of how many results were found"),
  *   description = @Translation("When checked, this will show the amount of results found."),
  *   stages = {
- *     "build" = 50
+ *     "build" = 5
  *   }
  * )
  */

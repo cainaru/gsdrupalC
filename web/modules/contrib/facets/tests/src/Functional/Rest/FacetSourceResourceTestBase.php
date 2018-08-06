@@ -52,12 +52,12 @@ abstract class FacetSourceResourceTestBase extends EntityResourceTestBase {
     return [
       'breadcrumb' => [],
       'dependencies' => [],
-      'filter_key' => null,
+      'filter_key' => NULL,
       'id' => 'red_panda',
       'langcode' => 'en',
       'name' => 'Red panda',
       'uuid' => 'red-panda-uuid',
-      'status' => true,
+      'status' => TRUE,
       'url_processor' => 'query_string',
     ];
   }

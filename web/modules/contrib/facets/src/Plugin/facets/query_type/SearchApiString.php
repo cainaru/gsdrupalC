@@ -65,7 +65,7 @@ class SearchApiString extends QueryTypePluginBase {
       foreach ($this->results as $result) {
         if ($result['count'] || $query_operator == 'or') {
           $result_filter = $result['filter'];
-          if ($result_filter[0] === '"')  {
+          if ($result_filter[0] === '"') {
             $result_filter = substr($result_filter, 1);
           }
           if ($result_filter[strlen($result_filter) - 1] === '"') {

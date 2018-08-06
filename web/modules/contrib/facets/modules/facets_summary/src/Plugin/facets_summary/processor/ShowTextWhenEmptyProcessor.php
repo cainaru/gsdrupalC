@@ -16,7 +16,7 @@ use Drupal\facets_summary\Processor\ProcessorPluginBase;
  *   description = @Translation("Show a text when there are no results, otherwise it will hide the block."),
  *   default_enabled = TRUE,
  *   stages = {
- *     "build" = 30
+ *     "build" = 10
  *   }
  * )
  */

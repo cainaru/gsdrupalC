@@ -17,7 +17,7 @@ use Drupal\facets_summary\Processor\ProcessorPluginBase;
  *   label = @Translation("Adds reset facets link."),
  *   description = @Translation("When checked, this facet will add a link to reset enabled facets."),
  *   stages = {
- *     "build" = 50
+ *     "build" = 30
  *   }
  * )
  */
