@@ -134,7 +134,7 @@
         "drupal/video_embed_field": "^1.5",
         "drupal/views_bulk_operations": "^2.3",
         "drupal/views_timelinejs": "^3.1",
-        "drush/drush": "^9.3",
+        "drush/drush": "^8.1.17",
         "enyo/dropzone": "^4.0",
         "gdsmith/easing": "^1.4",
         "harvesthq/chosen": "^1.8",
