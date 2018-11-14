@@ -561,3 +561,6 @@
 #17 /home/gardens1/drupal/dev.gardenshare.org/web/index.php(22): Drupal\Core\DrupalKernel->terminate(Object(Symfony\Component\HttpFoundation\Request), Object(Drupal\Core\Ajax\AjaxResponse))
 #18 {main}
 [24-Jul-2018 14:57:09 America/New_York] Uncaught PHP Exception Drupal\Core\Entity\EntityMalformedException: "The "facets_facet" entity cannot have a URI as it does not have an ID" at /home/gardens1/drupal/dev.gardenshare.org/web/core/lib/Drupal/Core/Entity/Entity.php line 190
+[02-Aug-2018 13:48:45 America/New_York] Uncaught PHP Exception Drupal\Core\Entity\Exception\UndefinedLinkTemplateException: "No link template 'canonical' found for the 'paragraph' entity type" at /home/gardens1/drupal/dev.gardenshare.org/web/core/lib/Drupal/Core/Entity/Entity.php line 225
+[02-Aug-2018 13:48:51 America/New_York] Uncaught PHP Exception Drupal\Core\Entity\Exception\UndefinedLinkTemplateException: "No link template 'canonical' found for the 'paragraph' entity type" at /home/gardens1/drupal/dev.gardenshare.org/web/core/lib/Drupal/Core/Entity/Entity.php line 225
+[02-Aug-2018 13:49:21 America/New_York] Uncaught PHP Exception Drupal\Core\Entity\Exception\UndefinedLinkTemplateException: "No link template 'canonical' found for the 'paragraph' entity type" at /home/gardens1/drupal/dev.gardenshare.org/web/core/lib/Drupal/Core/Entity/Entity.php line 225
