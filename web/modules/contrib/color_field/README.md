@@ -37,14 +37,57 @@ Install as you would normally install a contributed Drupal module. See also
 ### DEPENDENCIES
 There are JavaScript libraries required for a couple of the field widgets. If
 you are not actively using those field widgets, you can skip their installation
-if desired. If you installed color field via
-[Composer](https://getcomposer.org),the packages will have been suggested but
-not automatically installed. To install them you will need to add
-[Asset Packagist](https://asset-packagist.org) to your composer.json and run
+if desired.
+
+#### COMPOSER
+If you installed color field via [Composer](https://getcomposer.org), the
+packages will have been suggested but not automatically installed. If you have
+Asset Packagist already configured - as most Commerce users will - skip to just
+requiring the desired package(s).
 ```bash
 composer require bower-asset/jquery-simple-color bower-asset/spectrum
 ``` 
 
+Otherwise, to install them you will need to add
+[Asset Packagist](https://asset-packagist.org) to your composer.json and
+do some and make a couple other changes to your `composer.json`. Specifically,
+in the `extra` key add/adjust current values:
+```json
+"installer-types": [
+  "npm-asset",
+  "bower-asset"
+],
+"installer-paths": {
+  "web/core": [
+    "type:drupal-core"
+  ],
+  "web/libraries/{$name}": [
+    "type:bower-asset",
+    "type:npm-asset",
+    "type:drupal-library"
+  ],
+  "web/modules/contrib/{$name}": [
+    "type:drupal-module"
+  ],
+  "web/profiles/contrib/{$name}": [
+    "type:drupal-profile"
+  ],
+  "web/themes/contrib/{$name}": [
+    "type:drupal-theme"
+  ],
+  "drush/contrib/{$name}": [
+    "type:drupal-drush"
+  ]
+},
+```
+
+then run
+```bash
+composer require oomphinc/composer-installers-extender
+composer require bower-asset/jquery-simple-color bower-asset/spectrum
+```
+
+#### MANUAL
 If you are not using Composer, you will need to manually install them.
 
 - [jQuery Simple Color](https://github.com/recurser/jquery-simple-color)

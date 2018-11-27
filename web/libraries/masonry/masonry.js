@@ -1,39 +1,36 @@
 /*!
- * Masonry v3.3.2
+ * Masonry v4.2.2
  * Cascading grid layout library
- * http://masonry.desandro.com
+ * https://masonry.desandro.com
  * MIT License
  * by David DeSandro
  */
 
 ( function( window, factory ) {
-  'use strict';
   // universal module definition
-  if ( typeof define === 'function' && define.amd ) {
+  /* jshint strict: false */ /*globals define, module, require */
+  if ( typeof define == 'function' && define.amd ) {
     // AMD
     define( [
         'outlayer/outlayer',
-        'get-size/get-size',
-        'fizzy-ui-utils/utils'
+        'get-size/get-size'
       ],
       factory );
-  } else if ( typeof exports === 'object' ) {
+  } else if ( typeof module == 'object' && module.exports ) {
     // CommonJS
     module.exports = factory(
       require('outlayer'),
-      require('get-size'),
-      require('fizzy-ui-utils')
+      require('get-size')
     );
   } else {
     // browser global
     window.Masonry = factory(
       window.Outlayer,
-      window.getSize,
-      window.fizzyUIUtils
+      window.getSize
     );
   }
 
-}( window, function factory( Outlayer, getSize, utils ) {
+}( window, function factory( Outlayer, getSize ) {
 
 'use strict';
 
@@ -41,24 +38,28 @@
 
   // create an Outlayer layout class
   var Masonry = Outlayer.create('masonry');
+  // isFitWidth -> fitWidth
+  Masonry.compatOptions.fitWidth = 'isFitWidth';
 
-  Masonry.prototype._resetLayout = function() {
+  var proto = Masonry.prototype;
+
+  proto._resetLayout = function() {
     this.getSize();
     this._getMeasurement( 'columnWidth', 'outerWidth' );
     this._getMeasurement( 'gutter', 'outerWidth' );
     this.measureColumns();
 
     // reset column Y
-    var i = this.cols;
     this.colYs = [];
-    while (i--) {
+    for ( var i=0; i < this.cols; i++ ) {
       this.colYs.push( 0 );
     }
 
     this.maxY = 0;
+    this.horizontalColIndex = 0;
   };
 
-  Masonry.prototype.measureColumns = function() {
+  proto.measureColumns = function() {
     this.getContainerWidth();
     // if columnWidth is 0, default to outerWidth of first item
     if ( !this.columnWidth ) {
@@ -83,16 +84,17 @@
     this.cols = Math.max( cols, 1 );
   };
 
-  Masonry.prototype.getContainerWidth = function() {
+  proto.getContainerWidth = function() {
     // container is parent if fit width
-    var container = this.options.isFitWidth ? this.element.parentNode : this.element;
+    var isFitWidth = this._getOption('fitWidth');
+    var container = isFitWidth ? this.element.parentNode : this.element;
     // check that this.size and size are there
     // IE8 triggers resize on body size change, so they might not be
     var size = getSize( container );
     this.containerWidth = size && size.innerWidth;
   };
 
-  Masonry.prototype._getItemLayoutPosition = function( item ) {
+  proto._getItemLayoutPosition = function( item ) {
     item.getSize();
     // how many columns does this brick span
     var remainder = item.size.outerWidth % this.columnWidth;
@@ -100,33 +102,41 @@
     // round if off by 1 pixel, otherwise use ceil
     var colSpan = Math[ mathMethod ]( item.size.outerWidth / this.columnWidth );
     colSpan = Math.min( colSpan, this.cols );
-
-    var colGroup = this._getColGroup( colSpan );
-    // get the minimum Y value from the columns
-    var minimumY = Math.min.apply( Math, colGroup );
-    var shortColIndex = utils.indexOf( colGroup, minimumY );
-
+    // use horizontal or top column position
+    var colPosMethod = this.options.horizontalOrder ?
+      '_getHorizontalColPosition' : '_getTopColPosition';
+    var colPosition = this[ colPosMethod ]( colSpan, item );
     // position the brick
     var position = {
-      x: this.columnWidth * shortColIndex,
-      y: minimumY
+      x: this.columnWidth * colPosition.col,
+      y: colPosition.y
     };
-
     // apply setHeight to necessary columns
-    var setHeight = minimumY + item.size.outerHeight;
-    var setSpan = this.cols + 1 - colGroup.length;
-    for ( var i = 0; i < setSpan; i++ ) {
-      this.colYs[ shortColIndex + i ] = setHeight;
+    var setHeight = colPosition.y + item.size.outerHeight;
+    var setMax = colSpan + colPosition.col;
+    for ( var i = colPosition.col; i < setMax; i++ ) {
+      this.colYs[i] = setHeight;
     }
 
     return position;
+  };
+
+  proto._getTopColPosition = function( colSpan ) {
+    var colGroup = this._getTopColGroup( colSpan );
+    // get the minimum Y value from the columns
+    var minimumY = Math.min.apply( Math, colGroup );
+
+    return {
+      col: colGroup.indexOf( minimumY ),
+      y: minimumY,
+    };
   };
 
   /**
    * @param {Number} colSpan - number of columns the element spans
    * @returns {Array} colGroup
    */
-  Masonry.prototype._getColGroup = function( colSpan ) {
+  proto._getTopColGroup = function( colSpan ) {
     if ( colSpan < 2 ) {
       // if brick spans only one column, use all the column Ys
       return this.colYs;
@@ -137,19 +147,43 @@
     var groupCount = this.cols + 1 - colSpan;
     // for each group potential horizontal position
     for ( var i = 0; i < groupCount; i++ ) {
-      // make an array of colY values for that one group
-      var groupColYs = this.colYs.slice( i, i + colSpan );
-      // and get the max value of the array
-      colGroup[i] = Math.max.apply( Math, groupColYs );
+      colGroup[i] = this._getColGroupY( i, colSpan );
     }
     return colGroup;
   };
 
-  Masonry.prototype._manageStamp = function( stamp ) {
+  proto._getColGroupY = function( col, colSpan ) {
+    if ( colSpan < 2 ) {
+      return this.colYs[ col ];
+    }
+    // make an array of colY values for that one group
+    var groupColYs = this.colYs.slice( col, col + colSpan );
+    // and get the max value of the array
+    return Math.max.apply( Math, groupColYs );
+  };
+
+  // get column position based on horizontal index. #873
+  proto._getHorizontalColPosition = function( colSpan, item ) {
+    var col = this.horizontalColIndex % this.cols;
+    var isOver = colSpan > 1 && col + colSpan > this.cols;
+    // shift to next row if item can't fit on current row
+    col = isOver ? 0 : col;
+    // don't let zero-size items take up space
+    var hasSize = item.size.outerWidth && item.size.outerHeight;
+    this.horizontalColIndex = hasSize ? col + colSpan : this.horizontalColIndex;
+
+    return {
+      col: col,
+      y: this._getColGroupY( col, colSpan ),
+    };
+  };
+
+  proto._manageStamp = function( stamp ) {
     var stampSize = getSize( stamp );
     var offset = this._getElementOffset( stamp );
     // get the columns that this stamp affects
-    var firstX = this.options.isOriginLeft ? offset.left : offset.right;
+    var isOriginLeft = this._getOption('originLeft');
+    var firstX = isOriginLeft ? offset.left : offset.right;
     var lastX = firstX + stampSize.outerWidth;
     var firstCol = Math.floor( firstX / this.columnWidth );
     firstCol = Math.max( 0, firstCol );
@@ -158,27 +192,29 @@
     lastCol -= lastX % this.columnWidth ? 0 : 1;
     lastCol = Math.min( this.cols - 1, lastCol );
     // set colYs to bottom of the stamp
-    var stampMaxY = ( this.options.isOriginTop ? offset.top : offset.bottom ) +
+
+    var isOriginTop = this._getOption('originTop');
+    var stampMaxY = ( isOriginTop ? offset.top : offset.bottom ) +
       stampSize.outerHeight;
     for ( var i = firstCol; i <= lastCol; i++ ) {
       this.colYs[i] = Math.max( stampMaxY, this.colYs[i] );
     }
   };
 
-  Masonry.prototype._getContainerSize = function() {
+  proto._getContainerSize = function() {
     this.maxY = Math.max.apply( Math, this.colYs );
     var size = {
       height: this.maxY
     };
 
-    if ( this.options.isFitWidth ) {
+    if ( this._getOption('fitWidth') ) {
       size.width = this._getContainerFitWidth();
     }
 
     return size;
   };
 
-  Masonry.prototype._getContainerFitWidth = function() {
+  proto._getContainerFitWidth = function() {
     var unusedCols = 0;
     // count unused columns
     var i = this.cols;
@@ -192,10 +228,10 @@
     return ( this.cols - unusedCols ) * this.columnWidth - this.gutter;
   };
 
-  Masonry.prototype.needsResizeLayout = function() {
+  proto.needsResizeLayout = function() {
     var previousWidth = this.containerWidth;
     this.getContainerWidth();
-    return previousWidth !== this.containerWidth;
+    return previousWidth != this.containerWidth;
   };
 
   return Masonry;

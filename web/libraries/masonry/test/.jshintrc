@@ -1,12 +1,12 @@
 {
   "browser": true,
   "devel": false,
-  "strict": true,
   "undef": true,
   "unused": true,
-  "qunit": true,
   "globals": {
+    "getSize": false,
     "Masonry": false,
-    "checkItemPositions": false
+    "checkItemPositions": false,
+    "QUnit": false
   }
 }

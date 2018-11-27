@@ -1,8 +1,4 @@
 <?php
-/**
- * @file
- * Contains \Drupal\block_class\BlockClassTest.
- */
 
 namespace Drupal\block_class\Tests;
 
@@ -20,34 +16,34 @@ class BlockClassTest extends WebTestBase {
    *
    * @var array
    */
-  public static $modules = array('block', 'block_class');
+  public static $modules = ['block', 'block_class'];
 
   /**
    * Tests the custom CSS classes for blocks.
    */
   public function testBlockClass() {
 
-    $admin_user = $this->drupalCreateUser(array(
+    $admin_user = $this->drupalCreateUser([
       'administer block classes',
       'administer blocks',
-    ));
+    ]);
     $this->drupalLogin($admin_user);
 
     // Add a content block with custom CSS class.
     $this->drupalGet('admin/structure/block/add/system_main_block/classy', ['query' => ['region' => 'content']]);
-    $edit = array(
+    $edit = [
       'region' => 'content',
-      'third_party_settings[block_class][classes]' => 'TestClass_content'
-    );
-    $this->drupalPostForm(NULL, $edit, t('Save block'));
+      'third_party_settings[block_class][classes]' => 'TestClass_content',
+    ];
+    $this->drupalPostForm(NULL, $edit, $this->t('Save block'));
 
     // Add a user account menu with a custom CSS class.
     $this->drupalGet('admin/structure/block/add/system_menu_block:account/classy', ['query' => ['region' => 'content']]);
-    $edit = array(
+    $edit = [
       'region' => 'secondary_menu',
-      'third_party_settings[block_class][classes]' => 'TestClass_menu'
-    );
-    $this->drupalPostForm(NULL, $edit, t('Save block'));
+      'third_party_settings[block_class][classes]' => 'TestClass_menu',
+    ];
+    $this->drupalPostForm(NULL, $edit, $this->t('Save block'));
 
     // Go to the front page of the user.
     $this->drupalGet('<front>');

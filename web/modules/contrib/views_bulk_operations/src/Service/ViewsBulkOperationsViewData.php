@@ -193,7 +193,7 @@ class ViewsBulkOperationsViewData implements ViewsBulkOperationsViewDataInterfac
       throw new \Exception('Unexpected view result row structure.');
     }
 
-    if ($entity->isTranslatable()) {
+    if ($entity instanceof TranslatableInterface && $entity->isTranslatable()) {
 
       // Try to find a field alias for the langcode.
       // Assumption: translatable entities always
@@ -216,7 +216,7 @@ class ViewsBulkOperationsViewData implements ViewsBulkOperationsViewDataInterfac
         $language_field = $langcode_key;
       }
 
-      if ($entity instanceof TranslatableInterface && isset($row->{$language_field})) {
+      if (isset($row->{$language_field})) {
         return $entity->getTranslation($row->{$language_field});
       }
     }

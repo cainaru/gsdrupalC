@@ -22,18 +22,21 @@
     <ul{{ attributes.addClass(menu_level == 0 ? classes : 'dropdown-menu') }}>
     {% for item in items %}
       {%
+        set item_classes = item.url.getOption('container_attributes').class | split(" ")
+      %}
+      {%
         set item_classes = [
-          item.is_expanded and item.below ? 'expanded',
-          item.is_expanded and menu_level == 0 and item.below ? 'dropdown',
-          item.in_active_trail ? 'active',
+          item.is_expanded and item.below ? 'expanded dropdown',
+          item.in_active_trail ? 'active-trail',
+          loop.first ? 'first',
+          loop.last ? 'last',
         ]
       %}
+      <li{{ item.attributes.addClass(item_classes) }}>
       {% if menu_level == 0 and item.is_expanded and item.below %}
-        <li{{ item.attributes.addClass(item_classes) }}>
-        <a href="{{ item.url }}" class="dropdown-toggle" data-toggle="dropdown">{{ item.title }} <span class="caret"></span></a>
+        <a{{ item.link_attributes.addClass(['dropdown-toggle', item.in_active_trail ? 'active-trail']) | without('data-toggle') }} href="{{ item.url }}" data-toggle="dropdown">{{ item.title }}<span class="caret"></span></a>
       {% else %}
-        <li{{ item.attributes.addClass(item_classes) }}>
-        {{ link(item.title, item.url) }}
+        <a{{ item.link_attributes.addClass(item.in_active_trail ? 'active-trail') }} href="{{ item.url }}">{{ item.title }}</a>
       {% endif %}
       {% if item.below %}
         {{ _self.menu_links(item.below, attributes.removeClass(classes), menu_level + 1, classes) }}

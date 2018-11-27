@@ -107,6 +107,7 @@ class ColorCMYK extends ColorBase {
    *   The color in format: #RRGGBB.
    */
   public function toString($opacity = TRUE) {
+    return $this->toHex()->toString($opacity);
   }
 
   /**

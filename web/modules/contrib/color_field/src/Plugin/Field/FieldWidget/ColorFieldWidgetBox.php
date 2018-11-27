@@ -3,7 +3,6 @@
 namespace Drupal\color_field\Plugin\Field\FieldWidget;
 
 use Drupal\Core\Field\FieldItemListInterface;
-use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
@@ -18,34 +17,60 @@ use Drupal\Core\Form\FormStateInterface;
  *   }
  * )
  */
-class ColorFieldWidgetBox extends WidgetBase {
+class ColorFieldWidgetBox extends ColorFieldWidgetBase {
 
   /**
    * {@inheritdoc}
    */
   public static function defaultSettings() {
-    return array(
+    return [
       'default_colors' => '
 #AC725E,#D06B64,#F83A22,#FA573C,#FF7537,#FFAD46
 #42D692,#16A765,#7BD148,#B3DC6C,#FBE983
 #92E1C0,#9FE1E7,#9FC6E7,#4986E7,#9A9CFF
 #B99AFF,#C2C2C2,#CABDBF,#CCA6AC,#F691B2
 #CD74E6,#A47AE2',
-    ) + parent::defaultSettings();
+    ] + parent::defaultSettings();
   }
 
   /**
    * {@inheritdoc}
    */
   public function settingsForm(array $form, FormStateInterface $form_state) {
-    $element['default_colors'] = array(
+    $element['default_colors'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Default colors'),
       '#default_value' => $this->getSetting('default_colors'),
       '#required' => TRUE,
-      '#description' => $this->t('Default colors for pre-selected color boxes'),
-    );
+      '#element_validate' => [
+        [$this, 'settingsColorValidate'],
+      ],
+      '#description' => $this->t('Default colors for pre-selected color boxes. Enter as 6 digit upper case hex - such as #FF0000.'),
+    ];
     return $element;
+  }
+
+  /**
+   * Use element validator to make sure that hex values are in correct format.
+   *
+   * @param array $element
+   *   The Default colors element.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The current state of the form.
+   */
+  public function settingsColorValidate(array $element, FormStateInterface $form_state) {
+    $default_colors = $form_state->getValue($element['#parents']);
+    $colors = '';
+    if (!empty($default_colors)) {
+      preg_match_all("/#[0-9a-fA-F]{6}/", $default_colors, $default_colors, PREG_SET_ORDER);
+      foreach ($default_colors as $color) {
+        if (!empty($colors)) {
+          $colors .= ',';
+        }
+        $colors .= strtoupper($color[0]);
+      }
+    }
+    $form_state->setValue($element['#parents'], $colors);
   }
 
   /**
@@ -57,7 +82,7 @@ class ColorFieldWidgetBox extends WidgetBase {
     $default_colors = $this->getSetting('default_colors');
 
     if (!empty($default_colors)) {
-      preg_match_all("/#[0-9a-fA-F]{6}/", $default_colors, $default_colors, PREG_SET_ORDER);
+      preg_match_all("/#[0-9A-F]{6}/", $default_colors, $default_colors, PREG_SET_ORDER);
       foreach ($default_colors as $color) {
         $colors = $color[0];
         $summary[] = $colors;
@@ -75,58 +100,29 @@ class ColorFieldWidgetBox extends WidgetBase {
    * {@inheritdoc}
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
-    // We are nesting some sub-elements inside the parent, so we need a wrapper.
-    // We also need to add another #title attribute at the top level for ease in
-    // identifying this item in error messages. We do not want to display this
-    // title because the actual title display is handled at a higher level by
-    // the Field module.
-    $element['#theme_wrappers'] = array('color_field_widget_box');
-    $element['#attributes']['class'][] = 'container-inline';
+    $element = parent::formElement($items, $delta, $element, $form, $form_state);
+    // Ensure the default value is the required format.
+    if ($element['color']['#default_value']) {
+      $element['color']['#default_value'] = strtoupper($element['color']['#default_value']);
+      if (strlen($element['color']['#default_value']) === 6) {
+        $element['color']['#default_value'] = '#' . $element['color']['#default_value'];
+      }
+    }
 
     $element['#attached']['library'][] = 'color_field/color-field-widget-box';
 
     // Set Drupal settings.
-    $settings = [];
+    $settings[$element['#uid']] = [
+      'required' => $this->fieldDefinition->isRequired(),
+    ];
     $default_colors = $this->getSetting('default_colors');
-    preg_match_all("/#[0-9a-fA-F]{6}/", $default_colors, $default_colors, PREG_SET_ORDER);
+    preg_match_all("/#[0-9A-F]{6}/", $default_colors, $default_colors, PREG_SET_ORDER);
     foreach ($default_colors as $color) {
-      $settings['palette'][] = $color[0];
+      $settings[$element['#uid']]['palette'][] = $color[0];
     }
     $element['#attached']['drupalSettings']['color_field']['color_field_widget_box']['settings'] = $settings;
 
-    // Retrieve field label and description.
-    $element['#title'] = $this->fieldDefinition->getLabel();;
-    $element['#description'] = $this->fieldDefinition->getDescription();
-
-    // Prepare color.
-    $color = NULL;
-    if (isset($items[$delta]->color)) {
-      $color = $items[$delta]->color;
-      if (substr($color, 0, 1) !== '#') {
-        $color = '#' . $color;
-      }
-    }
-
-    $element['color'] = array(
-      '#maxlength' => 7,
-      '#size' => 7,
-      '#type' => 'textfield',
-      '#default_value' => $color,
-      '#attributes' => array('class' => array('visually-hidden')),
-    );
-    $element['color']['#suffix'] = "<div class='color-field-widget-box-form'></div>";
-
-    if ($this->getFieldSetting('opacity')) {
-      $element['opacity'] = array(
-        '#title' => $this->t('Opacity'),
-        '#type' => 'number',
-        '#min' => 0,
-        '#max' => 1,
-        '#step' => 0.01,
-        '#default_value' => isset($items[$delta]->opacity) ? $items[$delta]->opacity : NULL,
-        '#placeholder' => $this->getSetting('placeholder_opacity'),
-      );
-    }
+    $element['color']['#suffix'] = "<div class='color-field-widget-box-form' id='" . $element['#uid'] . "'></div>";
 
     return $element;
   }

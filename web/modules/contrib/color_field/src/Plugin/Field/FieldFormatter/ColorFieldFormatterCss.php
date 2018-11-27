@@ -24,7 +24,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   }
  * )
  */
-class ColorFieldFormatterCss extends FormatterBase implements ContainerFactoryPluginInterface{
+class ColorFieldFormatterCss extends FormatterBase implements ContainerFactoryPluginInterface {
   /**
    * The token service.
    *
@@ -78,23 +78,21 @@ class ColorFieldFormatterCss extends FormatterBase implements ContainerFactoryPl
    * {@inheritdoc}
    */
   public static function defaultSettings() {
-    return array(
+    return [
       'selector' => 'body',
       'property' => 'background-color',
       'important' => TRUE,
       'opacity' => TRUE,
-    ) + parent::defaultSettings();
+    ] + parent::defaultSettings();
   }
 
   /**
    * {@inheritdoc}
    */
   public function settingsForm(array $form, FormStateInterface $form_state) {
-    $opacity = $this->getFieldSetting('opacity');
-
     $elements = [];
 
-    $elements['selector'] = array(
+    $elements['selector'] = [
       '#title' => $this->t('Selector'),
       '#description' => $this->t('A valid CSS selector such as <code>.links > li > a, #logo</code>.'),
       '#type' => 'textarea',
@@ -102,36 +100,34 @@ class ColorFieldFormatterCss extends FormatterBase implements ContainerFactoryPl
       '#default_value' => $this->getSetting('selector'),
       '#required' => TRUE,
       '#placeholder' => 'body > div > a',
-    );
-    // $element['token'] = array(
-    // '#theme' => 'token_tree',
-    // '#token_types' => array($instance['entity_type']),
-    // '#dialog' => TRUE,
-    // ); .
-    $elements['property'] = array(
+    ];
+    $elements['token_help'] = [
+      '#theme' => 'token_tree_link',
+      '#token_types' => [$this->fieldDefinition->getTargetEntityTypeId()],
+    ];
+    $elements['property'] = [
       '#title' => $this->t('Property'),
-      '#description' => '',
       '#type' => 'select',
       '#default_value' => $this->getSetting('property'),
       '#required' => TRUE,
-      '#options' => array(
+      '#options' => [
         'background-color' => $this->t('Background color'),
         'color' => $this->t('Text color'),
-      ),
-    );
-    $elements['important'] = array(
+      ],
+    ];
+    $elements['important'] = [
       '#title' => $this->t('Important'),
       '#description' => $this->t('Whenever this declaration is more important than others.'),
       '#type' => 'checkbox',
       '#default_value' => $this->getSetting('important'),
-    );
+    ];
 
-    if ($opacity) {
-      $elements['opacity'] = array(
+    if ($this->getFieldSetting('opacity')) {
+      $elements['opacity'] = [
         '#type' => 'checkbox',
         '#title' => $this->t('Display opacity'),
         '#default_value' => $this->getSetting('opacity'),
-      );
+      ];
     }
 
     return $elements;

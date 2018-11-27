@@ -4,10 +4,12 @@ description: 'Provides a color field type to store the color value and opacity'
 # core: 8.x
 package: Field types
 dependencies:
-  - field
+  - drupal:field
+test_dependencies:
+  - token:token
 
-# Information added by Drupal.org packaging script on 2018-05-17
-version: '8.x-2.0-rc3'
+# Information added by Drupal.org packaging script on 2018-09-05
+version: '8.x-2.0'
 core: '8.x'
 project: 'color_field'
-datestamp: 1526529487
+datestamp: 1536168814

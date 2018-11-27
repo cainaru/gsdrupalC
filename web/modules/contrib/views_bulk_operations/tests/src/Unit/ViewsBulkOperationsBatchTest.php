@@ -39,9 +39,6 @@ class ViewsBulkOperationsBatchTest extends UnitTestCase {
     $actionProcessor = $this->getMockBuilder('Drupal\views_bulk_operations\Service\ViewsBulkOperationsActionProcessor')
       ->disableOriginalConstructor()
       ->getMock();
-    $actionProcessor->expects($this->any())
-      ->method('getEntity')
-      ->will($this->returnValue(new \stdClass()));
 
     $actionProcessor->expects($this->any())
       ->method('populateQueue')

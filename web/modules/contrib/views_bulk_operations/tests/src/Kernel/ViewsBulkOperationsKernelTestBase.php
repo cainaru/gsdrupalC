@@ -101,7 +101,8 @@ abstract class ViewsBulkOperationsKernelTestBase extends KernelTestBase {
       'language',
     ]);
 
-    // Get VBO view data service.
+    // Get time and VBO view data services.
+    $this->time = $this->container->get('datetime.time');
     $this->vboDataService = $this->container->get('views_bulk_operations.data');
   }
 
@@ -133,7 +134,7 @@ abstract class ViewsBulkOperationsKernelTestBase extends KernelTestBase {
       }
 
       // Create some test nodes.
-      $time = REQUEST_TIME;
+      $time = $this->time->getRequestTime();
       if (!isset($type_data['count'])) {
         $type_data['count'] = 10;
       }

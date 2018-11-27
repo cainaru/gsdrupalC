@@ -3,11 +3,11 @@ name: Geocoder Field
 description: 'Geocodes the content of a field and stores the result in other field and vice-versa.'
 # core: 8.x
 dependencies:
-  - field
-  - geocoder
+  - drupal:field
+  - geocoder:geocoder
 
-# Information added by Drupal.org packaging script on 2018-06-21
-version: '8.x-2.0-beta4'
+# Information added by Drupal.org packaging script on 2018-10-23
+version: '8.x-2.0-beta7'
 core: '8.x'
 project: 'geocoder'
-datestamp: 1529608297
+datestamp: 1540281184

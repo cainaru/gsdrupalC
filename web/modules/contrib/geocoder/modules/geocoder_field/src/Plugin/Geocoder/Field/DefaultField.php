@@ -188,16 +188,16 @@ class DefaultField extends PluginBase implements GeocoderFieldPluginInterface, C
       '#states' => $invisible_state,
     ];
 
-    // Set a default empty array value for geocode_field.
+    // Set a default empty value for geocode_field.
     $element['geocode_field'] = [
       '#type' => 'value',
-      '#value' => [],
+      '#value' => '',
     ];
 
-    // Set a default empty array value for reverse_geocode_field.
+    // Set a default empty value for reverse_geocode_field.
     $element['reverse_geocode_field'] = [
       '#type' => 'value',
-      '#value' => [],
+      '#value' => '',
     ];
 
     // Get the field options for geocode and reverse geocode source fields.
@@ -256,12 +256,7 @@ class DefaultField extends PluginBase implements GeocoderFieldPluginInterface, C
       '#title' => $this->t('<strong>Disable</strong> this field in the Content Edit Form'),
       '#description' => $this->t('If checked, the Field will be Disabled to the user in the edit form, </br>and totally managed by the Geocode/Reverse Geocode operation chosen'),
       '#default_value' => $field->getThirdPartySetting('geocoder_field', 'disabled'),
-      '#states' => [
-        'invisible' => [
-          [':input[name="third_party_settings[geocoder_field][method]"]' => ['value' => 'none']],
-          [':input[name="third_party_settings[geocoder_field][hidden]"]' => ['checked' => TRUE]],
-        ],
-      ],
+      '#states' => $invisible_state,
     ];
 
     // Get the enabled/selected plugins.

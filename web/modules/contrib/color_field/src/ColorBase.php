@@ -2,58 +2,36 @@
 
 namespace Drupal\color_field;
 
+/**
+ * Base color class to ease implementations.
+ */
 abstract class ColorBase implements ColorInterface {
 
   /**
-   * @var
+   * The opacity of the color.
+   *
+   * @var float
    */
   protected $opacity;
 
   /**
-   * Convert the color to Hex format
-   *
-   * @return ColorHex
-   *  The color in Hex format.
-   */
-  abstract function toHex();
-
-  /**
-   * Convert the color to RGB format
-   *
-   * @return ColorRGB
-   *  The color in RGB format.
-   */
-  abstract function toRGB();
-
-  /**
-   * Convert the color to a string format
-   *
-   * @return String
-   *  The color in string format.
-   */
-  abstract function toString();
-
-  /**
-   * Get the opacity
+   * Get the opacity.
    *
    * @return float
-   *  The opacity value between 0 and 1.
+   *   The opacity value between 0 and 1.
    */
   public function getOpacity() {
-    return $this->opacity;;
+    return $this->opacity;
   }
 
   /**
-   * Set the opacity
-   *
-   * @return float
-   *  The opacity value between 0 and 1.
+   * Set the opacity.
    */
   public function setOpacity($opacity) {
     $this->opacity = $opacity;
   }
 
-  static $patterns = array(
+  public static $patterns = [
     'cmyk'  => '/^(?:device-)?cmyk\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3}),\s*(\d+(?:\.\d+)?|\.\d+)\s*\)/',
     'rgba'  => '/^rgba\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3}),\s*(\d+(?:\.\d+)?|\.\d+)\s*\)/',
     'rgb' => '/^rgb\((\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3})\)$/',
@@ -62,10 +40,10 @@ abstract class ColorBase implements ColorInterface {
     'hsva'  => '/^hsva\((\d{1,3}),\s*(\d{1,3})%,\s*(\d{1,3})%,\s*(\d+(?:\.\d+)?|\.\d+)\s*\)$/',
     'hsv' => '/^hsv\((\d{1,3}),\s*(\d{1,3})%,\s*(\d{1,3})%\)$/',
     'hex6'  => '/^#?([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/',
-    'hex3'  => '/^#?([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/'
-  );
+    'hex3'  => '/^#?([0-9a-fA-F]{1})([0-9a-fA-F]{1})([0-9a-fA-F]{1})$/',
+  ];
 
-  static $named_colors = array(
+  public static $namedColors = [
     "aliceblue" => "f0f8ff",
     "antiquewhite" => "faebd7",
     "aqua" => "00ffff",
@@ -208,7 +186,7 @@ abstract class ColorBase implements ColorInterface {
     "white" => "ffffff",
     "whitesmoke" => "f5f5f5",
     "yellow" => "ffff00",
-    "yellowgreen" => "9acd32"
-  );
+    "yellowgreen" => "9acd32",
+  ];
 
 }

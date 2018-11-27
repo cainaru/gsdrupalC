@@ -26,10 +26,10 @@ class ColorFieldFormatterText extends FormatterBase {
    * {@inheritdoc}
    */
   public static function defaultSettings() {
-    return array(
+    return [
       'format' => 'hex',
       'opacity' => TRUE,
-    ) + parent::defaultSettings();
+    ] + parent::defaultSettings();
   }
 
   /**
@@ -40,19 +40,19 @@ class ColorFieldFormatterText extends FormatterBase {
 
     $elements = [];
 
-    $elements['format'] = array(
+    $elements['format'] = [
       '#type' => 'select',
       '#title' => $this->t('Format'),
       '#options' => $this->getColorFormat(),
       '#default_value' => $this->getSetting('format'),
-    );
+    ];
 
     if ($opacity) {
-      $elements['opacity'] = array(
+      $elements['opacity'] = [
         '#type' => 'checkbox',
         '#title' => $this->t('Display opacity'),
         '#default_value' => $this->getSetting('opacity'),
-      );
+      ];
     }
 
     return $elements;
@@ -62,7 +62,7 @@ class ColorFieldFormatterText extends FormatterBase {
    * This function is used to get the color format.
    *
    * @param string $format
-   *    Format is of string type.
+   *   Format is of string type.
    *
    * @return array|string
    *   Returns array or string.
@@ -87,9 +87,9 @@ class ColorFieldFormatterText extends FormatterBase {
 
     $summary = [];
 
-    $summary[] = $this->t('@format', array(
+    $summary[] = $this->t('@format', [
       '@format' => $this->getColorFormat($settings['format']),
-    ));
+    ]);
 
     if ($opacity && $settings['opacity']) {
       $summary[] = $this->t('Display with opacity.');

@@ -212,7 +212,7 @@ class ViewsBulkOperationsBulkForm extends FieldPluginBase implements CacheableDe
       'batch_size' => $this->options['batch'] ? $this->options['batch_size'] : 0,
       'total_results' => $this->viewData->getTotalResults(),
       'arguments' => $this->view->args,
-      'redirect_url' => Url::createFromRequest($this->requestStack->getCurrentRequest()),
+      'redirect_url' => Url::createFromRequest(clone $this->requestStack->getCurrentRequest()),
       'exposed_input' => $this->view->getExposedInput(),
     ];
 

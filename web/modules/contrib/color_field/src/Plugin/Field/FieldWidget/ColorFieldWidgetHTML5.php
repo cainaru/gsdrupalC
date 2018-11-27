@@ -3,7 +3,6 @@
 namespace Drupal\color_field\Plugin\Field\FieldWidget;
 
 use Drupal\Core\Field\FieldItemListInterface;
-use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
@@ -18,13 +17,13 @@ use Drupal\Core\Form\FormStateInterface;
  *   }
  * )
  */
-class ColorFieldWidgetHTML5 extends WidgetBase {
+class ColorFieldWidgetHTML5 extends ColorFieldWidgetBase {
 
   /**
    * {@inheritdoc}
    */
   public static function defaultSettings() {
-    return array() + parent::defaultSettings();
+    return [] + parent::defaultSettings();
   }
 
   /**
@@ -40,7 +39,7 @@ class ColorFieldWidgetHTML5 extends WidgetBase {
    * {@inheritdoc}
    */
   public function settingsSummary() {
-    $summary = array();
+    $summary = [];
 
     return $summary;
   }
@@ -49,38 +48,8 @@ class ColorFieldWidgetHTML5 extends WidgetBase {
    * {@inheritdoc}
    */
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
-    // Prepare color.
-    $color = NULL;
-    if (isset($items[$delta]->color)) {
-      $color = $items[$delta]->color;
-      if (substr($color, 0, 1) !== '#') {
-        $color = '#' . $color;
-      }
-    }
-
-    $element['color'] = array(
-      '#title' => $this->t('Color'),
-      '#type' => 'color',
-      '#maxlength' => 7,
-      '#size' => 7,
-      '#required' => $element['#required'],
-      '#default_value' => $color,
-    );
-
-    if ($this->getFieldSetting('opacity')) {
-      $element['color']['#prefix'] = '<div class="container-inline">';
-
-      $element['opacity'] = array(
-        '#title' => $this->t('Opacity'),
-        '#type' => 'number',
-        '#min' => 0,
-        '#max' => 1,
-        '#step' => 0.01,
-        '#required' => $element['#required'],
-        '#default_value' => isset($items[$delta]->opacity) ? $items[$delta]->opacity : NULL,
-        '#suffix' => '</div>',
-      );
-    }
+    $element = parent::formElement($items, $delta, $element, $form, $form_state);
+    $element['color']['#type'] = 'color';
 
     return $element;
   }

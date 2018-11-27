@@ -37,6 +37,8 @@ libraries-extend:
     - bootstrap/drupal.states
   core/drupal.tabledrag:
     - bootstrap/drupal.tabledrag
+  core/drupal.tableheader:
+  - bootstrap/drupal.tableheader
   image_widget_crop/cropper.integration:
     - bootstrap/image_widget_crop
   views/views.ajax:
@@ -73,8 +75,8 @@ libraries-override:
       theme:
         css/node.preview.css: false
 
-# Information added by Drupal.org packaging script on 2018-03-11
-version: '8.x-3.11'
+# Information added by Drupal.org packaging script on 2018-11-22
+version: '8.x-3.15'
 core: '8.x'
 project: 'bootstrap'
-datestamp: 1520792888
+datestamp: 1542871987

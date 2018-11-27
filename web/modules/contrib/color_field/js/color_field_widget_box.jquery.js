@@ -20,16 +20,18 @@
 
             var $context = $(context);
 
-            var default_colors = settings.color_field.color_field_widget_box.settings.default_colors;
-
             $context.find('.color-field-widget-box-form').each(function (index, element) {
                 var $element = $(element);
                 var $input = $element.prev().find('input');
+                $input.hide();
+                var props = settings.color_field.color_field_widget_box.settings[$element.prop('id')];
+
                 $element.empty().addColorPicker({
                     currentColor: $input.val(),
-                    colors: default_colors,
+                    colors: props.palette,
                     blotchClass:'color_field_widget_box__square',
                     blotchTransparentClass:'color_field_widget_box__square--transparent',
+                    addTransparentBlotch: !props.required,
                     clickCallback: function (color) {
                         $input.val(color).trigger('change');
                     }

@@ -176,6 +176,7 @@ trait ViewsBulkOperationsFormTrait {
       '#submit' => [
         [$this, 'cancelForm'],
       ],
+      '#limit_validation_errors' => [],
     ];
   }
 

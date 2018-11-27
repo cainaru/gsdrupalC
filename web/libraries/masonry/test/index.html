@@ -8,13 +8,10 @@
   <link rel="stylesheet" href="tests.css" />
   <link rel="stylesheet" href="../bower_components/qunit/qunit/qunit.css" />
 
-<script src="../bower_components/eventie/eventie.js"></script>
-<script src="../bower_components/doc-ready/doc-ready.js"></script>
-<script src="../bower_components/eventEmitter/EventEmitter.js"></script>
-<script src="../bower_components/get-style-property/get-style-property.js"></script>
+<script src="../bower_components/ev-emitter/ev-emitter.js"></script>
 <script src="../bower_components/get-size/get-size.js"></script>
-<script src="../bower_components/jquery-bridget/jquery.bridget.js"></script>
-<script src="../bower_components/matches-selector/matches-selector.js"></script>
+<script src="../bower_components/jquery-bridget/jquery-bridget.js"></script>
+<script src="../bower_components/desandro-matches-selector/matches-selector.js"></script>
 <script src="../bower_components/fizzy-ui-utils/utils.js"></script>
 <script src="../bower_components/outlayer/item.js"></script>
 <script src="../bower_components/outlayer/outlayer.js"></script>
@@ -31,6 +28,7 @@
 <script src="unit/zero-column-width.js"></script>
 <script src="unit/element-sizing.js"></script>
 <script src="unit/pixel-rounding.js"></script>
+<script src="unit/horizontal-order.js"></script>
 
 </head>
 <body>
@@ -149,6 +147,20 @@
     <div class="item"></div>
     <div class="item"></div>
   </div>
+
+  <h2>Horizontal order</h2>
+  <div id="horizontal-order" class="container">
+    <div class="item h3">1</div>
+    <div class="item h2">2</div>
+    <div class="item">3</div>
+    <div class="item">4</div>
+    <div class="item h3">5</div>
+    <div class="item h2">6</div>
+    <div class="item">7</div>
+    <div class="item">8</div>
+    <div class="item">9</div>
+  </div>
+
 
 </body>
 </html>

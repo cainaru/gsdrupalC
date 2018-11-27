@@ -32,7 +32,7 @@ class ViewsBulkOperationsBulkFormTest extends BrowserTestBase {
     $this->drupalCreateContentType(['type' => 'page']);
 
     $this->testNodes = [];
-    $time = REQUEST_TIME;
+    $time = $this->container->get('datetime.time')->getRequestTime();
     for ($i = 0; $i < 15; $i++) {
       // Ensure nodes are sorted in the same order they are inserted in the
       // array.

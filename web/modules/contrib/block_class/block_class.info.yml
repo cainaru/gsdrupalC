@@ -4,10 +4,10 @@ description: 'Allows assigning classes to Blocks'
 package: Other
 # core: 8.x
 dependencies:
-  - block
+  - drupal:block
 
-# Information added by Drupal.org packaging script on 2016-10-04
-version: '8.x-1.0-alpha1'
+# Information added by Drupal.org packaging script on 2018-07-13
+version: '8.x-1.0'
 core: '8.x'
 project: 'block_class'
-datestamp: 1475623440
+datestamp: 1531440825

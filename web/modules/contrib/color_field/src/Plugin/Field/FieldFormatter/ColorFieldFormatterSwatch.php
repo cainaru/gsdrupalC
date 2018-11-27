@@ -4,7 +4,6 @@ namespace Drupal\color_field\Plugin\Field\FieldFormatter;
 
 use Drupal\color_field\Plugin\Field\FieldType\ColorFieldType;
 use Drupal\Core\Field\FormatterBase;
-use Drupal\Core\Field\FieldItemInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\color_field\ColorHex;
@@ -27,12 +26,12 @@ class ColorFieldFormatterSwatch extends FormatterBase {
    * {@inheritdoc}
    */
   public static function defaultSettings() {
-    return array(
+    return [
       'shape' => 'square',
       'width' => 50,
       'height' => 50,
       'opacity' => TRUE,
-    ) + parent::defaultSettings();
+    ] + parent::defaultSettings();
   }
 
   /**
@@ -43,34 +42,34 @@ class ColorFieldFormatterSwatch extends FormatterBase {
 
     $elements = [];
 
-    $elements['shape'] = array(
+    $elements['shape'] = [
       '#type' => 'select',
       '#title' => $this->t('Shape'),
       '#options' => $this->getShape(),
       '#default_value' => $this->getSetting('shape'),
       '#description' => '',
-    );
-    $elements['width'] = array(
+    ];
+    $elements['width'] = [
       '#type' => 'number',
       '#title' => $this->t('Width'),
       '#default_value' => $this->getSetting('width'),
       '#min' => 1,
       '#description' => '',
-    );
-    $elements['height'] = array(
+    ];
+    $elements['height'] = [
       '#type' => 'number',
       '#title' => $this->t('Height'),
       '#default_value' => $this->getSetting('height'),
       '#min' => 1,
       '#description' => '',
-    );
+    ];
 
     if ($opacity) {
-      $elements['opacity'] = array(
+      $elements['opacity'] = [
         '#type' => 'checkbox',
         '#title' => $this->t('Display opacity'),
         '#default_value' => $this->getSetting('opacity'),
-      );
+      ];
     }
 
     return $elements;
@@ -79,9 +78,11 @@ class ColorFieldFormatterSwatch extends FormatterBase {
   /**
    * This is used to get the shape.
    *
-   * @param string $shape
+   * @param string|null $shape
+   *   The specific shape name to get.
    *
    * @return array|string
+   *   An array of shape ids/names or translated name of the specified shape.
    */
   protected function getShape($shape = NULL) {
     $formats = [];
@@ -104,14 +105,14 @@ class ColorFieldFormatterSwatch extends FormatterBase {
 
     $summary = [];
 
-    $summary[] = $this->t('@shape', array(
+    $summary[] = $this->t('@shape', [
       '@shape' => $this->getShape($settings['shape']),
-    ));
+    ]);
 
-    $summary[] = $this->t('Width: @width Height: @height', array(
+    $summary[] = $this->t('Width: @width Height: @height', [
       '@width' => $settings['width'],
       '@height' => $settings['height'],
-    ));
+    ]);
 
     if ($opacity && $settings['opacity']) {
       $summary[] = $this->t('Display with opacity.');
@@ -131,13 +132,13 @@ class ColorFieldFormatterSwatch extends FormatterBase {
     $elements['#attached']['library'][] = 'color_field/color-field-formatter-swatch';
 
     foreach ($items as $delta => $item) {
-      $elements[$delta] = array(
+      $elements[$delta] = [
         '#theme' => 'color_field_formatter_swatch',
         '#color' => $this->viewValue($item),
         '#shape' => $settings['shape'],
         '#width' => $settings['width'],
         '#height' => $settings['height'],
-      );
+      ];
     }
 
     return $elements;

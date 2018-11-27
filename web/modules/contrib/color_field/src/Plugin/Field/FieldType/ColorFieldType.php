@@ -8,7 +8,6 @@ use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\Core\TypedData\DataDefinition;
-use Drupal\color_field\ColorHex;
 
 /**
  * Plugin implementation of the 'color_type' field type.
@@ -26,19 +25,26 @@ class ColorFieldType extends FieldItemBase {
   /**
    * {@inheritdoc}
    */
+  public static function mainPropertyName() {
+    return 'color';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public static function defaultFieldSettings() {
-    return array(
+    return [
       'opacity' => TRUE,
-    ) + parent::defaultFieldSettings();
+    ] + parent::defaultFieldSettings();
   }
 
   /**
    * {@inheritdoc}
    */
   public static function defaultStorageSettings() {
-    return array(
+    return [
       'format' => '#HEXHEX',
-    ) + parent::defaultStorageSettings();
+    ] + parent::defaultStorageSettings();
   }
 
   /**
@@ -47,18 +53,18 @@ class ColorFieldType extends FieldItemBase {
   public function storageSettingsForm(array &$form, FormStateInterface $form_state, $has_data) {
     $element = [];
 
-    $element['format'] = array(
+    $element['format'] = [
       '#type' => 'select',
       '#title' => $this->t('Format storage'),
       '#description' => $this->t('Choose how to store the color.'),
       '#default_value' => $this->getSetting('format'),
-      '#options' => array(
+      '#options' => [
         '#HEXHEX' => $this->t('#123ABC'),
         'HEXHEX' => $this->t('123ABC'),
         '#hexhex' => $this->t('#123abc'),
         'hexhex' => $this->t('123abc'),
-      ),
-    );
+      ],
+    ];
 
     $element += parent::storageSettingsForm($form, $form_state, $has_data);
 
@@ -71,12 +77,12 @@ class ColorFieldType extends FieldItemBase {
   public function fieldSettingsForm(array $form, FormStateInterface $form_state) {
     $element = [];
 
-    $element['opacity'] = array(
+    $element['opacity'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Record opacity'),
       '#description' => $this->t('Whether or not to record.'),
       '#default_value' => $this->getSetting('opacity'),
-    );
+    ];
 
     return $element;
   }
@@ -87,25 +93,25 @@ class ColorFieldType extends FieldItemBase {
   public static function schema(FieldStorageDefinitionInterface $field_definition) {
     $format = $field_definition->getSetting('format');
     $color_length = isset($format) ? strlen($format) : 7;
-    return array(
-      'columns' => array(
-        'color' => array(
+    return [
+      'columns' => [
+        'color' => [
           'description' => 'The color value',
           'type' => 'varchar',
           'length' => $color_length,
           'not null' => FALSE,
-        ),
-        'opacity' => array(
+        ],
+        'opacity' => [
           'description' => 'The opacity/alphavalue property',
           'type' => 'float',
           'size' => 'tiny',
           'not null' => FALSE,
-        ),
-      ),
-      'indexes' => array(
-        'color' => array('color'),
-      ),
-    );
+        ],
+      ],
+      'indexes' => [
+        'color' => ['color'],
+      ],
+    ];
   }
 
   /**
@@ -139,34 +145,34 @@ class ColorFieldType extends FieldItemBase {
 
     $label = $this->getFieldDefinition()->getLabel();
 
-    $constraints[] = $constraint_manager->create('ComplexData', array(
-      'color' => array(
-        'Regex' => array(
+    $constraints[] = $constraint_manager->create('ComplexData', [
+      'color' => [
+        'Regex' => [
           'pattern' => '/^#?(([0-9a-fA-F]{2}){3}|([0-9a-fA-F]){3})$/i',
-        ),
-      ),
-    ));
+        ],
+      ],
+    ]);
 
     if ($opacity = $this->getSetting('opacity')) {
       $min = 0;
-      $constraints[] = $constraint_manager->create('ComplexData', array(
-        'opacity' => array(
-          'Range' => array(
+      $constraints[] = $constraint_manager->create('ComplexData', [
+        'opacity' => [
+          'Range' => [
             'min' => $min,
-            'minMessage' => $this->t('%name: the opacity may be no less than %min.', array('%name' => $label, '%min' => $min)),
-          ),
-        ),
-      ));
+            'minMessage' => $this->t('%name: the opacity may be no less than %min.', ['%name' => $label, '%min' => $min]),
+          ],
+        ],
+      ]);
 
       $max = 1;
-      $constraints[] = $constraint_manager->create('ComplexData', array(
-        'opacity' => array(
-          'Range' => array(
+      $constraints[] = $constraint_manager->create('ComplexData', [
+        'opacity' => [
+          'Range' => [
             'max' => $max,
-            'maxMessage' => $this->t('%name: the opacity may be no greater than %max.', array('%name' => $label, '%max' => $max)),
-          ),
-        ),
-      ));
+            'maxMessage' => $this->t('%name: the opacity may be no greater than %max.', ['%name' => $label, '%max' => $max]),
+          ],
+        ],
+      ]);
     }
 
     return $constraints;
@@ -238,6 +244,10 @@ class ColorFieldType extends FieldItemBase {
       }
 
       $this->color = $color;
+    }
+
+    if (!$this->getSetting('opacity')) {
+      unset($this->opacity);
     }
   }
 
