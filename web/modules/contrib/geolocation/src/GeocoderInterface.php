@@ -32,6 +32,17 @@ interface GeocoderInterface extends PluginInspectionInterface {
   /**
    * Attach geocoding logic to input element.
    *
+   * @param string $input_id
+   *   Name of the input element.
+   *
+   * @return array|null
+   *   Updated form element or NULL.
+   */
+  public function attachments($input_id);
+
+  /**
+   * Attach geocoding logic to input element.
+   *
    * @param array $render_array
    *   Form containing the input element.
    * @param string $element_name

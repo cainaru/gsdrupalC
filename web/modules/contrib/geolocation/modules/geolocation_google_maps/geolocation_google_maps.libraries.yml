@@ -1,0 +1,189 @@
+# Geolocation Google Maps API integration library.
+googlemapsapi:
+  version: 8.x-1.x
+  dependencies:
+    - core/drupalSettings
+    - geolocation/geolocation.api
+  js:
+    js/geolocation-google-maps-api.js: {}
+
+# Google CommonMap.
+commonmap.google:
+  js:
+    js/geolocation-common-map-google.js: {}
+  dependencies:
+    - geolocation/geolocation.commonmap
+
+# Google Maps geocoder function.
+geocoder.googlegeocodingapi:
+  version: 8.x-1.x
+  js:
+    js/geolocation-google-geocoding-api-geocoder.js: {}
+  dependencies:
+    - core/jquery.once
+    - geolocation/geolocation.geocoder.api
+    - geolocation_google_maps/googlemapsapi
+
+# Google widget API.
+widget.api.google:
+  version: 1.x
+  js:
+    js/geolocation-widget-google-api.js: { scope: footer }
+  dependencies:
+    - geolocation/geolocation.widget.api
+
+#
+# Map Features
+#
+
+# Drawing support.
+geolocation.drawing:
+  js:
+    js/MapFeature/geolocation-drawing.js: {}
+  dependencies:
+    - geolocation_google_maps/googlemapsapi
+
+# ClientLocationIndicator support.
+geolocation.client_location_indicator:
+  js:
+    js/MapFeature/geolocation-client-location-indicator.js: {}
+  dependencies:
+    - geolocation_google_maps/googlemapsapi
+
+# Spiderfying support.
+geolocation.spiderfying:
+  js:
+    js/MapFeature/geolocation-spiderfying.js: {}
+  dependencies:
+    - geolocation_google_maps/googlemapsapi
+    - geolocation_google_maps/spiderfier
+
+# External OverlappingMarkerSpiderfier
+spiderfier:
+  remote: https://github.com/jawj/OverlappingMarkerSpiderfier
+  version: 1.x
+  license:
+    name: MIT licence
+    url: http://www.opensource.org/licenses/mit-license.php
+    gpl-compatible: true
+  js:
+    https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier/1.0.3/oms.min.js: { type: external }
+
+# MarkerClusterer support.
+geolocation.markerclusterer:
+  js:
+    js/MapFeature/geolocation-markerclusterer.js: {}
+  dependencies:
+    - geolocation_google_maps/googlemapsapi
+    - geolocation_google_maps/markerclusterer
+
+# External marker clusterer.
+markerclusterer:
+  remote: https://github.com/googlemaps/js-marker-clusterer
+  version: 1.x
+  license:
+    name: Apache License, Version 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+    gpl-compatible: true
+  js:
+    https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/src/markerclusterer.js: { type: external }
+
+# InfoWindow support.
+geolocation.markerinfowindow:
+  js:
+    js/MapFeature/geolocation-marker-infowindow.js: {}
+  dependencies:
+    - geolocation_google_maps/googlemapsapi
+
+# ContextPopup support.
+geolocation.contextpopup:
+  js:
+    js/MapFeature/geolocation-contextpopup.js: {}
+  dependencies:
+    - geolocation_google_maps/googlemapsapi
+
+# External marker infobubble.
+infobubble:
+  remote: https://github.com/googlemaps/v3-utility-library/tree/master/infobubble
+  version: 1.x
+  license:
+    name: Apache License, Version 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+    gpl-compatible: true
+  js:
+    https://cdn.rawgit.com/googlemaps/v3-utility-library/master/infobubble/src/infobubble-compiled.js: { type: external }
+
+# InfoBubble support.
+geolocation.markerinfobubble:
+  js:
+    js/MapFeature/geolocation-marker-infobubble.js: {}
+  dependencies:
+    - geolocation_google_maps/googlemapsapi
+    - geolocation_google_maps/infobubble
+
+# MarkerIconAdjustment support.
+geolocation.markericonadjustment:
+  js:
+    js/MapFeature/geolocation-marker-icon.js: {}
+  dependencies:
+    - geolocation_google_maps/googlemapsapi
+
+# MapTypeStyle support.
+geolocation.maptypestyle:
+  js:
+    js/MapFeature/geolocation-maptypestyle.js: {}
+  dependencies:
+    - geolocation_google_maps/googlemapsapi
+
+# MapDisablePOI support.
+geolocation.mapdisablepoi:
+  js:
+    js/MapFeature/geolocation-mapdisablepoi.js: {}
+  dependencies:
+    - geolocation_google_maps/googlemapsapi
+
+#
+# Map Features - Controls
+#
+
+# Control MapType.
+geolocation.control_maptype:
+  js:
+    js/MapFeature/geolocation-control-maptype.js: {}
+  dependencies:
+    - geolocation_google_maps/googlemapsapi
+
+# Control Zoom.
+geolocation.control_zoom:
+  js:
+    js/MapFeature/geolocation-control-zoom.js: {}
+  dependencies:
+    - geolocation_google_maps/googlemapsapi
+
+# Control StreetView.
+geolocation.control_streetview:
+  js:
+    js/MapFeature/geolocation-control-streetview.js: {}
+  dependencies:
+    - geolocation_google_maps/googlemapsapi
+
+# ControlRecenter support.
+geolocation.control_recenter:
+  js:
+    js/MapFeature/geolocation-control-recenter.js: {}
+  dependencies:
+    - geolocation_google_maps/googlemapsapi
+
+# ControlLocate support.
+geolocation.control_locate:
+  js:
+    js/MapFeature/geolocation-control-locate.js: {}
+  dependencies:
+    - geolocation_google_maps/googlemapsapi
+
+# ControlGeocoder support.
+geolocation.control_geocoder:
+  js:
+    js/MapFeature/geolocation-control-geocoder.js: {}
+  dependencies:
+    - geolocation_google_maps/googlemapsapi

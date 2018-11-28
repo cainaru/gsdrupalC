@@ -1,0 +1,229 @@
+geolocation_views_style:
+  type: views_style
+  label: 'Geolocation CommonMap'
+  mapping:
+    even_empty:
+      type: integer
+      label: 'Even empty'
+    geolocation_field:
+      type: string
+      label: 'Geolocation Field'
+    title_field:
+      type: string
+      label: 'Title Field'
+    icon_field:
+      type: string
+      label: 'Icon Field'
+    show_raw_locations:
+      type: integer
+      label: 'Show raw locations'
+    marker_scroll_to_result:
+      type: integer
+      label: 'Scroll instead of open bubble'
+    marker_row_number:
+      type: integer
+      label: 'Use row number as marker label'
+    id_field:
+      type: string
+      label: 'ID field'
+    marker_icon_path:
+      type: string
+      label: 'Path to marker icon'
+    dynamic_map:
+      type: mapping
+      label: 'Dynamic map settings'
+      mapping:
+        enabled:
+          type: integer
+          label: 'Dynamic content refresh'
+        hide_form:
+          type: integer
+          label: 'Hide form'
+        views_refresh_delay:
+          type: string
+          label: 'Views fresh delay in ms'
+        update_handler:
+          type: string
+          label: 'Filter or argument name'
+        update_target:
+          type: string
+          label: 'Display to update'
+    context_popup_content:
+      type: string
+      label: 'Context Popup content'
+    marker_clusterer:
+      type: integer
+      label: 'Cluster markers'
+    marker_clusterer_image_path:
+      type: string
+      label: 'Path to cluster base images'
+    marker_clusterer_styles:
+      type: string
+      label: 'Custom cluster styles'
+    centre:
+      type: sequence
+      label: 'Centre Option'
+      sequence:
+        type: mapping
+        mapping:
+          weight:
+            type: integer
+            label: 'Weight'
+          enable:
+            type: boolean
+            label: 'enable'
+          settings:
+            type: sequence
+            label: 'Settings'
+            sequence:
+              type: string
+    map_provider_id:
+      type: string
+      label: 'Map provider ID'
+    map_provider_settings:
+      type: geolocation.map.provider.[%parent.map_provider_id]
+
+views.field.geolocation_field:
+  type: views.field.field
+  label: 'Geolocation Field'
+
+views.field.geolocation_field_proximity:
+  type: views.field.numeric
+  label: 'Geolocation Proximity Field'
+  mapping:
+    proximity_source:
+      type: string
+      label: 'Proximity Field Source'
+    proximity_lat:
+      type: string
+      label: 'Proximity Latitude'
+    proximity_lng:
+      type: string
+      label: 'Proximity Longitude'
+    proximity_units:
+      type: string
+      label: 'Proximity Units'
+    proximity_filter:
+      type: string
+      label: 'Proximity Filter'
+    proximity_argument:
+      type: string
+      label: 'Proximity Argument'
+    boundary_filter:
+      type: string
+      label: 'Boundary Filter'
+    entity_id_argument:
+      type: string
+      label: 'Proximity Entity ID argument'
+    proximity_geocoder:
+      type: integer
+      label: 'Enable geocoding widget'
+    proximity_geocoder_plugin_settings:
+      type: mapping
+      label: 'Geocoding widget settings'
+      mapping:
+        plugin_id:
+          type: string
+          label: 'Geolocation geocoding widget'
+        settings:
+          type: geolocation.geocoder.[%parent.plugin_id]
+
+
+views.filter.geolocation_filter_boundary:
+  type: views_filter
+  label: 'Geolocation Boundary Filter'
+  mapping:
+    value:
+      type: mapping
+      label: 'Value'
+      mapping:
+        lat_north_east:
+          type: string
+          label: 'North East Latitude'
+        lng_north_east:
+           type: string
+           label: 'North East Longitude'
+        lat_south_west:
+           type: string
+           label: 'South West Latitude'
+        lng_south_west:
+           type: string
+           label: 'North East Longitude'
+    expose:
+      type: mapping
+      label: 'Expose settings'
+      mapping:
+        input_by_geocoding_widget:
+          type: integer
+          label: 'Enable geocoding widget'
+        geocoder_plugin_settings:
+          type: mapping
+          label: 'Geocoding widget settings'
+          mapping:
+            plugin_id:
+              type: string
+              label: 'Geolocation geocoding widget'
+            settings:
+              type: geolocation.geocoder.[%parent.plugin_id]
+
+views.filter.geolocation_filter_proximity:
+  type: views_filter
+  label: 'Geolocation Proximity Filter'
+  mapping:
+    proximity_source:
+      type: string
+      label: 'Proximity Field Source'
+    proximity_lat:
+      type: string
+      label: 'Proximity Latitude'
+    proximity_lng:
+      type: string
+      label: 'Proximity Longitude'
+    proximity_units:
+      type: string
+      label: 'Proximity Units'
+    proximity_argument:
+      type: string
+      label: 'Proximity Argument'
+    entity_id_argument:
+      type: string
+      label: 'Proximity Entity ID argument'
+    boundary_filter:
+      type: string
+      label: 'Boundary Filter'
+    client_location:
+      type: boolean
+      label: 'Ask client for location first'
+    value:
+      type: views.filter_value.numeric
+      label: 'Proximity Value'
+    expose:
+      type: mapping
+      label: 'Expose settings'
+      mapping:
+        input_by_geocoding_widget:
+          type: integer
+          label: 'Enable geocoding widget'
+        geocoder_plugin_settings:
+          type: mapping
+          label: 'Geocoding widget settings'
+          mapping:
+            plugin_id:
+              type: string
+              label: 'Geolocation geocoding widget'
+            settings:
+              type: geolocation.geocoder.[%parent.plugin_id]
+
+views.filter.group_item.geolocation_filter_proximity:
+  type: views_filter_group_item
+  mapping:
+    value:
+      type: views.filter_value.numeric
+
+views.sort.geolocation_sort_proximity:
+  type: views_sort
+  label: 'Geolocation Proximity Sort'
+  mapping:
+    proximity_field:
+      type: string
+      label: 'Proximity Field Source'

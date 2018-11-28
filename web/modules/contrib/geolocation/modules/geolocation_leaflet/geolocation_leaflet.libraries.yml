@@ -1,0 +1,31 @@
+leaflet:
+  header: true
+  remote: http://leafletjs.com/
+  version: '1.0.3'
+  license:
+    name: BSD 2-clause "Simplified" License
+    url: https://github.com/Leaflet/Leaflet/blob/master/LICENSE
+    gpl-compatible: true
+  css:
+    component:
+      'https://unpkg.com/leaflet@1.0.3/dist/leaflet.css': { type: external, minified: true }
+  js:
+    'https://unpkg.com/leaflet@1.0.3/dist/leaflet.js': { type: external, minified: true }
+
+# Leaflet integration library.
+geolocation.leaflet:
+  version: 8.x-1.x
+  dependencies:
+    - core/drupalSettings
+    - geolocation/geolocation.api
+    - geolocation_leaflet/leaflet
+  js:
+    js/geolocation-leaflet-api.js: {}
+
+# Leaflet widget API.
+widget.api.leaflet:
+  version: 1.x
+  js:
+    js/geolocation-widget-leaflet-api.js: { scope: footer }
+  dependencies:
+    - geolocation/geolocation.widget.api

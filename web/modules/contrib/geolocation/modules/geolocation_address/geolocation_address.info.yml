@@ -1,0 +1,13 @@
+name: Geolocation - Address
+type: module
+description: Address integration
+# core: 8.x
+package: Geolocation
+dependencies:
+  - geolocation
+  - address
+# Information added by Drupal.org packaging script on 2018-01-13
+version: '8.x-2.0-beta1'
+core: '8.x'
+project: 'geolocation'
+datestamp: 1515803593

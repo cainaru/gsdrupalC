@@ -2,11 +2,8 @@
 
 namespace Drupal\geolocation;
 
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\field\FieldStorageConfigInterface;
-use Drupal\Core\Config\ConfigFactory;
 use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -28,20 +25,6 @@ class GeolocationCore implements ContainerInjectionInterface {
   protected $moduleHandler;
 
   /**
-   * Drupal\Core\Entity\EntityManager definition.
-   *
-   * @var \Drupal\Core\Entity\EntityManager
-   */
-  protected $entityManager;
-
-  /**
-   * The required configuration object.
-   *
-   * @var \Drupal\Core\Config\Config
-   */
-  protected $config;
-
-  /**
    * The GeocoderManager object.
    *
    * @var \Drupal\geolocation\GeocoderManager
@@ -49,22 +32,26 @@ class GeolocationCore implements ContainerInjectionInterface {
   protected $geocoderManager;
 
   /**
+   * The MapProviderManager object.
+   *
+   * @var \Drupal\geolocation\MapProviderManager
+   */
+  protected $mapProviderManager;
+
+  /**
    * Constructor.
    *
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
    *   A module handler.
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_manager
-   *   An EntityTypeManager instance.
-   * @param \Drupal\Core\Config\ConfigFactory $config
-   *   The factory for configuration objects.
    * @param \Drupal\geolocation\GeocoderManager $geocoder_manager
    *   The GeocoderManager object.
+   * @param \Drupal\geolocation\MapProviderManager $map_provider_manager
+   *   The MapProviderManager object.
    */
-  public function __construct(ModuleHandlerInterface $module_handler, EntityTypeManagerInterface $entity_manager, ConfigFactory $config, GeocoderManager $geocoder_manager) {
+  public function __construct(ModuleHandlerInterface $module_handler, GeocoderManager $geocoder_manager, MapProviderManager $map_provider_manager) {
     $this->moduleHandler = $module_handler;
-    $this->entityManager = $entity_manager;
-    $this->config = $config->get('geolocation.settings');
     $this->geocoderManager = $geocoder_manager;
+    $this->mapProviderManager = $map_provider_manager;
   }
 
   /**
@@ -73,9 +60,8 @@ class GeolocationCore implements ContainerInjectionInterface {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('module_handler'),
-      $container->get('entity_type.manager'),
-      $container->get('config.factory'),
-      $container->get('plugin.manager.geolocation.geocoder')
+      $container->get('plugin.manager.geolocation.geocoder'),
+      $container->get('plugin.manager.geolocation.mapprovider')
     );
   }
 
@@ -87,161 +73,6 @@ class GeolocationCore implements ContainerInjectionInterface {
    */
   public function getGeocoderManager() {
     return $this->geocoderManager;
-  }
-
-  /**
-   * Get views data for fields and filters.
-   *
-   * @param \Drupal\field\FieldStorageConfigInterface $field_storage
-   *   Storage of the current field.
-   *
-   * @return array
-   *   The data to return to Views.
-   */
-  public function getViewsFieldData(FieldStorageConfigInterface $field_storage) {
-
-    // Make sure views.views.inc is loaded.
-    module_load_include('inc', 'views', 'views.views');
-
-    // Get the default data from the views module.
-    $data = views_field_default_views_data($field_storage);
-
-    $args = ['@field_name' => $field_storage->getName()];
-
-    // Loop through all of the results and set our overrides.
-    foreach ($data as $table_name => $table_data) {
-      foreach ($table_data as $field_name => $field_data) {
-        // Only modify fields.
-        if ($field_name != 'delta') {
-          if (isset($field_data['field'])) {
-            // Use our own field handler.
-            $data[$table_name][$field_name]['field']['id'] = 'geolocation_field';
-            $data[$table_name][$field_name]['field']['click sortable'] = FALSE;
-          }
-          if (isset($field_data['filter'])) {
-            if (substr($field_name, -4, 4) == '_lat') {
-              $data[$table_name][$field_name]['title'] = $this->t('Latitude (@field_name)', $args);
-              continue;
-            }
-            if (substr($field_name, -4, 4) == '_lng') {
-              $data[$table_name][$field_name]['title'] = $this->t('Longitude (@field_name)', $args);
-              continue;
-            }
-            // The default filters are mostly not useful except lat/lng.
-            unset($data[$table_name][$field_name]['filter']);
-          }
-          if (isset($field_data['argument'])) {
-            // The default arguments aren't useful at all so remove them.
-            unset($data[$table_name][$field_name]['argument']);
-          }
-          if (isset($field_data['sort'])) {
-            // The default arguments aren't useful at all so remove them.
-            unset($data[$table_name][$field_name]['sort']);
-          }
-        }
-      }
-
-      $field_coordinates_table_data = [];
-      $entity_type_id = $field_storage->getTargetEntityTypeId();
-      $target_entity_type = $this->entityManager->getDefinition($field_storage->getTargetEntityTypeId());
-
-      if (array_key_exists($target_entity_type->getBaseTable() . '__' . $field_storage->getName(), $data)) {
-        $field_coordinates_table_data = $data[$target_entity_type->getBaseTable() . '__' . $field_storage->getName()][$field_storage->getName()];
-      }
-      elseif (array_key_exists($entity_type_id . '__' . $field_storage->getName(), $data)) {
-        // Fall back to using the key format as defined in,
-        // views_field_default_views_data().
-        $field_coordinates_table_data = $data[$entity_type_id . '__' . $field_storage->getName()][$field_storage->getName()];
-      }
-
-      // Add proximity handlers.
-      $data[$table_name][$args['@field_name'] . '_proximity'] = [
-        'group' => $target_entity_type->getLabel(),
-        'title' => $this->t('Proximity (@field_name)', $args),
-        'title short' => isset($field_coordinates_table_data['title short']) ? $field_coordinates_table_data['title short'] . $this->t(":proximity") : '',
-        'help' => isset($field_coordinates_table_data['help']) ? $field_coordinates_table_data['help'] : '',
-        'argument' => [
-          'id' => 'geolocation_argument_proximity',
-          'table' => $table_name,
-          'entity_type' => $entity_type_id,
-          'field_name' => $args['@field_name'] . '_proximity',
-          'real field' => $args['@field_name'],
-          'label' => $this->t('Distance to !field_name', $args),
-          'empty field name' => '- No value -',
-          'additional fields' => [
-            $args['@field_name'] . '_lat',
-            $args['@field_name'] . '_lng',
-            $args['@field_name'] . '_lat_sin',
-            $args['@field_name'] . '_lat_cos',
-            $args['@field_name'] . '_lng_rad',
-          ],
-        ],
-        'filter' => [
-          'id' => 'geolocation_filter_proximity',
-          'table' => $table_name,
-          'entity_type' => $entity_type_id,
-          'field_name' => $args['@field_name'] . '_proximity',
-          'real field' => $args['@field_name'],
-          'label' => $this->t('Distance to !field_name', $args),
-          'allow empty' => TRUE,
-          'additional fields' => [
-            $args['@field_name'] . '_lat',
-            $args['@field_name'] . '_lng',
-            $args['@field_name'] . '_lat_sin',
-            $args['@field_name'] . '_lat_cos',
-            $args['@field_name'] . '_lng_rad',
-          ],
-        ],
-        'field' => [
-          'table' => $table_name,
-          'id' => 'geolocation_field_proximity',
-          'field_name' => $args['@field_name'] . '_proximity',
-          'entity_type' => $entity_type_id,
-          'real field' => $args['@field_name'],
-          'float' => TRUE,
-          'additional fields' => [
-            $args['@field_name'] . '_lat',
-            $args['@field_name'] . '_lng',
-            $args['@field_name'] . '_lat_sin',
-            $args['@field_name'] . '_lat_cos',
-            $args['@field_name'] . '_lng_rad',
-          ],
-          'element type' => 'div',
-          'is revision' => (isset($table_data[$args['@field_name']]['field']['is revision']) && $table_data[$args['@field_name']]['field']['is revision']),
-          'click sortable' => TRUE,
-        ],
-        'sort' => [
-          'table' => $table_name,
-          'id' => 'geolocation_sort_proximity',
-          'field_name' => $args['@field_name'] . '_proximity',
-          'entity_type' => $entity_type_id,
-          'real field' => $args['@field_name'],
-        ],
-      ];
-
-      // Add boundary handlers.
-      $data[$table_name][$args['@field_name'] . '_boundary'] = [
-        'group' => $target_entity_type->getLabel(),
-        'title' => $this->t('Boundary (@field_name)', $args),
-        'title short' => isset($field_coordinates_table_data['title short']) ? $field_coordinates_table_data['title short'] . $this->t(":boundary") : '',
-        'help' => isset($field_coordinates_table_data['help']) ? $field_coordinates_table_data['help'] : '',
-        'filter' => [
-          'id' => 'geolocation_filter_boundary',
-          'table' => $table_name,
-          'entity_type' => $entity_type_id,
-          'field_name' => $args['@field_name'] . '_boundary',
-          'real field' => $args['@field_name'],
-          'label' => $this->t('Boundaries around !field_name', $args),
-          'allow empty' => TRUE,
-          'additional fields' => [
-            $args['@field_name'] . '_lat',
-            $args['@field_name'] . '_lng',
-          ],
-        ],
-      ];
-    }
-
-    return $data;
   }
 
   /**

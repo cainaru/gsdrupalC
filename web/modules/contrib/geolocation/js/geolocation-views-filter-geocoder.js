@@ -11,12 +11,6 @@
   'use strict';
 
   /**
-   * @namespace
-   */
-  Drupal.geolocation = Drupal.geolocation || {};
-  Drupal.geolocation.geocoder = Drupal.geolocation.geocoder || {};
-
-  /**
    * Attach common map style functionality.
    *
    * @type {Drupal~behavior}

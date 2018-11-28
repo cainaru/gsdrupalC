@@ -3,7 +3,7 @@
 namespace Drupal\geolocation\Plugin\views\field;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\views\Plugin\views\field\Field;
+use Drupal\views\Plugin\views\field\EntityField;
 
 /**
  * Field handler for geolocaiton field.
@@ -12,7 +12,7 @@ use Drupal\views\Plugin\views\field\Field;
  *
  * @ViewsField("geolocation_field")
  */
-class GeolocationField extends Field {
+class GeolocationField extends EntityField {
 
   /**
    * {@inheritdoc}

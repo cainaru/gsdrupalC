@@ -141,7 +141,9 @@ trait GeolocationItemTokenTrait {
             // Maybe there is values inside the values.
             if (is_array($value) || ($value instanceof \Traversable)) {
               foreach ($value as $deepkey => $deepvalue) {
-                $replacements['[geolocation_current_item:data:' . $key . ':' . $deepkey . ']'] = (string) $deepvalue;
+                if (is_string($deepvalue)) {
+                  $replacements['[geolocation_current_item:data:' . $key . ':' . $deepkey . ']'] = (string) $deepvalue;
+                }
               }
             }
             else {

@@ -7,6 +7,7 @@ use Drupal\geolocation\GeolocationCore;
 use Drupal\views\Plugin\views\filter\NumericFilter;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Render\BubbleableMetadata;
 
 /**
  * Filter handler for search keywords.
@@ -53,14 +54,11 @@ class ProximityFilter extends NumericFilter implements ContainerFactoryPluginInt
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    // Make phpcs happy.
-    /** @var \Drupal\geolocation\GeolocationCore $geolocation_core */
-    $geolocation_core = $container->get('geolocation.core');
     return new static(
       $configuration,
       $plugin_id,
       $plugin_definition,
-      $geolocation_core
+      $container->get('geolocation.core')
     );
   }
 
@@ -98,6 +96,14 @@ class ProximityFilter extends NumericFilter implements ContainerFactoryPluginInt
     parent::defaultExposeOptions();
 
     $this->options['expose']['label'] = $this->t('Distance in @units', ['@units' => $this->getProximityUnit() == 'km' ? 'kilometers' : 'miles']);
+    $this->options['expose']['input_by_geocoding_widget'] = ['default' => FALSE];
+    $this->options['expose']['geocoder_plugin_settings'] = [
+      'default' => [
+        'plugin_id' => '',
+        'settings' => [],
+      ],
+    ];
+
   }
 
   /**
@@ -198,11 +204,10 @@ class ProximityFilter extends NumericFilter implements ContainerFactoryPluginInt
     else {
       $value_element = &$form;
     }
-
     $value_element[$identifier]['#weight'] = 30;
 
     if ($this->options['proximity_units'] == 'exposed') {
-      $value_element[$this->options['expose']['identifier'] . '-units'] = [
+      $value_element[$identifier . '-units'] = [
         '#type' => 'select',
         '#default_value' => !empty($this->value['units']) ? $this->value['units'] : '',
         '#weight' => 40,
@@ -214,13 +219,13 @@ class ProximityFilter extends NumericFilter implements ContainerFactoryPluginInt
     }
 
     if ($this->options['proximity_source'] == 'exposed') {
-      $value_element[$this->options['expose']['identifier'] . '-lat'] = [
+      $value_element[$identifier . '-lat'] = [
         '#type' => 'textfield',
         '#title' => $this->t('Latitude'),
         '#weight' => 10,
       ];
 
-      $value_element[$this->options['expose']['identifier'] . '-lng'] = [
+      $value_element[$identifier . '-lng'] = [
         '#type' => 'textfield',
         '#title' => $this->t('Longitude'),
         '#weight' => 20,
@@ -233,7 +238,6 @@ class ProximityFilter extends NumericFilter implements ContainerFactoryPluginInt
       ) {
 
         $geocoder_configuration = $this->options['expose']['geocoder_plugin_settings']['settings'];
-        $geocoder_configuration['label'] = $this->options['expose']['label'];
 
         /** @var \Drupal\geolocation\GeocoderInterface $geocoder_plugin */
         $geocoder_plugin = $this->geolocationCore->getGeocoderManager()->getGeocoder(
@@ -250,7 +254,7 @@ class ProximityFilter extends NumericFilter implements ContainerFactoryPluginInt
 
         $geocoder_plugin->formAttachGeocoder($form, $identifier);
 
-        $form = array_merge_recursive($form, [
+        $form = BubbleableMetadata::mergeAttachments($form, [
           '#attached' => [
             'library' => [
               'geolocation/geolocation.views.filter.geocoder',
@@ -641,7 +645,7 @@ class ProximityFilter extends NumericFilter implements ContainerFactoryPluginInt
    */
   public function getLatitudeValue() {
     $proximity_center = $this->getProximityCenterBySource();
-    if (!is_null($proximity_center['latitude'])) {
+    if (isset($proximity_center['latitude']) && !is_null($proximity_center['latitude'])) {
       return $proximity_center['latitude'];
     }
     return NULL;
@@ -655,9 +659,10 @@ class ProximityFilter extends NumericFilter implements ContainerFactoryPluginInt
    */
   public function getLongitudeValue() {
     $proximity_center = $this->getProximityCenterBySource();
-    if (!is_null($proximity_center['longitude'])) {
+    if (isset($proximity_center['longitude']) && !is_null($proximity_center['longitude'])) {
       return $proximity_center['longitude'];
     }
+
     return NULL;
   }
 
