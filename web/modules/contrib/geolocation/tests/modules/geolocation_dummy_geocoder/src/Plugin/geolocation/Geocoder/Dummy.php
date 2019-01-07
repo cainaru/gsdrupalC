@@ -4,7 +4,6 @@ namespace Drupal\geolocation_dummy_geocoder\Plugin\geolocation\Geocoder;
 
 use Drupal\geolocation\GeocoderBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\BubbleableMetadata;
 
 /**
  * Provides the Google Geocoding API.
@@ -43,13 +42,14 @@ class Dummy extends GeocoderBase {
       '#attributes' => [
         'class' => [
           'form-autocomplete',
+          'geolocation-views-filter-geocoder',
           'geolocation-geocoder-dummy',
         ],
         'data-source-identifier' => $element_name,
       ],
     ];
 
-    $render_array = BubbleableMetadata::mergeAttachments($render_array, [
+    $render_array = array_merge_recursive($render_array, [
       '#attached' => [
         'library' => [
           0 => 'geolocation_dummy_geocoder/geocoder',

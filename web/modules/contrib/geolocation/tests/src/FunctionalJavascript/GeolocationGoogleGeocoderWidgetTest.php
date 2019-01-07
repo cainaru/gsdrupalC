@@ -26,7 +26,6 @@ class GeolocationGoogleGeocoderWidgetTest extends JavascriptTestBase {
     'node',
     'field',
     'geolocation',
-    'geolocation_google_maps',
   ];
 
   /**
@@ -131,10 +130,10 @@ class GeolocationGoogleGeocoderWidgetTest extends JavascriptTestBase {
 
     $this->drupalGetFilterGoogleKey('node/3/edit');
 
-    $this->assertSession()->elementExists('css', '.geolocation-map-container');
+    $this->assertSession()->elementExists('css', '.geolocation-map-canvas');
 
     // If Google works, either gm-style or gm-err-container will be present.
-    $this->assertSession()->elementExists('css', '.geolocation-map-container [class^="gm-"]');
+    $this->assertSession()->elementExists('css', '.geolocation-map-canvas [class^="gm-"]');
   }
 
   /**

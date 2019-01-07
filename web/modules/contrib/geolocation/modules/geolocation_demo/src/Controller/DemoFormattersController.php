@@ -73,10 +73,7 @@ class DemoFormattersController extends ControllerBase {
       'field_definition' => $field_definition,
       'configuration' => [
         'settings' => [
-          'tokenized_text' => [
-            'value' => 'The latitude value of this item is: [geolocation_current_item:lat]',
-            'format' => filter_default_format(),
-          ],
+          'tokenized_text' => 'The date is [current-date:html_date] and the latitude value [geolocation_current_item:lat]',
         ],
         'third_party_settings' => [],
       ],
@@ -85,26 +82,13 @@ class DemoFormattersController extends ControllerBase {
 
     $form = [];
 
-    $formatters = [
+    foreach ([
       'geolocation_latlng',
+      'geolocation_map',
       'geolocation_sexagesimal',
       'geolocation_token',
-    ];
-
-    $moduleHandler = \Drupal::moduleHandler();
-
-    if ($moduleHandler->moduleExists('geolocation_leaflet')) {
-      $formatters[] = 'geolocation_leaflet_map';
-    }
-
-    if ($moduleHandler->moduleExists('geolocation_google_maps')) {
-      $formatters[] = 'geolocation_map';
-    }
-
-    foreach ($formatters as $formatter_id) {
-      $formatter = $this
-        ->pluginManagerFieldFormatter
-        ->getInstance(array_merge_recursive($widget_settings, ['configuration' => ['type' => $formatter_id]]));
+    ] as $formatter_id) {
+      $formatter = $this->pluginManagerFieldFormatter->getInstance(array_merge_recursive($widget_settings, ['configuration' => ['type' => $formatter_id]]));
 
       $form[$formatter_id] = [
         '#type' => 'fieldset',

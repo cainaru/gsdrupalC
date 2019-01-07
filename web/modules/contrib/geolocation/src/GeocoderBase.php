@@ -4,57 +4,62 @@ namespace Drupal\geolocation;
 
 use Drupal\Core\Plugin\PluginBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Config\Config;
 
 /**
  * Class GeocoderBase.
  *
  * @package Drupal\geolocation
  */
-abstract class GeocoderBase extends PluginBase implements GeocoderInterface {
+abstract class GeocoderBase extends PluginBase implements GeocoderInterface, ContainerFactoryPluginInterface {
 
   /**
-   * Return plugin default settings.
+   * Geolocation settings config instance.
    *
-   * @return array
-   *   Default settings.
+   * @var \Drupal\Core\Config\Config
    */
-  protected function getDefaultSettings() {
-    return [
-      'label' => $this->t('Address'),
-      'description' => $this->t('Enter an address to be localized.'),
-    ];
+  protected $geolocationSettings;
+
+  /**
+   * Constructs a new GeocoderBase object.
+   *
+   * @param array $configuration
+   *   A configuration array containing information about the plugin instance.
+   * @param string $plugin_id
+   *   The plugin_id for the plugin instance.
+   * @param mixed $plugin_definition
+   *   The plugin implementation definition.
+   * @param \Drupal\Core\Config\Config $config
+   *   The 'geolocation.settings' config.
+   */
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, Config $config) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+
+    $this->geolocationSettings = $config;
   }
 
   /**
-   * Return plugin settings.
-   *
-   * @return array
-   *   Settings.
+   * {@inheritdoc}
    */
-  public function getSettings() {
-    return array_replace_recursive($this->getDefaultSettings(), $this->configuration);
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('config.factory')->get('geolocation.settings')
+    );
   }
 
   /**
    * {@inheritdoc}
    */
   public function getOptionsForm() {
-    $settings = $this->getSettings();
-
     return [
-      'label' => [
-        '#type' => 'textfield',
-        '#title' => $this->t('Label'),
-        '#default_value' => $settings['label'],
-        '#size' => 15,
-      ],
-
-      'description' => [
-        '#type' => 'textfield',
-        '#title' => $this->t('Description'),
-        '#default_value' => $settings['description'],
-        '#size' => 25,
-      ],
+      '#type' => 'html_tag',
+      '#tag' => 'span',
+      '#value' => $this->t('No settings available.'),
     ];
   }
 
@@ -63,13 +68,6 @@ abstract class GeocoderBase extends PluginBase implements GeocoderInterface {
    */
   public function processOptionsForm(array $form_element) {
     return NULL;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function attachments($input_id) {
-    return [];
   }
 
   /**

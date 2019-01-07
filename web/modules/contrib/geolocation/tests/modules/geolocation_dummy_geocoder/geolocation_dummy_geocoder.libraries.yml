@@ -3,4 +3,4 @@ geocoder:
   js:
     js/geolocation-dummy-geocoder.js: {}
   dependencies:
-    - geolocation/geolocation.geocoder.api
+    - geolocation/geolocation.geocoder
