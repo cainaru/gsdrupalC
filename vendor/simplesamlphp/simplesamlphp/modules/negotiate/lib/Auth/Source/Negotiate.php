@@ -23,7 +23,7 @@ class sspmod_negotiate_Auth_Source_Negotiate extends SimpleSAML_Auth_Source
     protected $timeout = 30;
     protected $keytab = '';
     protected $base = array();
-    protected $attr = 'uid';
+    protected $attr = array('uid');
     protected $subnet = null;
     protected $admin_user = null;
     protected $admin_pw = null;
@@ -59,9 +59,9 @@ class sspmod_negotiate_Auth_Source_Negotiate extends SimpleSAML_Auth_Source
         $this->enableTLS = $config->getBoolean('enable_tls', false);
         $this->debugLDAP = $config->getBoolean('debugLDAP', false);
         $this->timeout = $config->getInteger('timeout', 30);
-        $this->keytab = $config->getString('keytab');
+        $this->keytab = \SimpleSAML\Utils\Config::getCertPath($config->getString('keytab'));
         $this->base = $config->getArrayizeString('base');
-        $this->attr = $config->getString('attr', 'uid');
+        $this->attr = $config->getArrayizeString('attr', 'uid');
         $this->subnet = $config->getArray('subnet', null);
         $this->admin_user = $config->getString('adminUser', null);
         $this->admin_pw = $config->getString('adminPassword', null);
