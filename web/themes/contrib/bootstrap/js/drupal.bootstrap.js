@@ -365,8 +365,8 @@
    *   A DOM element to dispatch event on. Note: this may be a jQuery object,
    *   however be aware that this will trigger the same event for each element
    *   inside the jQuery collection; use with caution.
-   * @param {String} type
-   *   The type of event to simulate.
+   * @param {String|String[]} type
+   *   The type(s) of event to simulate.
    * @param {Object} [options]
    *   An object of options to pass to the event constructor. Typically, if
    *   an event is being proxied, you should just pass the original event
@@ -380,8 +380,8 @@
    */
   Bootstrap.simulate = function (element, type, options) {
     // Handle jQuery object wrappers so it triggers on each element.
+    var ret = true;
     if (element instanceof $) {
-      var ret = true;
       element.each(function () {
         if (!Bootstrap.simulate(this, type, options)) {
           ret = false;
@@ -404,42 +404,52 @@
 
     var event;
     var ctor;
-    for (var name in this.eventMap) {
-      if (this.eventMap[name].test(type)) {
-        ctor = name;
-        break;
+    var types = [].concat(type);
+    for (var i = 0, l = types.length; i < l; i++) {
+      type = types[i];
+      for (var name in this.eventMap) {
+        if (this.eventMap[name].test(type)) {
+          ctor = name;
+          break;
+        }
+      }
+      if (!ctor) {
+        throw new SyntaxError('Only rudimentary HTMLEvents, KeyboardEvents and MouseEvents are supported: ' + type);
+      }
+      var opts = {bubbles: true, cancelable: true};
+      if (ctor === 'KeyboardEvent' || ctor === 'MouseEvent') {
+        $.extend(opts, {ctrlKey: !1, altKey: !1, shiftKey: !1, metaKey: !1});
+      }
+      if (ctor === 'MouseEvent') {
+        $.extend(opts, {button: 0, pointerX: 0, pointerY: 0, view: window});
+      }
+      if (options) {
+        $.extend(opts, options);
+      }
+      if (typeof window[ctor] === 'function') {
+        event = new window[ctor](type, opts);
+        if (!element.dispatchEvent(event)) {
+          ret = false;
+        }
+      }
+      else if (document.createEvent) {
+        event = document.createEvent(ctor);
+        event.initEvent(type, opts.bubbles, opts.cancelable);
+        if (!element.dispatchEvent(event)) {
+          ret = false;
+        }
+      }
+      else if (typeof element.fireEvent === 'function') {
+        event = $.extend(document.createEventObject(), opts);
+        if (!element.fireEvent('on' + type, event)) {
+          ret = false;
+        }
+      }
+      else if (typeof element[type]) {
+        element[type]();
       }
     }
-    if (!ctor) {
-      throw new SyntaxError('Only rudimentary HTMLEvents, KeyboardEvents and MouseEvents are supported: ' + type);
-    }
-    var opts = {bubbles: true, cancelable: true};
-    if (ctor === 'KeyboardEvent' || ctor === 'MouseEvent') {
-      $.extend(opts, {ctrlKey: !1, altKey: !1, shiftKey: !1, metaKey: !1});
-    }
-    if (ctor === 'MouseEvent') {
-      $.extend(opts, {button: 0, pointerX: 0, pointerY: 0, view: window});
-    }
-    if (options) {
-      $.extend(opts, options);
-    }
-    if (typeof window[ctor] === 'function') {
-      event = new window[ctor](type, opts);
-      return element.dispatchEvent(event);
-    }
-    else if (document.createEvent) {
-      event = document.createEvent(ctor);
-      event.initEvent(type, opts.bubbles, opts.cancelable);
-      return element.dispatchEvent(event);
-    }
-    else if (typeof element.fireEvent === 'function') {
-      event = $.extend(document.createEventObject(), opts);
-      return element.fireEvent('on' + type, event);
-    }
-    else if (typeof element[type]) {
-      element[type]();
-      return true;
-    }
+    return ret;
   };
 
   /**

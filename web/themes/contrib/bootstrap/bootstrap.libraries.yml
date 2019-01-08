@@ -101,6 +101,10 @@ drupal.form:
   dependencies:
     - bootstrap/theme
 
+drupal.message:
+  js:
+    js/misc/message.js: {}
+
 drupal.progress:
   js:
     js/misc/progress.js: {}

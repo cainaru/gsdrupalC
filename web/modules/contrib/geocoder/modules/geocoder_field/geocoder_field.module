@@ -12,6 +12,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\FormState;
 use Drupal\Core\Entity\ContentEntityFormInterface;
 use Drupal\Core\Locale\CountryManager;
+use Geocoder\Model\AddressCollection;
 
 /**
  * Implements hook_form_alter().
@@ -177,11 +178,6 @@ function geocoder_field_entity_presave(EntityInterface $entity) {
 
     if (isset($remote_field)) {
 
-      // First we need to Pre-process field.
-      // Note: in case of Address module integration this creates the
-      // value as formatted address.
-      $preprocessor_manager->preprocess($remote_field);
-
       // Skip any action if:
       // remote value is null and the field value should be preserved
       // geofield has value and remote field value has not changed.
@@ -189,6 +185,11 @@ function geocoder_field_entity_presave(EntityInterface $entity) {
       (isset($original_field) && !$entity->get($field_name)->isEmpty() && $remote_field->getValue() == $original_field->getValue())) {
         continue;
       }
+
+      // First we need to Pre-process field.
+      // Note: in case of Address module integration this creates the
+      // value as formatted address.
+      $preprocessor_manager->preprocess($remote_field);
 
       /** @var \Drupal\geocoder\DumperInterface|\Drupal\Component\Plugin\PluginInspectionInterface $dumper */
       $dumper = $dumper_manager->createInstance($geocoder['dumper']);
@@ -202,7 +203,7 @@ function geocoder_field_entity_presave(EntityInterface $entity) {
           $value['value'] = CountryManager::getStandardList()[$value['value']];
         }
 
-        /* @var \Geocoder\Model\AddressCollection $address_collection */
+        /* @var \Geocoder\Model\AddressCollection|\Collection $address_collection */
         switch ($geocoder['method']) {
           case 'source':
             $failure_status_message = t("Unable to geocode '@text'.", ['@text' => isset($value['value']) ? $value['value'] : '']);
@@ -217,16 +218,18 @@ function geocoder_field_entity_presave(EntityInterface $entity) {
           default:
         }
 
-        if ($address_collection) {
+        // Normally each geocode/reverse op would return an AddressCollection.
+        if ($address_collection instanceof AddressCollection) {
           switch ($geocoder['delta_handling']) {
             // Single-to-multiple handling - if we can, explode out the
             // component geometries.
             case 's_to_m':
               foreach ($address_collection->all() as $collection_delta => $address) {
-                $result[] = $dumper->dump($address);
+                $this_result = $dumper->dump($address);
                 // Check|Fix some incompatibility between Dumper output and
                 // Field Config.
-                $dumper_manager->fixDumperFieldIncompatibility($result[$delta], $dumper, $field_config);
+                $dumper_manager->fixDumperFieldIncompatibility($this_result, $dumper, $field_config);
+                $result[] = $this_result;
               }
               break;
 
@@ -239,7 +242,7 @@ function geocoder_field_entity_presave(EntityInterface $entity) {
               $dumper_manager->fixDumperFieldIncompatibility($result[$delta], $dumper, $field_config);
 
               // If an Address field is being processed, transform its Dumper
-              // string result into array to comply to Address entity->set Api.
+              // result into array to comply to Address entity->set Api.
               if ($field_config->getType() == 'address' && $dumper->getPluginId() == 'geojson') {
                 $result[$delta] = $dumper_manager->setAddressFieldFromGeojson($result[$delta]);
               }
@@ -247,6 +250,33 @@ function geocoder_field_entity_presave(EntityInterface $entity) {
               if ($field_config->getType() === 'address_country' && $dumper->getPluginId() === 'geojson') {
                 $result[$delta] = $dumper_manager->setCountryFromGeojson($result[$delta]);
               }
+          }
+          continue;
+        }
+        // But some specific geocode/reverse ops (such as GPX geocode) might
+        // return Geometry/GeometryCollection, and this may be managed if
+        // the chosen dumper id equals a possible geofield.geophp adapter.
+        elseif ($address_collection instanceof Geometry && array_key_exists($dumper->getPluginId(), \Drupal::service('geofield.geophp')->getAdapterMap())) {
+          // Single-to-multiple handling - if we can, explode out the
+          // component geometries.
+          if ($address_collection instanceof GeometryCollection && $geocoder['delta_handling'] == 's_to_m') {
+            /* @var \GeometryCollection $address_collection */
+            if ($address_collection instanceof GeometryCollection) {
+              $components = $address_collection->getComponents();
+              /* @var \Geometry $component */
+              foreach ($components as $component) {
+                $this_result = $component->out($dumper->getPluginId());
+                // Check|Fix some incompatibility between Dumper output and
+                // Field Config.
+                $dumper_manager->fixDumperFieldIncompatibility($this_result, $dumper, $field_config);
+                $result[] = $this_result;
+              }
+            }
+          }
+          else {
+            $result[] = $address_collection->out($dumper->getPluginId());
+            // Check|Fix some incompatibility between result and Field Config.
+            $dumper_manager->fixDumperFieldIncompatibility($result[$delta], $dumper, $field_config);
           }
           continue;
         }
@@ -262,8 +292,7 @@ function geocoder_field_entity_presave(EntityInterface $entity) {
         }
         // Log the failure.
         if ($geocoder['failure']['log']) {
-          \Drupal::logger('geocoder')
-            ->warning($failure_status_message);
+          \Drupal::logger('geocoder')->warning($failure_status_message);
         }
       }
       $entity->set($field_name, $result);

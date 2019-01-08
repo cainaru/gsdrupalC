@@ -15,7 +15,7 @@ dependencies:
   - user
 
 # Information added by Drupal.org packaging script on 2018-09-07
-version: '8.x-1.6'
+version: '8.x-2.0'
 core: '8.x'
 project: 'entity_browser'
-datestamp: 1536328688
+datestamp: 1536328696

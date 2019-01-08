@@ -37,7 +37,7 @@
    * {@inheritdoc}
    */
   Drupal.behaviors.dialog.prepareDialogButtons = function prepareDialogButtons($dialog) {
-    var _that = this;
+    var _this = this;
     var buttons = [];
     var $buttons = $dialog.find('.form-actions').find('button, input[type=submit], .form-actions a.button');
     $buttons.each(function () {
@@ -65,14 +65,17 @@
         click: function click(e) {
           e.preventDefault();
           e.stopPropagation();
-          _that.ajaxCurrentButton = $(e.target);
-          _that.ajaxOriginalButton = $originalButton;
-          Bootstrap.simulate($originalButton, 'click');
+          _this.ajaxCurrentButton = $(e.target);
+          _this.ajaxOriginalButton = $originalButton;
+          // Some core JS binds dialog buttons to the mousedown or mouseup
+          // events instead of click; all three events must be simulated here.
+          // @see https://www.drupal.org/project/bootstrap/issues/3016254
+          Bootstrap.simulate($originalButton, ['mousedown', 'mouseup', 'click']);
         },
         create: function () {
-          _that.ajaxCurrentButton = $(this);
-          _that.ajaxOriginalButton = $originalButton;
-          _that.ajaxUpdateButtons(true);
+          _this.ajaxCurrentButton = $(this);
+          _this.ajaxOriginalButton = $originalButton;
+          _this.ajaxUpdateButtons(true);
         }
       });
     });

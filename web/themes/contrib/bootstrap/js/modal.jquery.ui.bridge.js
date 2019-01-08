@@ -211,7 +211,7 @@
             }
 
             // If show is enabled and currently not shown, show it.
-            if (this.options.show && !this.isShown) {
+            if (this.options.jQueryUiBridge && this.options.show && !this.isShown) {
               this.show();
             }
           },
