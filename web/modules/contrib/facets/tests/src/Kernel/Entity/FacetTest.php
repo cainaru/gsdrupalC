@@ -77,6 +77,9 @@ class FacetTest extends KernelTestBase {
         'show_less_label' => 'Show less',
         'show_more_label' => 'Show more',
       ],
+      'show_reset_link' => FALSE,
+      'hide_reset_when_no_selection' => FALSE,
+      'reset_text' => 'Show all',
     ];
     $this->assertEquals(['type' => 'links', 'config' => $config], $entity->getWidget());
     $this->assertInstanceOf(LinksWidget::class, $entity->getWidgetInstance());

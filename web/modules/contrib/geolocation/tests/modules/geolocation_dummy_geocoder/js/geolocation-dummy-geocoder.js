@@ -22,7 +22,6 @@
         if (!that.val().length) {
           return;
         }
-        $('.geolocation-geocoder-dummy-state[data-source-identifier="' + that.data('source-identifier') + '"]').val(0);
 
         $.ajax(drupalSettings.path.baseUrl + 'geolocation_dummy_geocoder/geocode/' + that.val()).done(function (data) {
           if (data.length < 3) {
@@ -41,7 +40,6 @@
             }
           };
           Drupal.geolocation.geocoder.resultCallback(address, that.data('source-identifier'));
-          $('.geolocation-geocoder-dummy-state[data-source-identifier="' + that.data('source-identifier') + '"]').val(1);
         });
       });
     }

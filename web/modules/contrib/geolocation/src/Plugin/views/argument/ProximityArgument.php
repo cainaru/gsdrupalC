@@ -2,73 +2,34 @@
 
 namespace Drupal\geolocation\Plugin\views\argument;
 
-use Drupal\geolocation\GeolocationCore;
 use Drupal\views\Plugin\views\argument\Formula;
 use Drupal\views\Plugin\views\query\Sql;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\geolocation\ProximityTrait;
 
 /**
  * Argument handler for geolocation proximity.
  *
  * Argument format should be in the following format:
- * "37.7749295,-122.41941550000001<=5miles" (defaults to km).
+ * "37.7749295,-122.41941550000001<=5mi" (defaults to km).
  *
  * @ingroup views_argument_handlers
  *
  * @ViewsArgument("geolocation_argument_proximity")
  */
-class ProximityArgument extends Formula implements ContainerFactoryPluginInterface {
+class ProximityArgument extends Formula {
+
+  use ProximityTrait;
 
   protected $operator = '<';
-  protected $proximity = '';
-
-  /**
-   * The GeolocationCore object.
-   *
-   * @var \Drupal\geolocation\GeolocationCore
-   */
-  protected $geolocationCore;
-
-  /**
-   * Constructs a Handler object.
-   *
-   * @param array $configuration
-   *   A configuration array containing information about the plugin instance.
-   * @param string $plugin_id
-   *   The plugin_id for the plugin instance.
-   * @param mixed $plugin_definition
-   *   The plugin implementation definition.
-   * @param \Drupal\geolocation\GeolocationCore $geolocation_core
-   *   The GeolocationCore object.
-   */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, GeolocationCore $geolocation_core) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition);
-
-    $this->geolocationCore = $geolocation_core;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    /** @var \Drupal\geolocation\GeolocationCore $geolocation_core */
-    $geolocation_core = $container->get('geolocation.core');
-    return new static(
-      $configuration,
-      $plugin_id,
-      $plugin_definition,
-      $geolocation_core
-    );
-  }
+  protected $distance = 0;
 
   /**
    * {@inheritdoc}
    */
   public function buildOptionsForm(&$form, FormStateInterface $form_state) {
     parent::buildOptionsForm($form, $form_state);
-    $form['description']['#markup'] .= $this->t('<br/> Proximity format should be in the following format: <strong>"37.7749295,-122.41941550000001<=5miles"</strong> (defaults to km).');
+    $form['description']['#markup'] .= $this->t('<br/> Proximity format should be in the following format: <strong>"37.7749295,-122.41941550000001<=5mi"</strong> (defaults to km).');
   }
 
   /**
@@ -78,14 +39,19 @@ class ProximityArgument extends Formula implements ContainerFactoryPluginInterfa
     // Parse argument for reference location.
     $values = $this->getParsedReferenceLocation();
     // Make sure we have enough information to start with.
-    if ($values && $values['lat'] && $values['lng'] && $values['distance']) {
-      // Get the earth radius in from the units.
-      $earth_radius = $values['units'] === 'mile' ? GeolocationCore::EARTH_RADIUS_MILE : GeolocationCore::EARTH_RADIUS_KM;
+    if (
+      !empty($values)
+      && isset($values['lat'])
+      && isset($values['lng'])
+      && isset($values['distance'])
+    ) {
+      $distance = self::convertDistance((float) $values['distance'], $values['unit']);
+
       // Build a formula for the where clause.
-      $formula = $this->geolocationCore->getProximityQueryFragment($this->tableAlias, $this->realField, $values['lat'], $values['lng'], $earth_radius);
+      $formula = self::getProximityQueryFragment($this->tableAlias, $this->realField, $values['lat'], $values['lng']);
       // Set the operator and value for the query.
-      $this->proximity = $values['distance'];
       $this->operator = $values['operator'];
+      $this->distance = $distance;
 
       return !empty($formula) ? str_replace('***table***', $this->tableAlias, $formula) : FALSE;
     }
@@ -101,9 +67,13 @@ class ProximityArgument extends Formula implements ContainerFactoryPluginInterfa
     $this->ensureMyTable();
     // Now that our table is secure, get our formula.
     $placeholder = $this->placeholder();
-    $formula = $this->getFormula() . ' ' . $this->operator . ' ' . $placeholder;
+    $formula = $this->getFormula();
+    if (!$formula) {
+      return;
+    }
+    $formula .= ' ' . $this->operator . ' ' . $placeholder;
     $placeholders = [
-      $placeholder => $this->proximity,
+      $placeholder => $this->distance,
     ];
 
     // The addWhere function is only available for SQL queries.
@@ -138,7 +108,7 @@ class ProximityArgument extends Formula implements ContainerFactoryPluginInterfa
           '<',
         ])) ? $values[3] : '<=',
         'distance' => (isset($values[4])) ? floatval($values[4]) : FALSE,
-        'units' => (isset($values[5]) && strpos(strtolower($values[5]), 'mile') !== FALSE) ? 'mile' : 'km',
+        'unit' => isset($values[5]) ? $values[5] : 'km',
       ] : FALSE;
     }
     return $values;

@@ -4,8 +4,10 @@ type: module
 description: 'Support module for Geolocation Views tests'
 package: Testing
 dependencies:
-  - geolocation
-  - views
-  - node
-  - field
+  - geolocation:geolocation
+  - geolocation:geolocation_google_maps
+  - geolocation:geolocation_leaflet
+  - drupal:views
+  - drupal:node
+  - drupal:field
 hidden: true

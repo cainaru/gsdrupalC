@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\facets\Unit\Plugin\widget;
 
-use Drupal\facets\Entity\Facet;
 use Drupal\facets\Plugin\facets\widget\CheckboxWidget;
 
 /**
@@ -51,19 +50,21 @@ class CheckboxWidgetTest extends WidgetTestBase {
   }
 
   /**
-   * Tests default configuration.
+   * {@inheritdoc}
    */
   public function testDefaultConfiguration() {
     $default_config = $this->widget->defaultConfiguration();
-    $expected = [
-      'show_numbers' => FALSE,
-      'soft_limit' => 0,
-      'soft_limit_settings' => [
-        'show_less_label' => 'Show less',
-        'show_more_label' => 'Show more',
-      ],
-    ];
-    $this->assertEquals($expected, $default_config);
+    $this->assertArrayHasKey('show_numbers', $default_config);
+    $this->assertArrayHasKey('soft_limit', $default_config);
+    $this->assertArrayHasKey('show_reset_link', $default_config);
+    $this->assertArrayHasKey('reset_text', $default_config);
+    $this->assertArrayHasKey('soft_limit_settings', $default_config);
+    $this->assertArrayHasKey('show_less_label', $default_config['soft_limit_settings']);
+    $this->assertArrayHasKey('show_more_label', $default_config['soft_limit_settings']);
+
+    $this->assertEquals(FALSE, $default_config['show_numbers']);
+    $this->assertEquals(0, $default_config['soft_limit']);
+    $this->assertEquals(FALSE, $default_config['show_reset_link']);
   }
 
 }

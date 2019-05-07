@@ -40,17 +40,31 @@ class Geocoder extends Plugin {
   public $description;
 
   /**
-   * The name of the geocoder.
+   * Can the geocoder retrieve coordinates.
    *
    * @var bool
    */
   public $locationCapable;
 
   /**
-   * The name of the geocoder.
+   * Can the geocoder retrieve boundaries.
    *
    * @var bool
    */
   public $boundaryCapable;
+
+  /**
+   * Can the geocoder be used in the frontend.
+   *
+   * @var bool
+   */
+  public $frontendCapable;
+
+  /**
+   * Can the geocoder perform reverse geocoding.
+   *
+   * @var bool
+   */
+  public $reverseCapable;
 
 }

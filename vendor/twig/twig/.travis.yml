@@ -15,7 +15,6 @@ php:
     - 7.1
     - 7.2
     - 7.3
-    - nightly
 
 env:
     - TWIG_EXT=no
@@ -36,12 +35,6 @@ script: ./vendor/bin/simple-phpunit
 matrix:
     fast_finish: true
     include:
-        - php: 5.3
-          dist: precise
-          env: TWIG_EXT=yes
-        - php: 5.3
-          dist: precise
-          env: TWIG_EXT=no
         - php: 5.4
           env: TWIG_EXT=yes
         - php: 5.5

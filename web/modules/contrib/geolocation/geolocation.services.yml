@@ -1,7 +1,4 @@
 services:
-  geolocation.core:
-    class: Drupal\geolocation\GeolocationCore
-    arguments: ["@module_handler", "@entity_type.manager", "@config.factory", "@plugin.manager.geolocation.geocoder"]
 
   geolocation.ajax_subscriber:
     class: Drupal\geolocation\EventSubscriber\AjaxResponseSubscriber
@@ -10,4 +7,32 @@ services:
 
   plugin.manager.geolocation.geocoder:
     class: Drupal\geolocation\GeocoderManager
+    parent: default_plugin_manager
+
+  plugin.manager.geolocation.dataprovider:
+    class: Drupal\geolocation\DataProviderManager
+    parent: default_plugin_manager
+
+  plugin.manager.geolocation.mapprovider:
+    class: Drupal\geolocation\MapProviderManager
+    parent: default_plugin_manager
+
+  plugin.manager.geolocation.mapcenter:
+    class: Drupal\geolocation\MapCenterManager
+    parent: default_plugin_manager
+
+  plugin.manager.geolocation.location:
+      class: Drupal\geolocation\LocationManager
+      parent: default_plugin_manager
+
+  plugin.manager.geolocation.mapfeature:
+    class: Drupal\geolocation\MapFeatureManager
+    parent: default_plugin_manager
+
+  plugin.manager.geolocation.locationinput:
+    class: Drupal\geolocation\LocationInputManager
+    parent: default_plugin_manager
+
+  plugin.manager.geolocation.geocoder_country_formatting:
+    class: Drupal\geolocation\GeocoderCountryFormattingManager
     parent: default_plugin_manager

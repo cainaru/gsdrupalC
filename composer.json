@@ -113,7 +113,7 @@
         "drupal/field_group": "^3.0",
         "drupal/focal_point": "^1.0",
         "drupal/geocoder": "^2.0",
-        "drupal/geolocation": "^1.11",
+        "drupal/geolocation": "3.x-dev",
         "drupal/inline_entity_form": "^1.0",
         "drupal/libraries": "^3.0",
         "drupal/masonry": "^1.0",

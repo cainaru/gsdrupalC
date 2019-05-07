@@ -2,7 +2,6 @@
 
 namespace Drupal\Tests\geolocation\FunctionalJavascript;
 
-use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
 use Drupal\views\Tests\ViewTestData;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\field\Entity\FieldConfig;
@@ -14,19 +13,19 @@ use Drupal\Core\Entity\Entity\EntityFormDisplay;
  *
  * @group geolocation
  */
-class GeolocationCommonMapAjaxJavascriptTest extends JavascriptTestBase {
-
-  use GeolocationGoogleTestTrait;
+class GeolocationCommonMapAjaxJavascriptTest extends GeolocationJavascriptTestBase {
 
   /**
    * {@inheritdoc}
    */
   public static $modules = [
     'node',
+    'user',
     'field',
     'views',
     'views_test_config',
     'geolocation',
+    'geolocation_google_maps',
     'geolocation_test_views',
   ];
 
@@ -112,20 +111,20 @@ class GeolocationCommonMapAjaxJavascriptTest extends JavascriptTestBase {
    * Tests the CommonMap style.
    */
   public function testCommonMap() {
-    $this->drupalGetFilterGoogleKey('geolocation-common-map-ajax-test');
+    $this->drupalGet('geolocation-common-map-ajax-test');
 
-    $this->assertSession()->elementExists('css', '.geolocation-common-map-container');
-    $this->assertSession()->elementExists('css', '.geolocation-common-map-locations');
+    $this->assertSession()->elementExists('css', '.geolocation-map-container');
+    $this->assertSession()->elementExists('css', '.geolocation-location');
 
     // If Google works, either gm-style or gm-err-container will be present.
-    $this->assertSession()->elementExists('css', '.geolocation-common-map-container [class^="gm-"]');
+    $this->assertSession()->elementExists('css', '.geolocation-map-container [class^="gm-"]');
   }
 
   /**
    * Tests the CommonMap style.
    */
   public function testCommonMapAjax() {
-    $this->drupalGetFilterGoogleKey('geolocation-common-map-ajax-test');
+    $this->drupalGet('geolocation-common-map-ajax-test');
 
     $session = $this->getSession();
 

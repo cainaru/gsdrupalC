@@ -6,8 +6,8 @@ package: Media
 dependencies:
   - drupal:media (>= 8.4.0)
 
-# Information added by Drupal.org packaging script on 2017-10-18
-version: '8.x-1.0-alpha1'
+# Information added by Drupal.org packaging script on 2019-04-04
+version: '8.x-1.0'
 core: '8.x'
 project: 'media_entity_generic'
-datestamp: 1508311147
+datestamp: 1554383298

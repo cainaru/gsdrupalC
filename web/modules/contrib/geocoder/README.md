@@ -56,9 +56,9 @@ Geocode functionalities on Entity fields from the Drupal backend:
   functionalities for Geocoding valid Exif Geo data present into JPG images;
 * The **geocoder_geofield** module provides integration with Geofield
   (module/field type) and the ability to both use it as target of Geocode or
-  source of Reverse Geocode with the other fields. It also enables the GPX 
-  provider/formatter functionalities for Geocoding valid GPX data present into 
-  gpx & text formats files;
+  source of Reverse Geocode with the other fields. It also enables the
+  provider/formatter functionalities for Geocoding valid GPX, KML and GeoJson
+  data present into files contents;
 * The **geocoder_address** module provides integration with Address
   (module/field type) and the ability to both use it as target of Reverse
   Geocode or source of Geocode with the other fields;

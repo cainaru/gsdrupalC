@@ -5,7 +5,7 @@ namespace Drupal\geocoder_geofield\Geocoder\Provider;
 /**
  * Provides a file handler to be used by 'kmlfile' plugin.
  */
-class KMLFile extends GeoPhpProvider {
+class KMLFile extends AbstractGeometryProvider {
 
   /**
    * Geophp Type.
@@ -17,7 +17,7 @@ class KMLFile extends GeoPhpProvider {
   /**
    * {@inheritdoc}
    */
-  public function getName() {
+  public function getName(): string {
     return 'kmlfile';
   }
 

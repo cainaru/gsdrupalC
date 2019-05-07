@@ -159,8 +159,8 @@ class FacetBlock extends BlockBase implements ContainerFactoryPluginInterface {
   public function blockSubmit($form, FormStateInterface $form_state) {
     // Checks for a valid form id. Panelizer does not generate one.
     if (isset($form['id']['#value'])) {
-      // Save block id to configuration, we do this for loading the original block
-      // with ajax.
+      // Save block id to configuration, we do this for loading the original
+      // block with ajax.
       $block_id = $form['id']['#value'];
       $this->configuration['block_id'] = $block_id;
     }

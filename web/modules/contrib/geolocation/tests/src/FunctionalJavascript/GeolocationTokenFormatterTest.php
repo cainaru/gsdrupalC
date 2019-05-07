@@ -2,18 +2,17 @@
 
 namespace Drupal\Tests\geolocation\FunctionalJavascript;
 
-use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
 use Drupal\Core\Entity\Entity\EntityFormDisplay;
 
 /**
- * Tests the Google Geocoder Token Formatter functionality.
+ * Tests the Token Formatter functionality.
  *
  * @group geolocation
  */
-class GeolocationTokenFormatterTest extends JavascriptTestBase {
+class GeolocationTokenFormatterTest extends GeolocationJavascriptTestBase {
 
   /**
    * {@inheritdoc}
@@ -21,6 +20,7 @@ class GeolocationTokenFormatterTest extends JavascriptTestBase {
   public static $modules = [
     'node',
     'field',
+    'filter',
     'geolocation',
   ];
 
@@ -47,7 +47,7 @@ class GeolocationTokenFormatterTest extends JavascriptTestBase {
 
     EntityFormDisplay::load('node.article.default')
       ->setComponent('field_geolocation', [
-        'type' => 'geolocation_googlegeocoder',
+        'type' => 'geolocation_latlng',
       ])
       ->save();
 
@@ -87,15 +87,18 @@ class GeolocationTokenFormatterTest extends JavascriptTestBase {
       ->setComponent('field_geolocation', [
         'type' => 'geolocation_token',
         'settings' => [
-          'tokenized_text' => '<h1 class="testingtitle">[geolocation_current_item:data:title]</h1><div class="testing">[geolocation_current_item:lat]/[geolocation_current_item:lng]</div>',
+          'tokenized_text' => [
+            'value' => 'Title: [geolocation_current_item:data:title] Lat/Lng: [geolocation_current_item:lat]/[geolocation_current_item:lng]',
+            'format' => filter_default_format(),
+          ],
         ],
         'weight' => 1,
       ])
       ->save();
 
     $this->drupalGet('node/1');
-    $this->assertSession()->responseContains('<div class="testing">52/47</div>');
-    $this->assertSession()->responseContains('<h1 class="testingtitle">My home</h1>');
+    $this->assertSession()->responseContains('Lat/Lng: 52/47');
+    $this->assertSession()->responseContains('Title: My home');
   }
 
 }

@@ -18,6 +18,7 @@ use Drupal\Tests\UnitTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 /**
  * Unit test for processor.
@@ -356,6 +357,39 @@ class QueryStringTest extends UnitTestCase {
   }
 
   /**
+   * Tests that unrouted paths can be handled properly.
+   */
+  public function testUnroutedPath() {
+    // Override router.
+    $router = $this->getMockBuilder(TestRouterInterface::class)
+      ->disableOriginalConstructor()
+      ->getMock();
+    $router->expects($this->any())
+      ->method('matchRequest')
+      ->willThrowException(new ResourceNotFoundException());
+
+    // Get the container from the setUp method and change it with the
+    // implementation created here, that has the route parameters.
+    $container = \Drupal::getContainer();
+    $container->set('router.no_access_checks', $router);
+    \Drupal::setContainer($container);
+
+    // Create facet.
+    $facet = new Facet([], 'facets_facet');
+    $facet->setFieldIdentifier('test');
+    $facet->setUrlAlias('test');
+    $facet->setFacetSourceId('facet_source__dummy');
+
+    $this->processor = new QueryString(['facet' => $facet], 'query_string', [], new Request(), $this->entityManager);
+
+    $results = $this->processor->buildUrls($facet, $this->originalResults);
+
+    foreach ($results as $result) {
+      $this->assertEquals('base:test', $result->getUrl()->getUri());
+    }
+  }
+
+  /**
    * Sets up a container.
    */
   protected function setContainer() {
@@ -375,7 +409,7 @@ class QueryStringTest extends UnitTestCase {
       ->disableOriginalConstructor()
       ->getMock();
     $fsi->method('getPath')
-      ->willReturn('test');
+      ->willReturn('/test');
 
     $manager = $this->getMockBuilder(FacetSourcePluginManager::class)
       ->disableOriginalConstructor()

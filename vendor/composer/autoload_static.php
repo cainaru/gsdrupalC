@@ -67,6 +67,7 @@ class ComposerStaticInit8a24c64bf1e563a9b883bf82ad6650f8
         array (
             'Twig\\Extensions\\' => 16,
             'Twig\\' => 5,
+            'TYPO3\\PharStreamWrapper\\' => 24,
         ),
         'S' => 
         array (
@@ -122,6 +123,7 @@ class ComposerStaticInit8a24c64bf1e563a9b883bf82ad6650f8
         ),
         'J' => 
         array (
+            'JsonSchema\\' => 11,
             'JakubOnderka\\PhpConsoleHighlighter\\' => 35,
             'JakubOnderka\\PhpConsoleColor\\' => 29,
             'JaimePerez\\TwigConfigurableI18n\\' => 32,
@@ -139,6 +141,10 @@ class ComposerStaticInit8a24c64bf1e563a9b883bf82ad6650f8
             'Gettext\\Languages\\' => 18,
             'Gettext\\' => 8,
         ),
+        'E' => 
+        array (
+            'Egulias\\EmailValidator\\' => 23,
+        ),
         'D' => 
         array (
             'Drupal\\Driver\\' => 14,
@@ -151,6 +157,7 @@ class ComposerStaticInit8a24c64bf1e563a9b883bf82ad6650f8
             'Dotenv\\' => 7,
             'Doctrine\\Instantiator\\' => 22,
             'Doctrine\\Common\\Inflector\\' => 26,
+            'Doctrine\\Common\\Collections\\' => 28,
             'Doctrine\\Common\\Cache\\' => 22,
             'Doctrine\\Common\\Annotations\\' => 28,
             'Doctrine\\Common\\' => 16,
@@ -166,6 +173,7 @@ class ComposerStaticInit8a24c64bf1e563a9b883bf82ad6650f8
         ),
         'B' => 
         array (
+            'Brumann\\Polyfill\\' => 17,
             'Behat\\Mink\\Driver\\' => 18,
             'Behat\\Mink\\' => 11,
         ),
@@ -234,6 +242,10 @@ class ComposerStaticInit8a24c64bf1e563a9b883bf82ad6650f8
         'Twig\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
+        ),
+        'TYPO3\\PharStreamWrapper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/typo3/phar-stream-wrapper/src',
         ),
         'Symfony\\Polyfill\\Php70\\' => 
         array (
@@ -383,6 +395,10 @@ class ComposerStaticInit8a24c64bf1e563a9b883bf82ad6650f8
         array (
             0 => __DIR__ . '/..' . '/masterminds/html5/src',
         ),
+        'JsonSchema\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema',
+        ),
         'JakubOnderka\\PhpConsoleHighlighter\\' => 
         array (
             0 => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src',
@@ -422,6 +438,10 @@ class ComposerStaticInit8a24c64bf1e563a9b883bf82ad6650f8
         'Gettext\\' => 
         array (
             0 => __DIR__ . '/..' . '/gettext/gettext/src',
+        ),
+        'Egulias\\EmailValidator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator',
         ),
         'Drupal\\Driver\\' => 
         array (
@@ -463,6 +483,10 @@ class ComposerStaticInit8a24c64bf1e563a9b883bf82ad6650f8
         array (
             0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector',
         ),
+        'Doctrine\\Common\\Collections\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/collections/lib/Doctrine/Common/Collections',
+        ),
         'Doctrine\\Common\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache',
@@ -501,6 +525,10 @@ class ComposerStaticInit8a24c64bf1e563a9b883bf82ad6650f8
         'CommerceGuys\\Addressing\\' => 
         array (
             0 => __DIR__ . '/..' . '/commerceguys/addressing/src',
+        ),
+        'Brumann\\Polyfill\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/brumann/polyfill-unserialize/src',
         ),
         'Behat\\Mink\\Driver\\' => 
         array (
@@ -565,6 +593,10 @@ class ComposerStaticInit8a24c64bf1e563a9b883bf82ad6650f8
             array (
                 0 => __DIR__ . '/..' . '/phpspec/prophecy/src',
             ),
+            'PEAR' => 
+            array (
+                0 => __DIR__ . '/..' . '/pear/pear_exception',
+            ),
         ),
         'G' => 
         array (
@@ -575,10 +607,6 @@ class ComposerStaticInit8a24c64bf1e563a9b883bf82ad6650f8
         ),
         'E' => 
         array (
-            'Egulias\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/egulias/email-validator/src',
-            ),
             'EasyRdf_' => 
             array (
                 0 => __DIR__ . '/..' . '/easyrdf/easyrdf/lib',
@@ -596,15 +624,11 @@ class ComposerStaticInit8a24c64bf1e563a9b883bf82ad6650f8
             ),
             'DrupalPractice\\' => 
             array (
-                0 => __DIR__ . '/..' . '/drupal/coder/coder_sniffer/Drupal',
+                0 => __DIR__ . '/..' . '/drupal/coder/coder_sniffer/DrupalPractice',
             ),
             'Doctrine\\Common\\Lexer\\' => 
             array (
                 0 => __DIR__ . '/..' . '/doctrine/lexer/lib',
-            ),
-            'Doctrine\\Common\\Collections\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/collections/lib',
             ),
             'Dflydev\\PlaceholderResolver' => 
             array (
@@ -625,7 +649,22 @@ class ComposerStaticInit8a24c64bf1e563a9b883bf82ad6650f8
             array (
                 0 => __DIR__ . '/..' . '/drush/drush/lib',
             ),
+            'Console' => 
+            array (
+                0 => __DIR__ . '/..' . '/pear/console_getopt',
+            ),
         ),
+        'A' => 
+        array (
+            'Archive_Tar' => 
+            array (
+                0 => __DIR__ . '/..' . '/pear/archive_tar',
+            ),
+        ),
+    );
+
+    public static $fallbackDirsPsr0 = array (
+        0 => __DIR__ . '/..' . '/pear/pear-core-minimal/src',
     );
 
     public static $classMap = array (
@@ -1196,6 +1235,7 @@ class ComposerStaticInit8a24c64bf1e563a9b883bf82ad6650f8
             $loader->prefixLengthsPsr4 = ComposerStaticInit8a24c64bf1e563a9b883bf82ad6650f8::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit8a24c64bf1e563a9b883bf82ad6650f8::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit8a24c64bf1e563a9b883bf82ad6650f8::$prefixesPsr0;
+            $loader->fallbackDirsPsr0 = ComposerStaticInit8a24c64bf1e563a9b883bf82ad6650f8::$fallbackDirsPsr0;
             $loader->classMap = ComposerStaticInit8a24c64bf1e563a9b883bf82ad6650f8::$classMap;
 
         }, null, ClassLoader::class);

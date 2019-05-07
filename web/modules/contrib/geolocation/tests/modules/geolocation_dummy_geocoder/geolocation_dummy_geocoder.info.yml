@@ -4,5 +4,5 @@ type: module
 description: 'Test the geocoding functionality'
 package: Testing
 dependencies:
-  - geolocation
+  - geolocation:geolocation
 hidden: true

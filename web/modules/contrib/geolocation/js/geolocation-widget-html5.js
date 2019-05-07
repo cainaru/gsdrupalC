@@ -1,6 +1,6 @@
 /**
  * @file
- *   Javascript for the Geolocation HTML5 widget.
+ * Javascript for the Geolocation HTML5 widget.
  */
 
 (function ($, Drupal, navigator) {
@@ -42,7 +42,8 @@
 
       });
 
-    }
+    },
+    detach: function (context, drupalSettings) {}
   };
 
   $('.geolocation-html5-button .clear').on('click', function (event) {
@@ -116,12 +117,15 @@
             case error.PERMISSION_DENIED:
               alert(Drupal.t('No location data found. Reason: PERMISSION_DENIED.'));
               break;
+
             case error.POSITION_UNAVAILABLE:
               alert(Drupal.t('No location data found. Reason: POSITION_UNAVAILABLE.'));
               break;
+
             case error.TIMEOUT:
               alert(Drupal.t('No location data found. Reason: TIMEOUT.'));
               break;
+
             default:
               alert(Drupal.t('No location data found. Reason: Unknown error.'));
               break;

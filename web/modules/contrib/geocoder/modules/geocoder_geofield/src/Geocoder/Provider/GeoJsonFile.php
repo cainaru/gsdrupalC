@@ -5,7 +5,7 @@ namespace Drupal\geocoder_geofield\Geocoder\Provider;
 /**
  * Provides a file handler to be used by 'geojsonfile' plugin.
  */
-class GeoJsonFile extends GeoPhpProvider {
+class GeoJsonFile extends AbstractGeometryProvider {
 
   /**
    * Geophp Type.
@@ -17,7 +17,7 @@ class GeoJsonFile extends GeoPhpProvider {
   /**
    * {@inheritdoc}
    */
-  public function getName() {
+  public function getName(): string {
     return 'geojsonfile';
   }
 

@@ -21,6 +21,8 @@ class GeolocationViewsCommonMapTest extends BrowserTestBase {
     'taxonomy',
     'geolocation',
     'geolocation_demo',
+    'geolocation_google_maps',
+    'geolocation_google_maps_demo',
   ];
 
   /**

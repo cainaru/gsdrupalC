@@ -87,14 +87,6 @@ display:
           entity_type: node
           entity_field: title
         field_geolocation_demo_single_proximity:
-          proximity_source: entity_id_argument
-          proximity_lat: ''
-          proximity_lng: ''
-          proximity_units: km
-          proximity_filter: ''
-          proximity_argument: field_geolocation_demo_single_proximity
-          entity_id_argument: nid
-          boundary_filter: ''
           id: field_geolocation_demo_single_proximity
           table: node__field_geolocation_demo_single
           field: field_geolocation_demo_single_proximity
@@ -147,9 +139,30 @@ display:
           decimal: .
           separator: ','
           format_plural: false
-          format_plural_string: "1\x03@count"
+          format_plural_string: !!binary MQNAY291bnQ=
           prefix: ''
           suffix: ''
+          center:
+            freeogeoip:
+              weight: 0
+              enable: false
+              location_plugin_id: freeogeoip
+            field_geolocation_demo_single_proximity:
+              weight: 0
+              enable: false
+              location_plugin_id: views_proximity_filter
+            fixed_value:
+              weight: 0
+              settings:
+                latitude: ''
+                longitude: ''
+              enable: false
+              location_plugin_id: fixed_value
+            field_geolocation_demo_single_entity_argument:
+              enable: true
+              weight: 0
+              location_plugin_id: views_entity_argument
+          display_unit: km
           plugin_id: geolocation_field_proximity
       filters:
         status:
@@ -201,9 +214,86 @@ display:
           entity_type: node
           entity_field: type
           plugin_id: bundle
+        field_geolocation_demo_single_proximity:
+          id: field_geolocation_demo_single_proximity
+          table: node__field_geolocation_demo_single
+          field: field_geolocation_demo_single_proximity
+          relationship: none
+          group_type: group
+          admin_label: ''
+          operator: '>'
+          value:
+            min: ''
+            max: ''
+            value: '0.1'
+            center:
+              coordinates:
+                lat:
+                lng:
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          location_input:
+            coordinates:
+              weight: 0
+              enable: false
+              location_input_id: coordinates
+            'freeogeoip:freeogeoip':
+              weight: 0
+              enable: false
+              location_input_id: location_plugins
+              settings:
+                location_plugin_id: freeogeoip
+            'fixed_value:fixed_value':
+              settings:
+                location_settings:
+                  settings:
+                    latitude: ''
+                    longitude: ''
+                location_plugin_id: fixed_value
+              weight: 0
+              enable: false
+              location_input_id: location_plugins
+            'views_entity_argument:field_geolocation_demo_single_entity_argument':
+              enable: true
+              weight: 0
+              location_input_id: location_plugins
+              settings:
+                location_plugin_id: views_entity_argument
+            client_location:
+              weight: 0
+              enable: false
+              location_input_id: client_location
+          unit: km
+          plugin_id: geolocation_filter_proximity
       sorts:
         field_geolocation_demo_single_proximity:
-          proximity_field: field_geolocation_demo_single_proximity
           id: field_geolocation_demo_single_proximity
           table: node__field_geolocation_demo_single
           field: field_geolocation_demo_single_proximity
@@ -221,10 +311,10 @@ display:
       empty: {  }
       relationships: {  }
       arguments:
-        nid:
-          id: nid
-          table: node_field_data
-          field: nid
+        field_geolocation_demo_single_entity_argument:
+          id: field_geolocation_demo_single_entity_argument
+          table: node__field_geolocation_demo_single
+          field: field_geolocation_demo_single_entity_argument
           relationship: none
           group_type: group
           admin_label: ''
@@ -235,8 +325,9 @@ display:
             title: All
           title_enable: false
           title: ''
-          default_argument_type: node
-          default_argument_options: {  }
+          default_argument_type: fixed
+          default_argument_options:
+            argument: ''
           default_argument_skip_url: false
           summary_options:
             base_path: ''
@@ -252,11 +343,8 @@ display:
             type: none
             fail: 'not found'
           validate_options: {  }
-          break_phrase: false
-          not: true
-          entity_type: node
-          entity_field: nid
-          plugin_id: node_nid
+          geolocation_entity_argument_source: 'node:geolocation_default_article:field_geolocation_demo_single'
+          plugin_id: geolocation_entity_argument
       display_extenders: {  }
     cache_metadata:
       max-age: -1

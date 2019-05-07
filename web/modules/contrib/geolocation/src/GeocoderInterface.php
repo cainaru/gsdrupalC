@@ -3,7 +3,6 @@
 namespace Drupal\geolocation;
 
 use Drupal\Component\Plugin\PluginInspectionInterface;
-use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Defines an interface for geolocation geocoder plugins.
@@ -43,30 +42,6 @@ interface GeocoderInterface extends PluginInspectionInterface {
   public function formAttachGeocoder(array &$render_array, $element_name);
 
   /**
-   * Process from as altered above.
-   *
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   Input values.
-   *
-   * @return bool
-   *   True of false.
-   */
-  public function formValidateInput(FormStateInterface $form_state);
-
-  /**
-   * Process from as altered above.
-   *
-   * @param array $input
-   *   Input values.
-   * @param string $element_name
-   *   Name of the input element.
-   *
-   * @return array|bool
-   *   Location data.
-   */
-  public function formProcessInput(array &$input, $element_name);
-
-  /**
    * Geocode an address.
    *
    * @param string $address
@@ -76,5 +51,36 @@ interface GeocoderInterface extends PluginInspectionInterface {
    *   Location or NULL.
    */
   public function geocode($address);
+
+  /**
+   * Reverse geocode an address.
+   *
+   * Intended return subject to available data:
+   *
+   * @code
+   * [
+   *   'organization' => '',
+   *   'address_line1' => '',
+   *   'address_line2' => '',
+   *   'postal_code' => '',
+   *   'sorting_code' => '',
+   *   'dependent_locality' => [],
+   *   'locality' => [],
+   *   'administrative_area' => [],
+   *   'country' => [],
+   *
+   *   'formatted_address' => '',
+   * ]
+   * @endcode
+   *
+   * @param float $latitude
+   *   Latitude to reverse geocode.
+   * @param float $longitude
+   *   Longitude to reverse geocode.
+   *
+   * @return array||null
+   *   Address or NULL.
+   */
+  public function reverseGeocode($latitude, $longitude);
 
 }

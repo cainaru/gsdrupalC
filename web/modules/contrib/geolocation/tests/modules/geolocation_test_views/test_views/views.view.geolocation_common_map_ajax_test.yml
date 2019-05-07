@@ -2,9 +2,10 @@ langcode: en
 status: true
 dependencies:
   module:
-    - geolocation
     - node
     - user
+    - geolocation
+    - geolocation_google_maps
 id: geolocation_common_map_ajax_test
 label: 'Geolocation Common Map Ajax Test'
 module: views
@@ -191,7 +192,7 @@ display:
           plugin_id: geolocation_field
       filters:
         status:
-          value: true
+          value: '1'
           table: node_field_data
           field: status
           plugin_id: boolean
@@ -356,41 +357,170 @@ display:
             update_handler: boundary_filter_field_geolocation_boundary
             hide_form: 0
             update_target: page_1
-            views_refresh_delay: 1200
+            views_refresh_delay: '1200'
           centre:
             fit_bounds:
+              map_center_id: fit_bounds
               enable: true
               weight: 0
             first_row:
+              map_center_id: location_plugins
               enable: true
               weight: 0
             fixed_value:
+              map_center_id: location_plugins
               enable: true
               weight: 0
               settings:
-                latitude: ''
-                longitude: ''
+                latitude: 0
+                longitude: 0
             client_location:
+              map_center_id: client_location
               enable: true
               weight: 0
-              settings:
-                update_map: '0'
             boundary_filter_field_geolocation_boundary:
               enable: true
               weight: 0
-          google_map_settings:
-            type: ROADMAP
-            zoom: '10'
-            mapTypeControl: 1
-            streetViewControl: 1
-            zoomControl: 1
-            scrollwheel: 1
-            disableDoubleClickZoom: 0
-            draggable: 1
-            style: ''
+          map_provider_id: google_maps
+          map_provider_settings:
             height: 400px
             width: 100%
-            info_auto_display: 1
+            type: ROADMAP
+            zoom: 3
+            maxZoom: 18
+            minZoom: 0
+            rotateControl: false
+            gestureHandling: auto
+            map_features:
+              control_locate:
+                weight: 0
+                settings:
+                  position: TOP_LEFT
+                enabled: false
+              marker_infowindow:
+                enabled: true
+                weight: 0
+                settings:
+                  info_window_solitary: true
+                  disable_auto_pan: true
+                  info_auto_display: false
+              marker_infobubble:
+                weight: 0
+                settings:
+                  close_other: 1
+                  close_button_src: ''
+                  shadow_style: 0
+                  padding: 10
+                  border_radius: 8
+                  border_width: 2
+                  border_color: '#039be5'
+                  background_color: '#fff'
+                  min_width: null
+                  max_width: 550
+                  min_height: null
+                  max_height: null
+                  close_button: 0
+                enabled: false
+              marker_icon:
+                weight: 0
+                settings:
+                  marker_icon_path: ''
+                  anchor:
+                    x: 0
+                    'y': 0
+                  origin:
+                    x: 0
+                    'y': 0
+                  label_origin:
+                    x: 0
+                    'y': 0
+                  size:
+                    width: null
+                    height: null
+                  scaled_size:
+                    width: null
+                    height: null
+                enabled: false
+              marker_clusterer:
+                weight: 0
+                settings:
+                  image_path: ''
+                  styles: ''
+                  max_zoom: 15
+                enabled: false
+              map_type_style:
+                weight: 0
+                settings:
+                  style: '[]'
+                enabled: false
+              control_zoom:
+                enabled: true
+                weight: 0
+                settings:
+                  position: RIGHT_CENTER
+                  behavior: default
+                  style: LARGE
+              control_streetview:
+                weight: 0
+                settings:
+                  position: TOP_LEFT
+                  behavior: default
+                enabled: false
+              control_recenter:
+                weight: 0
+                settings:
+                  position: TOP_LEFT
+                enabled: false
+              control_maptype:
+                enabled: true
+                weight: 0
+                settings:
+                  position: RIGHT_BOTTOM
+                  behavior: default
+                  style: DEFAULT
+              control_geocoder:
+                weight: 0
+                settings:
+                  position: TOP_LEFT
+                  geocoder: google_geocoding_api
+                  settings:
+                    label: Address
+                    description: 'Enter an address to be localized.'
+                    component_restrictions:
+                      route: ''
+                      locality: ''
+                      administrative_area: ''
+                      postal_code: ''
+                      country: ''
+                enabled: false
+              drawing:
+                weight: 0
+                settings:
+                  strokeColor: '#FF0000'
+                  strokeOpacity: '0.8'
+                  strokeWeight: '2'
+                  fillColor: '#FF0000'
+                  fillOpacity: '0.35'
+                  polyline: '0'
+                  geodesic: '0'
+                  polygon: '0'
+                enabled: false
+              map_disable_poi:
+                weight: 0
+                enabled: false
+              context_popup:
+                weight: 0
+                settings:
+                  content:
+                    value: ''
+                    format: basic_html
+                enabled: false
+              client_location_indicator:
+                weight: 0
+                enabled: false
+              spiderfying:
+                weight: 0
+                enabled: false
       defaults:
         style: false
         row: false

@@ -171,6 +171,7 @@ function chosen_attach_library(array &$element) {
     'minimum_single' => (int) $chosen_conf->get('minimum_single'),
     'minimum_multiple' => (int) $chosen_conf->get('minimum_multiple'),
     'minimum_width' => (int) $chosen_conf->get('minimum_width'),
+    'use_relative_width' => (bool) $chosen_conf->get('use_relative_width'),
     'options' => $options,
   ];
 }

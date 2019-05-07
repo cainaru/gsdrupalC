@@ -4,5 +4,10 @@ name: Geolocation
 description: 'Provides a simple geolocation field type to store and display location data (lat, lng).'
 package: Geolocation
 dependencies:
-  - field
-configure: geolocation.settings
+  - drupal:field
+simplytest_dependencies:
+  - geolocation_demo
+  - geolocation_google_maps
+  - geolocation_google_maps_demo
+  - geolocation_leaflet
+  - geolocation_leaflet_demo

@@ -118,6 +118,13 @@ class ChosenConfigForm extends ConfigFormBase {
       '#description' => $this->t('The minimum width of the Chosen widget. Leave blank to have chosen determine this.'),
     ];
 
+    $form['use_relative_width'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Use relative width'),
+      '#default_value' => $chosen_conf->get('use_relative_width'),
+      '#description' => $this->t('The relative width (% instead of px) of the Chosen widget.'),
+    ];
+
     $form['jquery_selector'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Apply Chosen to the following elements'),
@@ -126,8 +133,9 @@ class ChosenConfigForm extends ConfigFormBase {
     ];
 
     $form['options'] = [
-      '#type' => 'fieldset',
-      '#title' => t('Chosen general options'),
+      '#type' => 'details',
+      '#title' => $this->t('Chosen general options'),
+      '#open' => TRUE,
     ];
 
     $form['options']['search_contains'] = [
@@ -153,8 +161,9 @@ class ChosenConfigForm extends ConfigFormBase {
     ];
 
     $form['theme_options'] = [
-      '#type' => 'fieldset',
+      '#type' => 'details',
       '#title' => $this->t('Chosen per theme options'),
+      '#open' => TRUE,
     ];
 
     $default_disabled_themes = $chosen_conf->get('disabled_themes');
@@ -179,8 +188,9 @@ class ChosenConfigForm extends ConfigFormBase {
     ];
 
     $form['strings'] = [
-      '#type' => 'fieldset',
+      '#type' => 'details',
       '#title' => $this->t('Chosen strings'),
+      '#open' => TRUE,
     ];
 
     $form['strings']['placeholder_text_multiple'] = [
@@ -228,6 +238,7 @@ class ChosenConfigForm extends ConfigFormBase {
       ->set('minimum_multiple', $form_state->getValue('minimum_multiple'))
       ->set('disable_search_threshold', $form_state->getValue('disable_search_threshold'))
       ->set('minimum_width', $form_state->getValue('minimum_width'))
+      ->set('use_relative_width', $form_state->getValue('use_relative_width'))
       ->set('jquery_selector', $form_state->getValue('jquery_selector'))
       ->set('search_contains', $form_state->getValue('search_contains'))
       ->set('disable_search', $form_state->getValue('disable_search'))

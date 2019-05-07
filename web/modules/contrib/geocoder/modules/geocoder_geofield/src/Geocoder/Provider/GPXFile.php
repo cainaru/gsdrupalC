@@ -5,7 +5,7 @@ namespace Drupal\geocoder_geofield\Geocoder\Provider;
 /**
  * Provides a file handler to be used by 'gpxfile' plugin.
  */
-class GPXFile extends GeoPhpProvider {
+class GPXFile extends AbstractGeometryProvider implements GeometryProviderInterface {
 
   /**
    * Geophp Type.
@@ -17,7 +17,7 @@ class GPXFile extends GeoPhpProvider {
   /**
    * {@inheritdoc}
    */
-  public function getName() {
+  public function getName(): string {
     return 'gpxfile';
   }
 

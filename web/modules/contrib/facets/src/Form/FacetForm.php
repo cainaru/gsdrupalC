@@ -717,7 +717,7 @@ class FacetForm extends EntityForm {
     $facet->set('show_title', $form_state->getValue(['facet_settings', 'show_title'], FALSE));
 
     $facet->save();
-    drupal_set_message($this->t('Facet %name has been updated.', ['%name' => $facet->getName()]));
+    \Drupal::messenger()->addMessage($this->t('Facet %name has been updated.', ['%name' => $facet->getName()]));
   }
 
   /**

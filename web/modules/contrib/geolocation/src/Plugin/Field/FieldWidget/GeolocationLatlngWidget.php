@@ -5,7 +5,7 @@ namespace Drupal\geolocation\Plugin\Field\FieldWidget;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\geolocation\GeolocationCore;
+use Drupal\geolocation\Plugin\Field\FieldType\GeolocationItem;
 
 /**
  * Plugin implementation of the 'geolocation_latlng' widget.
@@ -40,7 +40,7 @@ class GeolocationLatlngWidget extends WidgetBase {
 
     $element['lat']['#description'] = $this->t('Enter either in decimal %decimal or sexagesimal format %sexagesimal', [
       '%decimal' => $lat_example,
-      '%sexagesimal' => GeolocationCore::decimalToSexagesimal($lat_example),
+      '%sexagesimal' => GeolocationItem::decimalToSexagesimal($lat_example),
     ]);
 
     $element['lng'] = [
@@ -56,7 +56,7 @@ class GeolocationLatlngWidget extends WidgetBase {
 
     $element['lng']['#description'] = $this->t('Enter either in decimal %decimal or sexagesimal format %sexagesimal', [
       '%decimal' => $lng_example,
-      '%sexagesimal' => GeolocationCore::decimalToSexagesimal($lng_example),
+      '%sexagesimal' => GeolocationItem::decimalToSexagesimal($lng_example),
     ]);
 
     return $element;
@@ -72,8 +72,8 @@ class GeolocationLatlngWidget extends WidgetBase {
         !empty($geolocation['lat'])
         && !empty($geolocation['lng'])
       ) {
-        $latitude = GeolocationCore::sexagesimalToDecimal($values[$index]['lat']);
-        $longitude = GeolocationCore::sexagesimalToDecimal($values[$index]['lng']);
+        $latitude = GeolocationItem::sexagesimalToDecimal($values[$index]['lat']);
+        $longitude = GeolocationItem::sexagesimalToDecimal($values[$index]['lng']);
 
         if (!empty($latitude) && !empty($longitude)) {
           $values[$index]['lat'] = $latitude;

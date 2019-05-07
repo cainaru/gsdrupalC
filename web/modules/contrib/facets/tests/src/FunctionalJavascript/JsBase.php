@@ -3,13 +3,13 @@
 namespace Drupal\Tests\facets\FunctionalJavascript;
 
 use Drupal\block\Entity\Block;
-use Drupal\FunctionalJavascriptTests\JavascriptTestBase;
+use Drupal\FunctionalJavascriptTests\WebDriverTestBase;
 use Drupal\search_api\Entity\Index;
 
 /**
  * Tests for the JS that transforms widgets into form elements.
  */
-abstract class JsBase extends JavascriptTestBase {
+abstract class JsBase extends WebDriverTestBase {
 
   /**
    * {@inheritdoc}
@@ -134,8 +134,16 @@ abstract class JsBase extends JavascriptTestBase {
    *   The id of the facet.
    * @param string $field
    *   The field name.
+   * @param string $widget_type
+   *   The type of the facet widget. links by default.
+   * @param array $widget_settings
+   *   The widget config.
+   *
+   * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+   * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+   * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  protected function createFacet($id, $field = 'type') {
+  protected function createFacet($id, $field = 'type', $widget_type = 'links', array $widget_settings = ['show_numbers' => TRUE, 'soft_limit' => 0]) {
     $facet_storage = \Drupal::entityTypeManager()->getStorage('facets_facet');
     // Create and save a facet with a checkbox widget.
     $facet_storage->create([
@@ -147,11 +155,8 @@ abstract class JsBase extends JavascriptTestBase {
       'empty_behavior' => ['behavior' => 'none'],
       'weight' => 1,
       'widget' => [
-        'type' => 'links',
-        'config' => [
-          'show_numbers' => TRUE,
-          'soft_limit' => 0,
-        ],
+        'type' => $widget_type,
+        'config' => $widget_settings,
       ],
       'processor_configs' => [
         'url_processor_handler' => [

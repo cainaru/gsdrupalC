@@ -87,14 +87,6 @@ display:
           entity_type: node
           entity_field: title
         field_geolocation_demo_single_proximity:
-          proximity_source: argument
-          proximity_lat: ''
-          proximity_lng: ''
-          proximity_units: km
-          proximity_filter: ''
-          proximity_argument: field_geolocation_demo_single_proximity
-          entity_id_argument: field_geolocation_demo_single_proximity
-          boundary_filter: ''
           id: field_geolocation_demo_single_proximity
           table: node__field_geolocation_demo_single
           field: field_geolocation_demo_single_proximity
@@ -147,9 +139,26 @@ display:
           decimal: .
           separator: ','
           format_plural: false
-          format_plural_string: "1\x03@count"
+          format_plural_string: !!binary MQNAY291bnQ=
           prefix: ''
           suffix: ''
+          center:
+            freeogeoip:
+              weight: 0
+              enable: false
+              location_plugin_id: freeogeoip
+            field_geolocation_demo_single_proximity:
+              enable: true
+              weight: 0
+              location_plugin_id: views_proximity_argument
+            fixed_value:
+              weight: 0
+              settings:
+                latitude: ''
+                longitude: ''
+              enable: false
+              location_plugin_id: fixed_value
+          display_unit: km
           plugin_id: geolocation_field_proximity
       filters:
         status:
@@ -203,7 +212,6 @@ display:
           plugin_id: bundle
       sorts:
         field_geolocation_demo_single_proximity:
-          proximity_field: field_geolocation_demo_single_proximity
           id: field_geolocation_demo_single_proximity
           table: node__field_geolocation_demo_single
           field: field_geolocation_demo_single_proximity
@@ -227,7 +235,7 @@ display:
           empty: true
           tokenize: false
           content:
-            value: "Simply attach an URL argument after <strong>\"/\"</strong> in the format <strong>\"[Latitude],[Longitude][Operator][Distance][Unit]\"</strong> (defaults to km).<br>\n<br>\nTry for example: <a href=\"[site:url]/geolocation-demo/proximity_argument_and_sort/37.7749295,-122.41941550000001<=5000miles\">/37.7749295,-122.41941550000001<=5000miles</a><br>\n<br>"
+            value: "Simply attach an URL argument after <strong>\"/\"</strong> in the format <strong>\"[Latitude],[Longitude][Operator][Distance][Unit]\"</strong> (defaults to km).<br>\n<br>\nTry for example: <a href=\"[site:url]/geolocation-demo/proximity_argument_and_sort/37.7749295,-122.41941550000001<=5000mi\">/37.7749295,-122.41941550000001<=5000miles</a><br>\n<br>"
             format: basic_html
           plugin_id: text
       footer: {  }

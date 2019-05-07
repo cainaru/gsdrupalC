@@ -7,6 +7,7 @@ use Drupal\Core\Url;
 use Drupal\facets\FacetInterface;
 use Drupal\facets\UrlProcessor\UrlProcessorPluginBase;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 
 /**
  * Query string URL processor.
@@ -57,17 +58,38 @@ class QueryString extends UrlProcessorPluginBase {
     $this->urlAlias = $facet->getUrlAlias();
 
     $request = $this->request;
-    if ($facet->getFacetSource()->getPath()) {
-      $request = Request::create($facet->getFacetSource()->getPath());
+    $facet_path = $facet->getFacetSource()->getPath();
+    if ($facet_path) {
+      $request = Request::create($facet_path);
       $request->attributes->set('_format', $this->request->get('_format'));
     }
 
-    // Grab any route params from the original request.
-    $routeParameters = Url::createFromRequest($this->request)
-      ->getRouteParameters();
+    // Try to grab any route params from the original request.
+    // In case of request path not having a matching route, Url generator will
+    // fail with.
+    try {
+      $routeParameters = Url::createFromRequest($this->request)
+        ->getRouteParameters();
 
-    // Create a request url.
-    $requestUrl = Url::createFromRequest($request);
+      $requestUrl = Url::createFromRequest($request);
+    }
+    catch (ResourceNotFoundException $e) {
+      $routeParameters = [];
+
+      // Bypass exception if no path available.
+      // Should be unreachable in default FacetSource implementations,
+      // but you never know.
+      if (!$facet_path) {
+        throw $e;
+      }
+
+      $requestUrl = Url::fromUserInput($facet_path, [
+        'query' => [
+          '_format' => $this->request->get('_format'),
+        ],
+      ]);
+    }
+
     $requestUrl->setOption('attributes', ['rel' => 'nofollow']);
 
     /** @var \Drupal\facets\Result\ResultInterface[] $results */
@@ -80,11 +102,17 @@ class QueryString extends UrlProcessorPluginBase {
         $this->buildUrls($facet, $children);
       }
 
-      $filter_string = $this->urlAlias . $this->getSeparator() . $result->getRawValue();
+      if ($result->getRawValue() === NULL) {
+        $filter_string = NULL;
+      }
+      else {
+        $filter_string = $this->urlAlias . $this->getSeparator() . $result->getRawValue();
+      }
       $result_get_params = clone $get_params;
 
       $filter_params = [];
       foreach ($this->getActiveFilters() as $facet_id => $values) {
+        $values = array_filter($values);
         foreach ($values as $value) {
           $filter_params[] = $this->getUrlAliasByFacetId($facet_id, $facet->getFacetSourceId()) . ":" . $value;
         }
@@ -119,10 +147,13 @@ class QueryString extends UrlProcessorPluginBase {
             }
           }
         }
+
       }
       // If the value is not active, add the filter string.
       else {
-        $filter_params[] = $filter_string;
+        if ($filter_string !== NULL) {
+          $filter_params[] = $filter_string;
+        }
 
         if ($facet->getUseHierarchy()) {
           // If hierarchy is active, unset parent trail and every child when
