@@ -5,6 +5,12 @@ config:
   via: apache
   webroot: web
   database: mariadb:10.3.16
+proxy:
+  phpmyadmin:
+    - pma.dev-map-gardenshare.lndo.site
+services:
+  phpmyadmin:
+    type: phpmyadmin
 tooling:
   drupal:
     cmd: /app/vendor/bin/drupal --root=/app/web
