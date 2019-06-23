@@ -1130,9 +1130,7 @@
         "version_normalized": "1.8.2.0",
         "dist": {
             "type": "zip",
-            "url": "https://github.com/dinbror/blazy/archive/1.8.2.zip",
-            "reference": null,
-            "shasum": null
+            "url": "https://github.com/dinbror/blazy/archive/1.8.2.zip"
         },
         "require": {
             "composer/installers": "^1.2.0"
@@ -6414,9 +6412,7 @@
         "version_normalized": "1.4.1.0",
         "dist": {
             "type": "zip",
-            "url": "https://github.com/gdsmith/jquery.easing/archive/1.4.1.zip",
-            "reference": null,
-            "shasum": null
+            "url": "https://github.com/gdsmith/jquery.easing/archive/1.4.1.zip"
         },
         "require": {
             "composer/installers": "^1.2.0"
@@ -6744,9 +6740,7 @@
         "version_normalized": "1.8.2.0",
         "dist": {
             "type": "zip",
-            "url": "https://github.com/harvesthq/chosen/releases/download/v1.8.2/chosen_v1.8.2.zip",
-            "reference": null,
-            "shasum": null
+            "url": "https://github.com/harvesthq/chosen/releases/download/v1.8.2/chosen_v1.8.2.zip"
         },
         "require": {
             "composer/installers": "^1.2.0"
@@ -6868,9 +6862,7 @@
         "version_normalized": "1.6.4.0",
         "dist": {
             "type": "zip",
-            "url": "https://github.com/jackmoore/colorbox/archive/1.x.zip",
-            "reference": null,
-            "shasum": null
+            "url": "https://github.com/jackmoore/colorbox/archive/1.x.zip"
         },
         "require": {
             "composer/installers": "^1.2.0"
