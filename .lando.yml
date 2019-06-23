@@ -15,4 +15,4 @@ tooling:
   drupal:
     cmd: /app/vendor/bin/drupal --root=/app/web
   drush:
-    cmd: /app/bin/drush
+    cmd: /app/vendor/bin/drush
