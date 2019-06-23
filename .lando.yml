@@ -1,0 +1,12 @@
+name: dev-map-gardenshare
+recipe: drupal8
+config:
+  php: '7.2'
+  via: apache
+  webroot: web
+  database: mariadb:10.3.16
+tooling:
+  drupal:
+    cmd: /app/vendor/bin/drupal --root=/app/web
+  drush:
+    cmd: /app/bin/drush
