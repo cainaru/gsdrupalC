@@ -3,6 +3,7 @@
 namespace Drupal\entity_embed\Plugin\Filter;
 
 use Drupal\Component\Utility\Html;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Render\BubbleableMetadata;
@@ -112,10 +113,10 @@ class EntityEmbedFilter extends FilterBase implements ContainerFactoryPluginInte
           $node->removeAttribute('data-entity-embed-settings');
         }
 
+        $entity = NULL;
         try {
           // Load the entity either by UUID (preferred) or ID.
           $id = NULL;
-          $entity = NULL;
           if ($id = $node->getAttribute('data-entity-uuid')) {
             $entity = $this->entityTypeManager->getStorage($entity_type)
               ->loadByProperties(['uuid' => $id]);
@@ -125,8 +126,19 @@ class EntityEmbedFilter extends FilterBase implements ContainerFactoryPluginInte
             $id = $node->getAttribute('data-entity-id');
             $entity = $this->entityTypeManager->getStorage($entity_type)->load($id);
           }
+          if (!$entity instanceof EntityInterface) {
+            $alt_text = $this->t('Deleted content encountered, site owner alerted.');
+            $title_text = $this->t('Deleted content.');
+            $entity_output = '<img src="' . file_create_url('core/modules/media/images/icons/no-thumbnail.png') . '" width="180" height="180" alt="' . $alt_text . '" title="' . $title_text . '"/>';
+            throw new EntityNotFoundException(sprintf('Unable to load embedded %s entity %s.', $entity_type, $id));
+          }
+        }
+        catch (EntityNotFoundException $e) {
+          watchdog_exception('entity_embed', $e);
+        }
 
-          if ($entity) {
+        if ($entity instanceof EntityInterface) {
+          try {
             // Protect ourselves from recursive rendering.
             static $depth = 0;
             $depth++;
@@ -158,21 +170,20 @@ class EntityEmbedFilter extends FilterBase implements ContainerFactoryPluginInte
 
             $depth--;
           }
-          else {
-            $alt_text = $this->t('Deleted content encountered, site owner alerted.');
-            $title_text = $this->t('Deleted content.');
-            $entity_output = '<img src="' . file_create_url('core/modules/media/images/icons/no-thumbnail.png') . '" width="180" height="180" alt="' . $alt_text . '" title="' . $title_text . '"/>';
-            throw new EntityNotFoundException(sprintf('Unable to load embedded %s entity %s.', $entity_type, $id));
+          catch (RecursiveRenderingException $e) {
+            watchdog_exception('entity_embed', $e);
           }
-        }
-        catch (\Exception $e) {
-          watchdog_exception('entity_embed', $e);
         }
 
         $this->replaceNodeContent($node, $entity_output);
       }
 
-      $result->setProcessedText(Html::serialize($dom));
+      $result->setProcessedText(Html::serialize($dom))
+        ->addAttachments([
+          'library' => [
+            'entity_embed/caption',
+          ],
+        ]);
     }
 
     return $result;
