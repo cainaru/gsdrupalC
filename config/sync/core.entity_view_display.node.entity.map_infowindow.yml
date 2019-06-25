@@ -1,9 +1,9 @@
-uuid: 0fe6fff3-ab76-43d8-806c-645286129852
+uuid: 3a78c3de-e40b-4f38-b039-1fca917fd2c5
 langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.node.teaser
+    - core.entity_view_mode.node.map_infowindow
     - field.field.node.entity.body
     - field.field.node.entity.field_accepts
     - field.field.node.entity.field_address
@@ -22,30 +22,37 @@ dependencies:
     - field.field.node.entity.field_website
     - node.type.entity
   module:
-    - text
+    - address
     - user
-id: node.entity.teaser
+id: node.entity.map_infowindow
 targetEntityType: node
 bundle: entity
-mode: teaser
+mode: map_infowindow
 content:
-  body:
-    label: hidden
-    type: text_summary_or_trimmed
-    weight: 0
-    settings:
-      trim_length: 600
+  field_address:
+    weight: 12
+    label: above
+    settings: {  }
     third_party_settings: {  }
+    type: address_default
+    region: content
+  field_type:
+    weight: 21
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
     region: content
   links:
-    weight: 1
+    weight: 101
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
+  body: true
   content_moderation_control: true
   field_accepts: true
-  field_address: true
   field_certifications: true
   field_contact_name: true
   field_csa_pickup_locations: true
@@ -57,5 +64,4 @@ hidden:
   field_media: true
   field_phone: true
   field_products: true
-  field_type: true
   field_website: true
