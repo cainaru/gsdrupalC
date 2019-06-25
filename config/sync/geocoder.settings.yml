@@ -44,3 +44,4 @@ plugins_options:
   yandex: {  }
 _core:
   default_config_hash: osnxMBUiZuk-XXBHfOYTjoChGsNlHSSMZnv3CrXGFcE
+geocoder_presave_disabled: false
