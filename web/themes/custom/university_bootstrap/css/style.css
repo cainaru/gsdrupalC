@@ -8832,6 +8832,28 @@ footer.footer {
   padding: .2em .6em .2em;
   text-shadow: none; }
 
+/**
+ * Map view
+ * 
+ */
+@media (min-width: 768px) {
+  .map-with-sidebar > .view-content {
+    width: 60%; } }
+@media (min-width: 768px) {
+  .map-with-sidebar.map-left > .view-content {
+    float: left; } }
+@media (min-width: 768px) {
+  .map-with-sidebar.map-right > .view-content {
+    float: right; } }
+
+.map-sidebar {
+  word-wrap: break-word; }
+  @media (min-width: 768px) {
+    .map-sidebar {
+      width: 40%;
+      max-height: 500px;
+      overflow-y: scroll; } }
+
 .narrative.full {
   font-size: 2rem; }
   .narrative.full p {

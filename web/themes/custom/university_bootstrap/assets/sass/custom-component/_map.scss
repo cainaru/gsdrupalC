@@ -1,0 +1,31 @@
+/**
+ * Map view
+ * 
+ */
+
+.map-with-sidebar {
+  & > .view-content {
+    @media (min-width: $screen-sm-min) {
+      width: 60%;
+    }
+  }
+  &.map-left > .view-content {
+    @media (min-width: $screen-sm-min) {
+      float: left;
+    }
+  }
+  &.map-right > .view-content {
+    @media (min-width: $screen-sm-min) {
+      float: right;
+    }
+  }
+}
+
+.map-sidebar {
+  word-wrap: break-word;
+  @media (min-width: $screen-sm-min) {
+    width: 40%;
+    max-height: 500px;
+    overflow-y: scroll;
+  }
+}
