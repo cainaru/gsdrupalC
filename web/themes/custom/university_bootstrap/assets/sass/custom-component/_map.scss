@@ -32,10 +32,81 @@
 }
 
 .map-list-item {
-	margin-left: 15px;
-    margin-right: 15px;
-	margin-bottom: 15px;
-	@include clearfix;
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  // Place the border on the list items and negative margin up for better styling
+  margin-bottom: -1px;
+  background-color: $list-group-bg;
+  border-top: 1px solid $list-group-border;
+  border-bottom: 1px solid $list-group-border;
+}
+
+a.map-list-item {
+  text-decoration: none;
+  color: $list-group-link-color;
+
+  .map-list-item-heading {
+    color: $list-group-link-heading-color;
+    font-weight: 500;
+  }
+
+  // Hover state
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: $list-group-link-hover-color;
+    background-color: $list-group-hover-bg;
+  }
+}
+
+.map-list-item {
+  // Disabled state
+  &.disabled,
+  &.disabled:hover,
+  &.disabled:focus {
+    background-color: $list-group-disabled-bg;
+    color: $list-group-disabled-color;
+    cursor: $cursor-disabled;
+
+    // Force color to inherit for custom content
+    .map-list-item-heading {
+      color: inherit;
+    }
+    .map-list-item-text {
+      color: $list-group-disabled-text-color;
+    }
+  }
+
+  // Active class on item itself, not parent
+  &.active,
+  &.active:hover,
+  &.active:focus {
+    z-index: 2; // Place active items above their siblings for proper border styling
+    color: $list-group-active-color;
+    background-color: $list-group-active-bg;
+    border-color: $list-group-active-border;
+
+    // Force color to inherit for custom content
+    .map-list-item-heading,
+    .map-list-item-heading > small,
+    .map-list-item-heading > .small {
+      color: inherit;
+    }
+    .map-list-item-text {
+      color: $list-group-active-text-color;
+    }
+  }
+}
+
+.map-list-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+  line-height: 1.1;
+}
+.map-list-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
 }
 
 .map-list-item .views-field-field-media {
@@ -51,20 +122,10 @@
     margin-top: 0;
 }
 
-.map-list-item .address br {
-    display: none;
-}
-
 .map-list-item .views-field-field-type {
     font-size: 14px;
 }
 
-.map-list-item .views-field-field-type .views-label {
-    float: left;
-    padding-right: .25em;
-}
-.map-list-item .views-field-field-type .field-content {
-    float: none;
-    padding-right: .25em;
-    display: inline-block;
+.map-details-panel {
+  
 }
